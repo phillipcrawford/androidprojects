@@ -3,6 +3,7 @@ package com.example.geoquiz
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -26,10 +27,11 @@ class MainActivity : AppCompatActivity() {
         trueButton = findViewById(R.id.true_button)
         falseButton = findViewById(R.id.false_button)
 
-        trueButton.setOnClickListener { view: View -> trueButton.setText(R.string.correct_toast)
+        trueButton.setOnClickListener { view: View ->
+            trueButton.setText(R.string.correct_toast)
         }
         falseButton.setOnClickListener { view: View ->
-
+            Toast.makeText(this, R.string.incorrect_toast, Toast.LENGTH_SHORT)
 
         }
     }
