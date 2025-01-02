@@ -26,8 +26,7 @@ class MainActivity : AppCompatActivity() {
         trueButton = findViewById(R.id.true_button)
         falseButton = findViewById(R.id.false_button)
 
-        trueButton.setOnClickListener { view: View ->
-         //   trueButton.setText(R.string.correct_toast)
+        trueButton.setOnClickListener { view: View -> trueButton.setText(R.string.correct_toast)
         }
         falseButton.setOnClickListener { view: View ->
 
