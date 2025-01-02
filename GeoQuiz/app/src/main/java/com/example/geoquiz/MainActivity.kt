@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
          //   trueButton.setText(R.string.correct_toast)
         }
         falseButton.setOnClickListener { view: View ->
-        
+
 
         }
     }
