@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
             trueButton.setText(R.string.correct_toast)
         }
         falseButton.setOnClickListener { view: View ->
-            Toast.makeText(this, R.string.incorrect_toast, Toast.LENGTH_SHORT)
+            Toast.makeText(this, R.string.incorrect_toast, Toast.LENGTH_SHORT).show()
 
         }
     }
