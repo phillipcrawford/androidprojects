@@ -29,5 +29,9 @@ class MainActivity : AppCompatActivity() {
         trueButton.setOnClickListener { view: View ->
          //   trueButton.setText(R.string.correct_toast)
         }
+        falseButton.setOnClickListener { view: View ->
+        
+
+        }
     }
 }
