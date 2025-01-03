@@ -31,7 +31,10 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        binding.questionTextView.setOnClickListener { view: View ->
+            currentIndex = (currentIndex + 1) % questionBank.size
+            updateQuestion()
+        }
         binding.trueButton.setOnClickListener { view: View ->
             checkAnswer(true)
         }
