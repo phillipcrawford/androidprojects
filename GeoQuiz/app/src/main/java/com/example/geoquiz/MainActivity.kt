@@ -41,6 +41,13 @@ class MainActivity : AppCompatActivity() {
         binding.falseButton.setOnClickListener { view: View ->
             checkAnswer(false)
         }
+        binding.previousButton.setOnClickListener {
+            currentIndex = (currentIndex - 1) % questionBank.size
+            if (currentIndex == -1) {
+                currentIndex = questionBank.size - 1
+            }
+            updateQuestion()
+        }
         binding.nextButton.setOnClickListener {
             currentIndex = (currentIndex + 1) % questionBank.size
             updateQuestion()
