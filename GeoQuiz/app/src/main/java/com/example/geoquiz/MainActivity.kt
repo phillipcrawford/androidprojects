@@ -39,6 +39,10 @@ class MainActivity : AppCompatActivity() {
         binding.questionTextView.setOnClickListener { view: View ->
             currentIndex = (currentIndex + 1) % questionBank.size
             updateQuestion()
+            binding.trueButton.isEnabled = true
+            binding.trueButton.isClickable = true
+            binding.falseButton.isEnabled = true
+            binding.falseButton.isClickable = true
         }
         binding.trueButton.setOnClickListener { view: View ->
             checkAnswer(true)
@@ -51,6 +55,8 @@ class MainActivity : AppCompatActivity() {
             checkAnswer(false)
             view.isEnabled = false
             view.isClickable = false
+            binding.trueButton.isEnabled = false
+            binding.trueButton.isClickable = false
         }
         binding.previousButton.setOnClickListener {
             currentIndex = (currentIndex - 1) % questionBank.size
@@ -58,10 +64,18 @@ class MainActivity : AppCompatActivity() {
                 currentIndex = questionBank.size - 1
             }
             updateQuestion()
+            binding.trueButton.isEnabled = true
+            binding.trueButton.isClickable = true
+            binding.falseButton.isEnabled = true
+            binding.falseButton.isClickable = true
         }
         binding.nextButton.setOnClickListener {
             currentIndex = (currentIndex + 1) % questionBank.size
             updateQuestion()
+            binding.trueButton.isEnabled = true
+            binding.trueButton.isClickable = true
+            binding.falseButton.isEnabled = true
+            binding.falseButton.isClickable = true
         }
         updateQuestion()
     }
