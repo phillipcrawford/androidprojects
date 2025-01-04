@@ -75,6 +75,11 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG,"onPause() called")
     }
 
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop() called")
+    }
+
     
 
     private fun updateQuestion(){
