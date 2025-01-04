@@ -39,50 +39,34 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.questionTextView.setOnClickListener { view: View ->
-            currentIndex = (currentIndex + 1) % questionBank.size
+            incrementIndex()
             updateQuestion()
-            binding.trueButton.isEnabled = true
-            binding.trueButton.isClickable = true
-            binding.falseButton.isEnabled = true
-            binding.falseButton.isClickable = true
+            resetButtons()
         }
         binding.trueButton.setOnClickListener { view: View ->
             checkAnswer(true)
-            view.isEnabled = false
-            view.isClickable = false
-            binding.falseButton.isEnabled = false
-            binding.falseButton.isClickable = false
+            disableButtons()
         }
         binding.falseButton.setOnClickListener { view: View ->
             checkAnswer(false)
-            view.isEnabled = false
-            view.isClickable = false
-            binding.trueButton.isEnabled = false
-            binding.trueButton.isClickable = false
+            disableButtons()
         }
         binding.previousButton.setOnClickListener {
-            currentIndex = (currentIndex - 1) % questionBank.size
+            incrementIndex()
             if (currentIndex == -1) {
                 currentIndex = questionBank.size - 1
             }
             updateQuestion()
-            binding.trueButton.isEnabled = true
-            binding.trueButton.isClickable = true
-            binding.falseButton.isEnabled = true
-            binding.falseButton.isClickable = true
+            resetButtons()
         }
         binding.nextButton.setOnClickListener {
-            if (currentIndex == questionBank.size - 1){
+            if (reachEnd()){
                 score()
                 resetScore()
             }
-            currentIndex = (currentIndex + 1) % questionBank.size
+            incrementIndex()
             updateQuestion()
-            binding.trueButton.isEnabled = true
-            binding.trueButton.isClickable = true
-            binding.falseButton.isEnabled = true
-            binding.falseButton.isClickable = true
-
+            resetButtons()
         }
         updateQuestion()
     }
@@ -129,6 +113,29 @@ class MainActivity : AppCompatActivity() {
         }
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show()
     }
+
+    private fun resetButtons(){
+        binding.trueButton.isEnabled = true
+        binding.trueButton.isClickable = true
+        binding.falseButton.isEnabled = true
+        binding.falseButton.isClickable = true
+    }
+
+    private fun disableButtons(){
+        binding.trueButton.isEnabled = false
+        binding.trueButton.isClickable = false
+        binding.falseButton.isEnabled = false
+        binding.falseButton.isClickable = false
+    }
+
+    private fun incrementIndex(){
+        currentIndex = (currentIndex + 1) % questionBank.size
+    }
+
+    private fun reachEnd(): Boolean{
+        return currentIndex == questionBank.size - 1
+    }
+
 
     private fun score(){
         val score = correctAnswers.toDouble() / questionBank.size * 100
