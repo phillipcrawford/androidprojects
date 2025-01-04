@@ -70,6 +70,11 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onResume() called")
     }
 
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG,"onPause() called")
+    }
+
     
 
     private fun updateQuestion(){
