@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
     )
 
     private var currentIndex = 0
+    private var correctAnswers = 0
+    private var incorrectAnswers = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,12 +72,17 @@ class MainActivity : AppCompatActivity() {
             binding.falseButton.isClickable = true
         }
         binding.nextButton.setOnClickListener {
+            if (currentIndex == questionBank.size - 1){
+                score()
+                resetScore()
+            }
             currentIndex = (currentIndex + 1) % questionBank.size
             updateQuestion()
             binding.trueButton.isEnabled = true
             binding.trueButton.isClickable = true
             binding.falseButton.isEnabled = true
             binding.falseButton.isClickable = true
+
         }
         updateQuestion()
     }
@@ -114,10 +121,22 @@ class MainActivity : AppCompatActivity() {
         val correctAnswer = questionBank[currentIndex].answer
 
         val messageResId = if (userAnswer == correctAnswer) {
+            correctAnswers = correctAnswers + 1
             R.string.correct_toast
         } else {
+            incorrectAnswers = incorrectAnswers + 1
             R.string.incorrect_toast
         }
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun score(){
+        val score = correctAnswers.toDouble() / questionBank.size * 100
+        Toast.makeText(this, "Your score is $score%", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun resetScore(){
+        correctAnswers = 0
+        incorrectAnswers = 0
     }
 }
