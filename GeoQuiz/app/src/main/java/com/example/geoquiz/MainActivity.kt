@@ -42,9 +42,15 @@ class MainActivity : AppCompatActivity() {
         }
         binding.trueButton.setOnClickListener { view: View ->
             checkAnswer(true)
+            view.isEnabled = false
+            view.isClickable = false
+            binding.falseButton.isEnabled = false
+            binding.falseButton.isClickable = false
         }
         binding.falseButton.setOnClickListener { view: View ->
             checkAnswer(false)
+            view.isEnabled = false
+            view.isClickable = false
         }
         binding.previousButton.setOnClickListener {
             currentIndex = (currentIndex - 1) % questionBank.size
