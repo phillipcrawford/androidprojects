@@ -80,7 +80,10 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onStop() called")
     }
 
-    
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy() called")
+    }
 
     private fun updateQuestion(){
         val questionTextResId = questionBank[currentIndex].textResId
