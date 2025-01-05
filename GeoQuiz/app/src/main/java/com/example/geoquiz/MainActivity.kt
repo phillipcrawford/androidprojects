@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Log.d(TAG, "Got a QuizViewModel: $quizViewModel")
         binding.questionTextView.setOnClickListener { view: View ->
             incrementIndex()
             updateQuestion()
