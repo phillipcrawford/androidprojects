@@ -48,4 +48,12 @@ class QuizViewModel : ViewModel() {
             currentIndex = questionBank.size - 1
         }
     }
+
+    fun incrementCorrectAnswers(){
+        correctAnswers = correctAnswers + 1
+    }
+
+    fun incrementIncorrectAnswers(){
+        incorrectAnswers = incorrectAnswers + 1
+    }
 }
