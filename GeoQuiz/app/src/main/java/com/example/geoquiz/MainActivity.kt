@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         binding.nextButton.setOnClickListener {
             if (quizViewModel.reachEnd()){
                 score()
-                resetScore()
+                quizViewModel.resetScore()
             }
             incrementIndex()
             updateQuestion()
@@ -134,8 +134,4 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "Your score is $score%", Toast.LENGTH_SHORT).show()
     }
 
-    private fun resetScore(){
-        correctAnswers = 0
-        incorrectAnswers = 0
-    }
 }

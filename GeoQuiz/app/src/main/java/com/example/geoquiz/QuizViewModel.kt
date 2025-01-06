@@ -67,7 +67,7 @@ class QuizViewModel : ViewModel() {
         return score
     }
 
-    private fun resetScore(){
+    fun resetScore(){
         correctAnswers = 0
         incorrectAnswers = 0
     }
