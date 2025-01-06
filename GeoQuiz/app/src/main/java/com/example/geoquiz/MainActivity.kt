@@ -121,8 +121,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun incrementIndex(){
-        currentIndex = (currentIndex + 1) % questionBank.size
-        //quizViewModel.moveToNext()
+        //currentIndex = (currentIndex + 1) % questionBank.size
+        quizViewModel.moveToNext()
     }
 
     private fun reachEnd(): Boolean{
