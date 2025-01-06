@@ -58,11 +58,17 @@ class QuizViewModel : ViewModel() {
         incorrectAnswers = incorrectAnswers + 1
     }
 
-    fun reachEnd(): Boolean{
+    fun reachEnd(): Boolean {
         return currentIndex == questionBank.size - 1
     }
 
-    fun score(){
+    fun score(): Double {
         val score = correctAnswers.toDouble() / questionBank.size * 100
+        return score
+    }
+
+    private fun resetScore(){
+        correctAnswers = 0
+        incorrectAnswers = 0
     }
 }

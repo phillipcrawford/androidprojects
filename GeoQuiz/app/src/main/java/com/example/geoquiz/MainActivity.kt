@@ -130,7 +130,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun score(){
-        quizViewModel.score()
+        val score = quizViewModel.score()
         Toast.makeText(this, "Your score is $score%", Toast.LENGTH_SHORT).show()
     }
 
