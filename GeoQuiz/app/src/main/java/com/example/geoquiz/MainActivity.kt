@@ -130,7 +130,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun score(){
-        val score = correctAnswers.toDouble() / questionBank.size * 100
+        quizViewModel.score()
         Toast.makeText(this, "Your score is $score%", Toast.LENGTH_SHORT).show()
     }
 

@@ -1,6 +1,7 @@
 package com.example.geoquiz
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 
 private const val TAG = "QuizViewModel"
@@ -59,5 +60,9 @@ class QuizViewModel : ViewModel() {
 
     fun reachEnd(): Boolean{
         return currentIndex == questionBank.size - 1
+    }
+
+    fun score(){
+        val score = correctAnswers.toDouble() / questionBank.size * 100
     }
 }
