@@ -96,10 +96,10 @@ class MainActivity : AppCompatActivity() {
         val correctAnswer = quizViewModel.currentQuestionAnswer
 
         val messageResId = if (userAnswer == correctAnswer) {
-            correctAnswers = correctAnswers + 1
+            quizViewModel.incrementCorrectAnswers()
             R.string.correct_toast
         } else {
-            incorrectAnswers = incorrectAnswers + 1
+            quizViewModel.incrementIncorrectAnswers()
             R.string.incorrect_toast
         }
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show()
