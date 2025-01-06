@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             disableButtons()
         }
         binding.previousButton.setOnClickListener {
-            incrementIndex()
+            decrementIndex()
             if (currentIndex == -1) {
                 currentIndex = questionBank.size - 1
             }
@@ -123,6 +123,11 @@ class MainActivity : AppCompatActivity() {
     private fun incrementIndex(){
         //currentIndex = (currentIndex + 1) % questionBank.size
         quizViewModel.moveToNext()
+    }
+
+    private fun decrementIndex(){
+        //currentIndex = (currentIndex - 1) % questionBank.size
+        quizViewModel.moveToPrevious()
     }
 
     private fun reachEnd(): Boolean{
