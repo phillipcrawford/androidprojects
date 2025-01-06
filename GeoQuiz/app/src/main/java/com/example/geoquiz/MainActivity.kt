@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             resetButtons()
         }
         binding.nextButton.setOnClickListener {
-            if (reachEnd()){
+            if (quizViewModel.reachEnd()){
                 score()
                 resetScore()
             }
@@ -128,11 +128,6 @@ class MainActivity : AppCompatActivity() {
         //currentIndex = (currentIndex - 1) % questionBank.size
         quizViewModel.moveToPrevious()
     }
-
-    private fun reachEnd(): Boolean{
-        return currentIndex == questionBank.size - 1
-    }
-
 
     private fun score(){
         val score = correctAnswers.toDouble() / questionBank.size * 100

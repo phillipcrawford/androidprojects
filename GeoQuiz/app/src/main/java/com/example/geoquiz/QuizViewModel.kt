@@ -56,4 +56,8 @@ class QuizViewModel : ViewModel() {
     fun incrementIncorrectAnswers(){
         incorrectAnswers = incorrectAnswers + 1
     }
+
+    fun reachEnd(): Boolean{
+        return currentIndex == questionBank.size - 1
+    }
 }
