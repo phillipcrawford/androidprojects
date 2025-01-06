@@ -44,9 +44,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.previousButton.setOnClickListener {
             decrementIndex()
-            if (currentIndex == -1) {
-                currentIndex = questionBank.size - 1
-            }
+            quizViewModel.clickedPreviousFirst()
             updateQuestion()
             resetButtons()
         }
