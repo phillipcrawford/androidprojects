@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onCreate(Bundle?) called")
         Log.d(TAG,"Phillip was here")
         enableEdgeToEdge()
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        //binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         Log.d(TAG, "Got a QuizViewModel: $quizViewModel")
         binding.questionTextView.setOnClickListener { view: View ->
