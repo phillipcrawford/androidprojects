@@ -39,6 +39,7 @@ android {
 }
 
 dependencies {
+    testImplementation(libs.junit.jupiter)
     val lifecycle_version = "2.8.7"
     val activity_version = "1.9.3"
 
