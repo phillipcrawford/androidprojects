@@ -7,4 +7,7 @@ import org.junit.Test
 
 class QuizViewModelTest {
     @Test
+    fun providesExpectedQuestionText(){
+        
+    }
 }
