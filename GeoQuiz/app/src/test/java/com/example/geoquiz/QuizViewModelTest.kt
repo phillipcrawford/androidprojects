@@ -1,5 +1,6 @@
 package com.example.geoquiz
 
+import android.util.Log
 import org.junit.jupiter.api.Assertions.*
 import androidx.lifecycle.SavedStateHandle
 import org.junit.Assert.assertEquals
@@ -12,4 +13,14 @@ class QuizViewModelTest {
         val quizViewModel = QuizViewModel(savedStateHandle)
         assertEquals(R.string.question_australia, quizViewModel.currentQuestionText)
     }
+
+    @Test
+    fun wrapsAroundQuestionBank(){
+        val savedStateHandle = SavedStateHandle(mapOf(CURRENT_INDEX_KEY to 5))
+        val quizViewModel = QuizViewModel(savedStateHandle)
+        assertEquals(R.string.question_asia, quizViewModel.currentQuestionText)
+        quizViewModel.moveToNext()
+        assertEquals(R.string.question_australia, quizViewModel.currentQuestionText)
+    }
+
 }

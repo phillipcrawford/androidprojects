@@ -9,12 +9,12 @@ const val CURRENT_INDEX_KEY = "CURRENT_INDEX_KEY"
 class QuizViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
 
     init {
-        Log.d(TAG, "ViewModel instance created")
+        //Log.d(TAG, "ViewModel instance created")
     }
 
     override fun onCleared() {
         super.onCleared()
-        Log.d(TAG, "ViewModel instance about to be destroyed")
+        //Log.d(TAG, "ViewModel instance about to be destroyed")
     }
 
     private val questionBank = listOf(
