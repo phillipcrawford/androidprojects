@@ -23,4 +23,20 @@ class QuizViewModelTest {
         assertEquals(R.string.question_australia, quizViewModel.currentQuestionText)
     }
 
+    @Test
+    fun firstQuestionIsTrue(){
+        val savedStateHandle = SavedStateHandle()
+        val quizViewModel = QuizViewModel(savedStateHandle)
+        assertTrue(quizViewModel.currentQuestionAnswer)
+    }
+
+    @Test
+    fun thirdQuestionIsFalse(){
+        val savedStateHandle = SavedStateHandle()
+        val quizViewModel = QuizViewModel(savedStateHandle)
+        quizViewModel.moveToNext()
+        quizViewModel.moveToNext()
+        assertFalse(quizViewModel.currentQuestionAnswer)
+    }
+
 }
