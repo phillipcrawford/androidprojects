@@ -1,5 +1,7 @@
 package com.example.geoquiz
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,5 +18,13 @@ class CheatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCheatBinding.inflate(layoutInflater)
         setContentView(binding.root)
+    }
+
+    companion object {
+        fun newIntent(packageContext: Context, answerIsTrue: Boolean): Intent {
+            return Intent(packageContext, CheatActivity::class.java).apply {
+                putExtra(EXTRA_ANSWER_IS_TRUE, answerIsTrue)
+            }
+        }
     }
 }
