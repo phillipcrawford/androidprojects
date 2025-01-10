@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.geoquiz.databinding.ActivityCheatBinding
 
+const val EXTRA_ANSWER_SHOWN = "com.example.geoquiz.answer_shown"
 private const val EXTRA_ANSWER_IS_TRUE = "com.example.geoquiz.answer_is_true"
 
 class CheatActivity : AppCompatActivity() {
