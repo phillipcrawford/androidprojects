@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         binding.cheatButton.setOnClickListener {
             val answerIsTrue = quizViewModel.currentQuestionAnswer
             val intent = CheatActivity.newIntent(this@MainActivity, answerIsTrue)
-            startActivity(intent)
+            cheatLauncher.launch(intent)
         }
         binding.previousButton.setOnClickListener {
             decrementIndex()
