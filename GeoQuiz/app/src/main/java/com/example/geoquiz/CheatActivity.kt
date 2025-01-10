@@ -12,12 +12,15 @@ import com.example.geoquiz.databinding.ActivityCheatBinding
 private const val EXTRA_ANSWER_IS_TRUE = "com.example.geoquiz.answer_is_true"
 
 class CheatActivity : AppCompatActivity() {
+
     private lateinit var binding: ActivityCheatBinding
+    private var answerIsTrue = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCheatBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        answerIsTrue = intent.getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false)
     }
 
     companion object {
