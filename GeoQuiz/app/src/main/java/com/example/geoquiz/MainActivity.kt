@@ -1,5 +1,6 @@
 package com.example.geoquiz
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -37,6 +38,10 @@ class MainActivity : AppCompatActivity() {
         binding.falseButton.setOnClickListener { view: View ->
             checkAnswer(false)
             disableButtons()
+        }
+        binding.cheatButton.setOnClickListener {
+            val intent = Intent(this, CheatActivity::class.java)
+            startActivity(intent)
         }
         binding.previousButton.setOnClickListener {
             decrementIndex()
