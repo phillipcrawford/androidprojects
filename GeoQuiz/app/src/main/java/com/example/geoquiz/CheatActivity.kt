@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -15,6 +16,7 @@ private const val EXTRA_ANSWER_IS_TRUE = "com.example.geoquiz.answer_is_true"
 class CheatActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCheatBinding
+    private val quizViewModel: QuizViewModel by viewModels()
     private var answerIsTrue = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +31,7 @@ class CheatActivity : AppCompatActivity() {
                 else -> R.string.false_button
             }
             binding.answerTextView.setText(answerText)
+            quizViewModel.isCheater = true
             setAnswerShownResult(true)
         }
     }
