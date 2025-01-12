@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.RenderEffect
 import android.graphics.Shader
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.geoquiz.databinding.ActivityMainBinding
 
@@ -152,6 +154,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "Your score is $score%", Toast.LENGTH_SHORT).show()
     }
 
+    @RequiresApi(Build.VERSION_CODES.S)
     private fun blurCheatButton(){
         val effect = RenderEffect.createBlurEffect(
             10.0f,
