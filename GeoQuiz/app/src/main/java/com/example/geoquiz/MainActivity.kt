@@ -163,5 +163,4 @@ class MainActivity : AppCompatActivity() {
         )
         binding.cheatButton.setRenderEffect(effect)
     }
-
 }
