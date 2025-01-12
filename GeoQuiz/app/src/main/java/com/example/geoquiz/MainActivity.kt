@@ -45,7 +45,8 @@ class MainActivity : AppCompatActivity() {
             incrementIndex()
             updateQuestion()
             resetButtons()
-            blurCheatButton()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+                blurCheatButton()
         }
         binding.trueButton.setOnClickListener { view: View ->
             checkAnswer(true)
