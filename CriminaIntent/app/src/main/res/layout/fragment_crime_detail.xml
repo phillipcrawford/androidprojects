@@ -20,5 +20,10 @@
         android:importantForAutofill="no"
         android:inputType="text" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceHeadline5"
+        android:text="@string/crime_details_label" />
     
 </LinearLayout>
