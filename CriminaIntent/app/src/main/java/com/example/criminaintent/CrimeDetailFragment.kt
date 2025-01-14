@@ -1,11 +1,17 @@
 package com.example.criminaintent
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.criminaintent.databinding.FragmentCrimeDetailBinding
 import java.util.Date
 import java.util.UUID
 
 class CrimeDetailFragment : Fragment() {
+
+    private lateinit var binding: FragmentCrimeDetailBinding
 
     private lateinit var crime: Crime
 
