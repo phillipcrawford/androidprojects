@@ -25,4 +25,13 @@ class CrimeDetailFragment : Fragment() {
             isSolved = false
         )
     }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentCrimeDetailBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
 }
