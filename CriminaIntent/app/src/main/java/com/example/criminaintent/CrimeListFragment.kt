@@ -4,6 +4,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.example.criminaintent.databinding.FragmentCrimeListBinding
 
 
@@ -23,5 +26,12 @@ class CrimeListFragment : Fragment() {
         Log.d(TAG, "Total crimes: ${crimeListViewModel.crimes.size}")
     }
 
-    
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentCrimeListBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 }
