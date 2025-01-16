@@ -43,18 +43,14 @@ android {
 dependencies {
     testImplementation(libs.junit.jupiter)
     androidTestImplementation(libs.junit.jupiter)
-    val lifecycle_version = "2.8.7"
-    val activity_version = "1.9.3"
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    //implementation("androidx.activity:activity-ktx:1.4.0")
-    //implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
-    implementation("androidx.activity:activity-ktx:$activity_version")
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.activity.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
