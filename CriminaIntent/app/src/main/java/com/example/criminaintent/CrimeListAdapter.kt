@@ -16,7 +16,7 @@ class CrimeHolder(
         binding.root.setOnClickListener {
             Toast.makeText(
                 binding.root.context,
-                "${crime.title} clickased!",
+                "${crime.title} clickasded!",
                 Toast.LENGTH_SHORT
             ).show()
         }
