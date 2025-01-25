@@ -59,7 +59,7 @@ dependencies {
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
-    //ksp(libs.androidx.room.compiler)ssf
+    //ksp(libs.androidx.room.compiler)ssfs
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
