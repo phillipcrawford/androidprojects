@@ -2,6 +2,8 @@ package com.example.criminaintent
 
 import android.content.Context
 
+private const val DATABASE_NAME = "crime-database"
+
 class CrimeRepository private constructor(context: Context) {
     companion object {
         private var INSTANCE: CrimeRepository? = null
