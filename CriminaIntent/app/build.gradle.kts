@@ -41,7 +41,7 @@ android {
 }
 
 dependencies {
-    val room_version = "2.6.1"
+    //val room_version = "2.6.1"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -53,9 +53,9 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.lifecycle.runtime.ktx)
-    implementation("androidx.room:room-runtime:$room_version")
-    ksp("androidx.room:room-compiler:$room_version")
-    implementation("androidx.room:room-ktx:$room_version")
+    implementation(libs.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.room.ktx)
     //implementation(libs.room.runtime)
     //implementation(libs.room.ktx)
     //ksp(libs.androidx.room.compiler)
