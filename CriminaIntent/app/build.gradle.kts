@@ -1,8 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    //id("com.google.devtools.ksp")
-    id("androidx.room")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -39,13 +38,10 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    room {
-        schemaDirectory("$projectDir/schemas")
-    }
 }
 
 dependencies {
-
+    val room_version = "2.6.1"
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -57,9 +53,12 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.lifecycle.runtime.ktx)
-    implementation(libs.room.runtime)
-    implementation(libs.room.ktx)
-    //ksp(libs.androidx.room.compiler)ssfs
+    implementation("androidx.room:room-runtime:$room_version")
+    ksp("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+    //implementation(libs.room.runtime)
+    //implementation(libs.room.ktx)
+    //ksp(libs.androidx.room.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
