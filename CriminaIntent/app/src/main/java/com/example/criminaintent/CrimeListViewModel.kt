@@ -11,6 +11,7 @@ import java.util.UUID
 private const val TAG = "CrimeListViewModel"
 
 class CrimeListViewModel : ViewModel() {
+    private val crimeRepository = CrimeRepository.get()
 
     val crimes = mutableListOf<Crime>()
 
