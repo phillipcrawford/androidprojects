@@ -8,5 +8,6 @@
     <fragment
         android:id="@+id/crimeListFragment"
         android:name="com.example.criminaintent.CrimeListFragment"
-        android:label="CrimeListFragment" />
+        android:label="CrimeListFragment"
+        tools:layout="@layout/fragment_crime_list" />
 </navigation>
