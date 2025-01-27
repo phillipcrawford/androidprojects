@@ -55,7 +55,7 @@ dependencies {
     implementation(libs.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.navigation.fragment.ktx)
-    implementation("androidx.navigation:navigation-ui-ktx:2.8.5")
+    implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.room.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
