@@ -54,6 +54,7 @@ dependencies {
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.room.runtime)
     ksp(libs.androidx.room.compiler)
+    implementation("androidx.navigation:navigation-fragment-ktx:2.8.5")
     implementation(libs.room.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
