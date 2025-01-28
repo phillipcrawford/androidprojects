@@ -10,4 +10,8 @@
         android:name="com.example.criminaintent.CrimeListFragment"
         android:label="CrimeListFragment"
         tools:layout="@layout/fragment_crime_list" />
+    <fragment
+        android:id="@+id/crimeDetailFragment"
+        android:name="com.example.criminaintent.CrimeDetailFragment"
+        android:label="CrimeDetailFragment" />
 </navigation>
