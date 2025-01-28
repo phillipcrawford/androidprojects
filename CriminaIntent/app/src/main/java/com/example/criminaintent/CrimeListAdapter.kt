@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.criminaintent.databinding.ListItemCrimeBinding
+import java.util.UUID
 
 class CrimeHolder(
     private val binding: ListItemCrimeBinding
