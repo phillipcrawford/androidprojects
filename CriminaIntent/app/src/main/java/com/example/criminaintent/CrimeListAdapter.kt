@@ -16,7 +16,7 @@ class CrimeHolder(
         binding.crimeDate.text = crime.date.toString()
 
         binding.root.setOnClickListener {
-            onCrimeClicked()
+            onCrimeClicked(crime.id)
         }
 
         binding.crimeSolved.visibility = if (crime.isSolved) {
