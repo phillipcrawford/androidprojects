@@ -17,5 +17,6 @@
     <fragment
         android:id="@+id/crimeDetailFragment"
         android:name="com.example.criminaintent.CrimeDetailFragment"
-        android:label="CrimeDetailFragment" />
+        android:label="CrimeDetailFragment"
+        tools:layout="@layout/fragment_crime_detail" />
 </navigation>
