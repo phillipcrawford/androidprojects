@@ -11,6 +11,8 @@ class CrimeDetailViewModel {
     val crime: StateFlow<Crime?> = _crime.asStateFlow()
 
     init{
-        
+        viewModelScope.launch {
+            _crime.value = crimeRepository.getCrime(crimeId)
+        }
     }
 }
