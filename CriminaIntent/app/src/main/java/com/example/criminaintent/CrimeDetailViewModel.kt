@@ -9,4 +9,8 @@ class CrimeDetailViewModel {
 
     private val _crime: MutableStateFlow<Crime?> = MutableStateFlow(null)
     val crime: StateFlow<Crime?> = _crime.asStateFlow()
+
+    init{
+        
+    }
 }
