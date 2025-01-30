@@ -72,6 +72,8 @@ class CrimeDetailFragment : Fragment() {
             if (crimeTitle.text.toString() != crime.title) {
                 crimeTitle.setText(crime.title)
             }
+            crimeDate.text = crime.date.toString()
+            crimeSolved.isChecked = crime.isSolved
         }
     }
 }
