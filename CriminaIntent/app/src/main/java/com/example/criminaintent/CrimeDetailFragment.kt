@@ -9,8 +9,10 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.example.criminaintent.databinding.FragmentCrimeDetailBinding
+import kotlinx.coroutines.launch
 
 class CrimeDetailFragment : Fragment() {
 
@@ -51,7 +53,9 @@ class CrimeDetailFragment : Fragment() {
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
 
+            }
         }
     }
 
