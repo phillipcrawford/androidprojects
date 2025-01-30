@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.criminaintent.databinding.FragmentCrimeDetailBinding
 
@@ -47,6 +48,10 @@ class CrimeDetailFragment : Fragment() {
 
             crimeSolved.setOnCheckedChangeListener { _, isChecked ->
             }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+
         }
     }
 
