@@ -68,6 +68,10 @@ class CrimeDetailFragment : Fragment() {
     }
 
     private fun updateUi(crime: Crime){
-        
+        binding.apply {
+            if (crimeTitle.text.toString() != crime.title) {
+                crimeTitle.setText(crime.title)
+            }
+        }
     }
 }
