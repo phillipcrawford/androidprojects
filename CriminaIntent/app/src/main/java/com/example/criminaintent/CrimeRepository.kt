@@ -29,12 +29,10 @@ class CrimeRepository private constructor(
 
     suspend fun getCrime(id: UUID): Crime = database.crimeDao().getCrime(id)
 
-    suspend fun updateCrime(crime: Crime) {
+    fun updateCrime(crime: Crime) {
         coroutineScope.launch {
             database.crimeDao().updateCrime(crime)
         }
-
-        database.crimeDao().updateCrime(crime)
     }
 
     companion object {
