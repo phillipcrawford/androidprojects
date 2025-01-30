@@ -20,6 +20,10 @@ class CrimeDetailFragment : Fragment() {
 
     private val args: CrimeDetailFragmentArgs by navArgs()
 
+    private val crimeDetailViewModel: CrimeDetailViewModel by viewModels {
+        
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
