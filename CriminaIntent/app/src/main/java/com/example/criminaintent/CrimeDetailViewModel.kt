@@ -20,3 +20,7 @@ class CrimeDetailViewModel(crimeId: UUID) : ViewModel() {
         }
     }
 }
+
+class CrimeDetailViewModelFactory(
+    private val crimeId: UUID
+)
