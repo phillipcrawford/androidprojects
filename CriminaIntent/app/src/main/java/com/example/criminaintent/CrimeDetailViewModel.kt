@@ -30,9 +30,7 @@ class CrimeDetailViewModel(crimeId: UUID) : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-        //viewModelScope.launch {
-            crime.value?.let { crimeRepository.updateCrime(it) }
-        //}
+        crime.value?.let { crimeRepository.updateCrime(it) }
     }
 }
 
