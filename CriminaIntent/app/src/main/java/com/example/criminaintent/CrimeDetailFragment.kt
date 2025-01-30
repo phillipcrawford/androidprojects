@@ -66,4 +66,8 @@ class CrimeDetailFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun updateUi(crime: Crime){
+        
+    }
 }
