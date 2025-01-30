@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class CrimeDetailViewModel {
+class CrimeDetailViewModel(crimeId: UUID) {
     private val crimeRepository = CrimeRepository.get()
 
     private val _crime: MutableStateFlow<Crime?> = MutableStateFlow(null)
