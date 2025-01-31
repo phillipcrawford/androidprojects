@@ -34,8 +34,7 @@ class CrimeDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCrimeDetailBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+        return binding.roota
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
