@@ -17,7 +17,9 @@ class DatePickerFragment : DialogFragment() {
                 _: DatePicker, year: Int, month: Int, day: Int ->
 
             val resultDate = GregorianCalendar(year, month, day).time
-            
+
+            setFragmentResult(REQUEST_KEY_DATE,
+                bundleOf(BUNDLE_KEY_DATE to resultDate))
         }
         val calendar = Calendar.getInstance()
         calendar.time = arg.crimeDate
