@@ -70,7 +70,7 @@ class CrimeDetailFragment : Fragment() {
         ) { _, bundle ->
             val newDate =
                 bundle.getSerializable(DatePickerFragment.BUNDLE_KEY_DATE) as Date
-            crimeDetailViewModel.updateCrime { it.copy(date = newDate) }a
+            crimeDetailViewModel.updateCrime { it.copy(date = newDate) }ab
         }
     }
 
