@@ -23,7 +23,7 @@
             android:name="crimeId"
             app:argType="java.util.UUID" />
         <action
-            android:id="@+id/action_crimeDetailFragment_to_datePickerFragment"
+            android:id="@+id/select_date"
             app:destination="@id/datePickerFragment" />
     </fragment>
     <dialog
