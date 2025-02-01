@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.criminaintent.databinding.FragmentCrimeDetailBinding
 import kotlinx.coroutines.launch
+import java.util.Date
 
 class CrimeDetailFragment : Fragment() {
 
@@ -66,8 +67,10 @@ class CrimeDetailFragment : Fragment() {
 
         setFragmentResultListener(
             DatePickerFragment.REQUEST_KEY_DATE
-        ) { requestKey, bundle ->
-            // TODO
+        ) { _, bundle ->
+            val newDate =
+                bundle.getSerializable(DatePickerFragment.BUNDLE_KEY_DATE) as Date
+            crimeDetailViewModel.updateCrime { it.copy(date = newDate) }
         }
     }
 
