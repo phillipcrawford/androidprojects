@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.Dialog
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.navArgs
 
@@ -12,6 +13,9 @@ class DatePickerFragment : DialogFragment() {
     private val arg: DatePickerFragmentArgs by navArgs()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dateListener = DatePickerDialog.OnDateSetListener {
+                _: DatePicker, year: Int, month: Int, day: Int ->
+        }
         val calendar = Calendar.getInstance()
         calendar.time = arg.crimeDate
         val initialYear = calendar.get(Calendar.YEAR)
