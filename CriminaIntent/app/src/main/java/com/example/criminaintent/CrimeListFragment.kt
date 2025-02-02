@@ -3,7 +3,6 @@ package com.example.criminaintent
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
