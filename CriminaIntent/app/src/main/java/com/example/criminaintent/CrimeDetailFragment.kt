@@ -81,11 +81,6 @@ class CrimeDetailFragment : Fragment() {
         _binding = null
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.fragment_crime_list, menu)
-    }
-
     private fun updateUi(crime: Crime){
         binding.apply {
             if (crimeTitle.text.toString() != crime.title) {
