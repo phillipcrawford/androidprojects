@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">NavbarTest</string>
     <string name="trial">Trial!</string>
+    <string name="new_trial">New Trial!</string>
 </resources>
