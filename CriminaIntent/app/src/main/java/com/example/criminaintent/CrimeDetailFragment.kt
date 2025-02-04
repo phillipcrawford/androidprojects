@@ -97,4 +97,8 @@ class CrimeDetailFragment : Fragment() {
             crimeSolved.isChecked = crime.isSolved
         }
     }
+
+    private fun getCrimeReport(crime: Crime): String {
+        
+    }
 }
