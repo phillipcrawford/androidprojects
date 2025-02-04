@@ -110,7 +110,9 @@ class CrimeDetailFragment : Fragment() {
         val suspectText = if (crime.suspect.isBlank()) {
             getString(R.string.crime_report_no_suspect)
         } else {
-            
+            getString(R.string.crime_report_suspect, crime.suspect)
         }
+
+        
     }
 }
