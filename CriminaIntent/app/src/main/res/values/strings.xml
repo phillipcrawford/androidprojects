@@ -8,5 +8,5 @@
     <string name="crime_suspect_text">Choose Suspect</string>
     <string name="crime_report_text">Send Crime Report</string>"
     <string name="crime_report">%1$s! The crime was discovered on %2$s. %3$s, and %4$s</string>
-    
+    <string name="crime_report_solved">The crime is solved</string>"
 </resources>
