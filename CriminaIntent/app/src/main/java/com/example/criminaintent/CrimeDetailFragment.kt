@@ -107,5 +107,8 @@ class CrimeDetailFragment : Fragment() {
         }
 
         val dateString = DateFormat.format(DATE_FORMAT, crime.date).toString()
+        val suspectText = if (crime.suspect.isBlank()) {
+            
+        }
     }
 }
