@@ -104,5 +104,7 @@ class CrimeDetailFragment : Fragment() {
         } else {
             getString(R.string.crime_report_unsolved)
         }
+
+        val dateString = DateFormat.formate(DATE_FORMAT, crime.date).toString()
     }
 }
