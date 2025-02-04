@@ -101,6 +101,8 @@ class CrimeDetailFragment : Fragment() {
     private fun getCrimeReport(crime: Crime): String {
         val solvedString = if (crime.isSolved) {
             getString(R.string.crime_report_solved)
+        } else {
+            getString(R.string.crime_report_unsolved)
         }
     }
 }
