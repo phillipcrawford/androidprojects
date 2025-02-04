@@ -1,6 +1,7 @@
 package com.example.criminaintent
 
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -105,6 +106,6 @@ class CrimeDetailFragment : Fragment() {
             getString(R.string.crime_report_unsolved)
         }
 
-        val dateString = DateFormat.formate(DATE_FORMAT, crime.date).toString()
+        val dateString = DateFormat.format(DATE_FORMAT, crime.date).toString()
     }
 }
