@@ -113,6 +113,9 @@ class CrimeDetailFragment : Fragment() {
             getString(R.string.crime_report_suspect, crime.suspect)
         }
 
-        
+        return getString(
+            R.string.crime_report,
+            crime.title, dateString, solvedString, suspectText
+        )
     }
 }
