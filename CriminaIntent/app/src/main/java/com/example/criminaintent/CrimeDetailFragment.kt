@@ -3,6 +3,8 @@ package com.example.criminaintent
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.ContactsContract
+import android.provider.ContactsContract.Contacts
 import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.Menu
@@ -151,5 +153,11 @@ class CrimeDetailFragment : Fragment() {
             R.string.crime_report,
             crime.title, dateString, solvedString, suspectText
         )
+    }
+
+    private fun parseContactSelection(contactURI:Uri) {
+        val queryFields = arrayOf(ContactsContract.Contacts.DISPLAY_NAME)
+
+        
     }
 }
