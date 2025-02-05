@@ -37,6 +37,10 @@ class CrimeDetailFragment : Fragment() {
         CrimeDetailViewModelFactory(args.crimeId)
     }
 
+    private val selectSuspect = registerForActivityResult(
+        
+    )
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
