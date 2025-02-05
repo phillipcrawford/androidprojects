@@ -23,7 +23,7 @@ class CrimeRepository private constructor(
             CrimeDatabase::class.java,
             DATABASE_NAME
         )
-        .createFromAsset(DATABASE_NAME)
+        //.createFromAsset(DATABASE_NAME)
         .addMigrations(migration_1_2)
         .build()
 
