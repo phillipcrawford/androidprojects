@@ -158,6 +158,7 @@ class CrimeDetailFragment : Fragment() {
     private fun parseContactSelection(contactURI:Uri) {
         val queryFields = arrayOf(ContactsContract.Contacts.DISPLAY_NAME)
 
-        
+        val queryCursor = requireActivity().contentResolver
+            .query(contactURI, queryFields, null, null, null)
     }
 }
