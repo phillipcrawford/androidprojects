@@ -160,5 +160,11 @@ class CrimeDetailFragment : Fragment() {
 
         val queryCursor = requireActivity().contentResolver
             .query(contactURI, queryFields, null, null, null)
+
+        queryCursor?.use { cursor ->
+            if (cursor.moveToFirst()) {
+                
+            }
+        }
     }
 }
