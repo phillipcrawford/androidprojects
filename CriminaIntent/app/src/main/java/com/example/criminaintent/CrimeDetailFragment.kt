@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
@@ -38,7 +39,7 @@ class CrimeDetailFragment : Fragment() {
     }
 
     private val selectSuspect = registerForActivityResult(
-        
+        ActivityResultContracts.PickContact()
     )
 
     override fun onCreateView(
