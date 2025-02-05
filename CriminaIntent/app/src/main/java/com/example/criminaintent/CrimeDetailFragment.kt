@@ -107,7 +107,8 @@ class CrimeDetailFragment : Fragment() {
                         getString(R.string.crime_report_subject)
                     )
                 }
-                startActivity(reportIntent)
+                //startActivity(reportIntent)
+                
             }
         }
     }
