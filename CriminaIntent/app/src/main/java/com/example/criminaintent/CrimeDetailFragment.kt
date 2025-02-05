@@ -164,6 +164,9 @@ class CrimeDetailFragment : Fragment() {
         queryCursor?.use { cursor ->
             if (cursor.moveToFirst()) {
                 val suspect = cursor.getString(0)
+                crimeDetailViewModel.updateCrime { oldCrime ->
+                    oldCrime.copy(suspect = suspect)
+                }
             }
         }
     }
