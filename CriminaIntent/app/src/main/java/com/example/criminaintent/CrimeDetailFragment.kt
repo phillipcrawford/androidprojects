@@ -40,7 +40,9 @@ class CrimeDetailFragment : Fragment() {
 
     private val selectSuspect = registerForActivityResult(
         ActivityResultContracts.PickContact()
-    )
+    ) { uri: Uri? ->
+        // Handle the result
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
