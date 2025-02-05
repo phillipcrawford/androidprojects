@@ -69,6 +69,10 @@ class CrimeDetailFragment : Fragment() {
                     oldCrime.copy(isSolved = isChecked)
                 }
             }
+
+            crimeSuspect.setOnClickListener {
+                selectSuspect.launch(null)
+            }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
