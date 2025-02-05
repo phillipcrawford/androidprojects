@@ -101,12 +101,13 @@ class CrimeDetailFragment : Fragment() {
             crimeReport.setOnClickListener {
                 val reportIntent = Intent(Intent.ACTION_SEND).apply {
                     type = "text/plain"
-                    putExtra(Intent.EXTRA_TEXT, getCrimeReport(crime)))
+                    putExtra(Intent.EXTRA_TEXT, getCrimeReport(crime))
                     putExtra(
                         Intent.EXTRA_SUBJECT,
                         getString(R.string.crime_report_subject)
                     )
                 }
+                startActivity(reportIntent)
             }
         }
     }
