@@ -108,7 +108,11 @@ class CrimeDetailFragment : Fragment() {
                     )
                 }
                 //startActivity(reportIntent)
-                
+                val chooserIntent = Intent.createChooser(
+                    reportIntent,
+                    getString(R.string.send_report)
+                )
+                startActivity(chooserIntent)
             }
         }
     }
