@@ -1,5 +1,6 @@
 package com.example.criminaintent
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.LayoutInflater
@@ -96,6 +97,12 @@ class CrimeDetailFragment : Fragment() {
                 )
             }
             crimeSolved.isChecked = crime.isSolved
+
+            crimeReport.setOnClickListener {
+                val reportIntent = Intent(Intent.ACTION_SEND).apply {
+                    
+                }
+            }
         }
     }
 
