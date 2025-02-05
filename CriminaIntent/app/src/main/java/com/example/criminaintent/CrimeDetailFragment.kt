@@ -163,7 +163,7 @@ class CrimeDetailFragment : Fragment() {
 
         queryCursor?.use { cursor ->
             if (cursor.moveToFirst()) {
-                
+                val suspect = cursor.getString(0)
             }
         }
     }
