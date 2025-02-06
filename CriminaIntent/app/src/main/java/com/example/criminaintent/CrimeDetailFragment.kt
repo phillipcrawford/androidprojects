@@ -44,7 +44,7 @@ class CrimeDetailFragment : Fragment() {
     private val selectSuspect = registerForActivityResult(
         ActivityResultContracts.PickContact()
     ) { uri: Uri? ->
-        // Handle the result
+        uri?.let { parseContactSelection(it) }
     }
 
     override fun onCreateView(
