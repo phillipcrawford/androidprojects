@@ -79,7 +79,8 @@ class CrimeDetailFragment : Fragment() {
             }
 
             val selectSuspectIntent = selectSuspect.contract.createIntent(
-                requireContext()
+                requireContext(),
+                null
             )
         }
 
