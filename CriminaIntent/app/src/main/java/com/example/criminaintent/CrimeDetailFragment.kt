@@ -170,4 +170,8 @@ class CrimeDetailFragment : Fragment() {
             }
         }
     }
+
+    private fun canResolveIntent(intent: Intent): Boolean {
+        
+    }
 }
