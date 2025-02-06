@@ -174,5 +174,6 @@ class CrimeDetailFragment : Fragment() {
 
     private fun canResolveIntent(intent: Intent): Boolean {
         val packageManager: PackageManager = requireActivity().packageManager
+        val resolvedActivity: ResolveInfo? =
     }
 }
