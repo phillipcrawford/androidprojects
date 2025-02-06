@@ -2,6 +2,7 @@ package com.example.criminaintent
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -177,7 +178,7 @@ class CrimeDetailFragment : Fragment() {
         val resolvedActivity: ResolveInfo? =
             packageManager.resolveActivity(
                 intent,
-                packageManager.MATCH_DEFAULT_ONLY
+                PackageManager.MATCH_DEFAULT_ONLY
             )
     }
 }
