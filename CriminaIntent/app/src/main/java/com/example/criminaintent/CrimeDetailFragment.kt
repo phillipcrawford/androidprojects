@@ -82,6 +82,7 @@ class CrimeDetailFragment : Fragment() {
                 requireContext(),
                 null
             )
+            crimeSuspect.isEnabled = canResolveIntent(selectSuspectIntent)
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
