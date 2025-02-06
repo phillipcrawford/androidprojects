@@ -180,5 +180,6 @@ class CrimeDetailFragment : Fragment() {
                 intent,
                 PackageManager.MATCH_DEFAULT_ONLY
             )
+        return resolvedActivity != null
     }
 }
