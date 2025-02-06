@@ -77,6 +77,10 @@ class CrimeDetailFragment : Fragment() {
             crimeSuspect.setOnClickListener {
                 selectSuspect.launch(null)
             }
+
+            val selectSuspectIntent = selectSuspect.contract.createIntent(
+                
+            )
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
