@@ -24,7 +24,9 @@
         </activity>
     </application>
     <queries>
-        
+        <intent>
+            
+        </intent>
     </queries>
 
 </manifest>
