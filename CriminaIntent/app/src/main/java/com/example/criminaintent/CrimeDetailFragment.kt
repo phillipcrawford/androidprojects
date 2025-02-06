@@ -1,6 +1,7 @@
 package com.example.criminaintent
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -172,6 +173,6 @@ class CrimeDetailFragment : Fragment() {
     }
 
     private fun canResolveIntent(intent: Intent): Boolean {
-        
+        val packageManager: PackageManager = requireActivity().packageManager
     }
 }
