@@ -25,7 +25,7 @@
     </application>
     <queries>
         <intent>
-            
+            <action android:name="android.intent.action.PICK" />
         </intent>
     </queries>
 
