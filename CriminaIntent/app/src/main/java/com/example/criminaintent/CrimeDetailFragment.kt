@@ -176,7 +176,8 @@ class CrimeDetailFragment : Fragment() {
         val packageManager: PackageManager = requireActivity().packageManager
         val resolvedActivity: ResolveInfo? =
             packageManager.resolveActivity(
-
+                intent,
+                packageManager.MATCH_DEFAULT_ONLY
             )
     }
 }
