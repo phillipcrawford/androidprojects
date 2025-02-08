@@ -239,7 +239,8 @@ class CrimeDetailFragment : Fragment() {
                     binding.crimePhoto.tag = photoFileName
                 }
             } else {
-
+                binding.crimePhoto.setImageBitmap(null)
+                binding.crimePhoto.tag = null
             }
         }
     }
