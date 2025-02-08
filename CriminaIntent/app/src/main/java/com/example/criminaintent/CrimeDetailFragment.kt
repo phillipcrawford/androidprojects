@@ -96,6 +96,7 @@ class CrimeDetailFragment : Fragment() {
                 )
 
                 takePhoto.launch(photoUri)
+            }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
