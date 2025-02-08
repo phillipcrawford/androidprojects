@@ -51,6 +51,12 @@ class CrimeDetailFragment : Fragment() {
         uri?.let { parseContactSelection(it) }
     }
 
+    private val takePhoto = registerForActivityResult(
+        ActivityResultContracts.TakePicture()
+    ) { didTakePhoto :Boolean ->
+        // Handle the result
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
