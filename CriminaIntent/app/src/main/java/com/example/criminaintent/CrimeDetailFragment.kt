@@ -173,6 +173,8 @@ class CrimeDetailFragment : Fragment() {
             crimeSuspect.text = crime.suspect.ifEmpty {
                 getString(R.string.crime_report_no_suspect)
             }
+
+            updatePhoto(crime.photoFileName)
         }
     }
 
