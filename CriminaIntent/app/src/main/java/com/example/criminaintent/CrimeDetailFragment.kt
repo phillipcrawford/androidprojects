@@ -83,6 +83,10 @@ class CrimeDetailFragment : Fragment() {
                 null
             )
             crimeSuspect.isEnabled = canResolveIntent(selectSuspectIntent)
+
+            crimeCamera.setOnClickListener {
+                val photoName = "IMG_${Date()}.JPG"
+
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
