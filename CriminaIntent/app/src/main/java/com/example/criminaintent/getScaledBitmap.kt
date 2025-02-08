@@ -1,5 +1,5 @@
 package com.example.criminaintent
 
-fun getScaledBitmap(){
-    
+fun getScaledBitmap(path: String, destWidth: Int, destHeight: Int): Bitmap {
+
 }
