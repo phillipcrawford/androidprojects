@@ -22,4 +22,9 @@ fun getScaledBitmap(path: String, destWidth: Int, destHeight: Int): Bitmap {
 
         minOf(heightScale, widthScale).roundToInt()
     }
+
+    // Read in and create final bitmap
+    return BitmapFactory.decodeFile(path, BitmapFactory.Options().apply {
+        inSampleSize = sampleSize
+    })
 }
