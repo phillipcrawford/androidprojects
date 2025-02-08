@@ -14,6 +14,7 @@ import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
@@ -25,6 +26,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.criminaintent.databinding.FragmentCrimeDetailBinding
 import kotlinx.coroutines.launch
+import java.io.File
 import java.util.Date
 
 private const val DATE_FORMAT = "EEE, MMM, dd"
@@ -86,7 +88,14 @@ class CrimeDetailFragment : Fragment() {
 
             crimeCamera.setOnClickListener {
                 val photoName = "IMG_${Date()}.JPG"
+                val photoFile = File(requireContext().applicationContext.filesDir, photoName)
+                val photoUri = FileProvider.getUriForFile(
+                    requireContext(),
+                    "com.example.criminaintent.fileprovider",
+                    photoFile
+                )
 
+                takePhoto.launch(photoUri)
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
