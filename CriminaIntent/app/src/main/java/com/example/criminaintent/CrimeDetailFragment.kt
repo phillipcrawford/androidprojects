@@ -220,4 +220,8 @@ class CrimeDetailFragment : Fragment() {
             )
         return resolvedActivity != null
     }
+
+    private fun updatePhoto(photoFileName: String?) {
+        
+    }
 }
