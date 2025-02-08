@@ -222,6 +222,16 @@ class CrimeDetailFragment : Fragment() {
     }
 
     private fun updatePhoto(photoFileName: String?) {
-        
+        if (binding.crimePhoto.tag != photoFileName) {
+            val photoFile = photoFileName?.let {
+                File(requireContext().applicationContext.filesDir, it)
+            }
+
+            if (photoFile?.exists() == true) {
+
+            } else {
+
+            }
+        }
     }
 }
