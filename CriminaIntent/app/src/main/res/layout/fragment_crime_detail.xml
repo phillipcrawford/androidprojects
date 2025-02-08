@@ -16,6 +16,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginEnd="16dp">
+
+            <ImageView
+                android:id="@+id/crime_photo"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
         </LinearLayout>
     </LinearLayout>
 
