@@ -54,8 +54,14 @@ class CrimeDetailFragment : Fragment() {
     private val takePhoto = registerForActivityResult(
         ActivityResultContracts.TakePicture()
     ) { didTakePhoto :Boolean ->
-        // Handle the result
+        if (didTakePhoto && photoName != null) {
+            crimeDetailViewModel.updateCrime { oldCrime ->
+                oldCrime.copy(photoFileName = photoName)
+            }
+        }
     }
+
+    private var photoName: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -93,7 +99,7 @@ class CrimeDetailFragment : Fragment() {
             crimeSuspect.isEnabled = canResolveIntent(selectSuspectIntent)
 
             crimeCamera.setOnClickListener {
-                val photoName = "IMG_${Date()}.JPG"
+                photoName = "IMG_${Date()}.JPG"
                 val photoFile = File(requireContext().applicationContext.filesDir, photoName)
                 val photoUri = FileProvider.getUriForFile(
                     requireContext(),
@@ -103,6 +109,12 @@ class CrimeDetailFragment : Fragment() {
 
                 takePhoto.launch(photoUri)
             }
+
+            val captureImageIntent = takePhoto.contract.createIntent(
+                requireContext(),
+                null
+            )
+            crimeCamera.isEnabled = canResolveIntent(captureImageIntent) 
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
