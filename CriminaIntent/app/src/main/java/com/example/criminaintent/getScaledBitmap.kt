@@ -7,4 +7,8 @@ fun getScaledBitmap(path: String, destWidth: Int, destHeight: Int): Bitmap {
     // Read in the dimensions of the image on disk
     val options = BitmapFactory.Options()
     options.inJustDecodeBounds = true
+    BitmapFactory.decodeFile(path,options)
+
+    val srcWidth = options.outWidth.toFloat()
+    val srcHeight = options.outHeight.toFloat()
 }
