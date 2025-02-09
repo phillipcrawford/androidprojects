@@ -55,14 +55,14 @@ class CrimeDetailFragment : Fragment() {
     private val takePhoto = registerForActivityResult(
         ActivityResultContracts.TakePicture()
     ) { didTakePhoto :Boolean ->
-        if (didTakePhoto && photoName != null) {
-            crimeDetailViewModel.updateCrime { oldCrime ->
-                oldCrime.copy(photoFileName = photoName)
-            }
-        }
+//        if (didTakePhoto && photoName != null) {
+//            crimeDetailViewModel.updateCrime { oldCrime ->
+//                oldCrime.copy(photoFileName = photoName)
+//            }
+//        }
     }
 
-    private var photoName: String? = null
+    //private var photoName: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -100,7 +100,7 @@ class CrimeDetailFragment : Fragment() {
             crimeSuspect.isEnabled = canResolveIntent(selectSuspectIntent)
 
             crimeCamera.setOnClickListener {
-                photoName = "IMG_${Date()}.JPG"
+                val photoName = "IMG_${Date()}.JPG"
                 val photoFile = File(requireContext().applicationContext.filesDir, photoName)
                 val photoUri = FileProvider.getUriForFile(
                     requireContext(),
@@ -111,11 +111,11 @@ class CrimeDetailFragment : Fragment() {
                 takePhoto.launch(photoUri)
             }
 
-            val captureImageIntent = takePhoto.contract.createIntent(
-                requireContext(),
-                null
-            )
-            crimeCamera.isEnabled = canResolveIntent(captureImageIntent)
+//            val captureImageIntent = takePhoto.contract.createIntent(
+//                requireContext(),
+//                null
+//            )
+//            crimeCamera.isEnabled = canResolveIntent(captureImageIntent)
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -174,7 +174,7 @@ class CrimeDetailFragment : Fragment() {
                 getString(R.string.crime_report_no_suspect)
             }
 
-            updatePhoto(crime.photoFileName)
+            //updatePhoto(crime.photoFileName)
         }
     }
 
@@ -224,26 +224,26 @@ class CrimeDetailFragment : Fragment() {
         return resolvedActivity != null
     }
 
-    private fun updatePhoto(photoFileName: String?) {
-        if (binding.crimePhoto.tag != photoFileName) {
-            val photoFile = photoFileName?.let {
-                File(requireContext().applicationContext.filesDir, it)
-            }
-
-            if (photoFile?.exists() == true) {
-                binding.crimePhoto.doOnLayout { measureView ->
-                    val scaledBitmap = getScaledBitmap(
-                        photoFile.path,
-                        measureView.width,
-                        measureView.height
-                    )
-                    binding.crimePhoto.setImageBitmap(scaledBitmap)
-                    binding.crimePhoto.tag = photoFileName
-                }
-            } else {
-                binding.crimePhoto.setImageBitmap(null)
-                binding.crimePhoto.tag = null
-            }
-        }
-    }
+//    private fun updatePhoto(photoFileName: String?) {
+//        if (binding.crimePhoto.tag != photoFileName) {
+//            val photoFile = photoFileName?.let {
+//                File(requireContext().applicationContext.filesDir, it)
+//            }
+//
+//            if (photoFile?.exists() == true) {
+//                binding.crimePhoto.doOnLayout { measureView ->
+//                    val scaledBitmap = getScaledBitmap(
+//                        photoFile.path,
+//                        measureView.width,
+//                        measureView.height
+//                    )
+//                    binding.crimePhoto.setImageBitmap(scaledBitmap)
+//                    binding.crimePhoto.tag = photoFileName
+//                }
+//            } else {
+//                binding.crimePhoto.setImageBitmap(null)
+//                binding.crimePhoto.tag = null
+//            }
+//        }
+//    }
 }
