@@ -12,4 +12,5 @@
     <string name="crime_report_solved">El caso está resuelto</string>
     <string name="crime_report_unsolved">El caso no está resuelto</string>
     <string name="crime_report_no_suspect">no hay sospechoso.</string>
+    <string name="crime_report_suspect">el/la sospechoso/a es %s.</string>
 </resources>
