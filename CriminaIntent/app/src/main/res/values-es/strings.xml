@@ -4,4 +4,5 @@
     <string name="crime_title_hint">Introduzca un título para el crimen.</string>
     <string name="crime_title_label">Título</string>
     <string name="crime_details_label">Detalles</string>
+    <string name="crime_solved_label">Solucionado</string>
 </resources>
