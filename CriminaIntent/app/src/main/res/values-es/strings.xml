@@ -7,4 +7,5 @@
     <string name="crime_solved_label">Solucionado</string>
     <string name="new_crime">Crimen Nuevo</string>
     <string name="crime_suspect_text">Elegir Sospechoso</string>
+    <string name="crime_report_text">Enviar el Informe del Crimen</string>
 </resources>
