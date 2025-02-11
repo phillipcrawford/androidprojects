@@ -9,4 +9,5 @@
     <string name="crime_suspect_text">Elegir Sospechoso</string>
     <string name="crime_report_text">Enviar el Informe del Crimen</string>
     <string name="crime_report">%1$s! El crimen fue descubierto el %2$s. %3$s, y %4$s </string>
+    <string name="crime_report_solved">El caso está resuelto</string>
 </resources>
