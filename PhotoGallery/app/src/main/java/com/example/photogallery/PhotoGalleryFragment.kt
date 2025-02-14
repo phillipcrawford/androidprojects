@@ -32,7 +32,8 @@ class PhotoGalleryFragment {
             super.onViewCreated(view, savedInstanceState)
 
             val retrofit: Retrofit = Retrofit.Builder()
-            
+                .baseUrl("https://www.flickr.com/")
+                .build()
         }
 
         override fun onDestroyView() {
