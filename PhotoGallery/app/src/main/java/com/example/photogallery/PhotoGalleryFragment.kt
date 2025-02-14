@@ -41,6 +41,10 @@ class PhotoGalleryFragment : Fragment(){
                 .build()
 
             val flickrApi: FlickrApi = retrofit.create(FlickrApi::class.java)
+
+            viewLifecycleOwner.lifecycleScope.launch {
+                
+            }
         }
 
     override fun onDestroyView() {
