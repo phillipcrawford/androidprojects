@@ -43,7 +43,7 @@ class PhotoGalleryFragment : Fragment(){
             val flickrApi: FlickrApi = retrofit.create(FlickrApi::class.java)
 
             viewLifecycleOwner.lifecycleScope.launch {
-                
+                val response = flickrApi.fetchContents()
             }
         }
 
