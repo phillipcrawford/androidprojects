@@ -10,6 +10,8 @@ import com.example.photogallery.api.FlickrApi
 import com.example.photogallery.databinding.FragmentPhotoGalleryBinding
 import retrofit2.Retrofit
 
+import retrofit2.converter.scalars.ScalarsConverterFactory
+
 
 class PhotoGalleryFragment : Fragment(){
     private var _binding: FragmentPhotoGalleryBinding? = null
