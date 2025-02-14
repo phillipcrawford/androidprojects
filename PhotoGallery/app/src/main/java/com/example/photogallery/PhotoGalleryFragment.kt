@@ -44,6 +44,7 @@ class PhotoGalleryFragment : Fragment(){
 
             viewLifecycleOwner.lifecycleScope.launch {
                 val response = flickrApi.fetchContents()
+                Log.d(TAG, "Response received: $response")
             }
         }
 
