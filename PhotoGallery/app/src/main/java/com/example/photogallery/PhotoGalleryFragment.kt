@@ -35,7 +35,7 @@ class PhotoGalleryFragment {
                 .baseUrl("https://www.flickr.com/")
                 .build()
 
-            val flickrApi: FlickrApi = retrofit.create()
+            val flickrApi: FlickrApi = retrofit.create<FlickrApi>()
         }
 
         override fun onDestroyView() {
