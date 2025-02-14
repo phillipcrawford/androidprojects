@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.photogallery.databinding.FragmentPhotoGalleryBinding
+import retrofit2.Retrofit
 
 class PhotoGalleryFragment {
     class PhotoGalleryFragment : Fragment(){
@@ -31,6 +32,7 @@ class PhotoGalleryFragment {
             super.onViewCreated(view, savedInstanceState)
 
             val retrofit: Retrofit = Retrofit.Builder()
+            
         }
 
         override fun onDestroyView() {
