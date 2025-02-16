@@ -35,7 +35,7 @@ class PhotoGalleryFragment : Fragment(){
             super.onViewCreated(view, savedInstanceState)
 
             viewLifecycleOwner.lifecycleScope.launch {
-                val response = PhotoRepository().fetchContents()
+                val response = PhotoRepository().fetchPhotos()
                 Log.d(TAG, "Response received: $response")
             }
         }
