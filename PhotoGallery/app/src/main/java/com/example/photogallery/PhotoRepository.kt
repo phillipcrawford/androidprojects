@@ -9,7 +9,7 @@ class PhotoRepository {
 
     init {
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl("https://www.flickr.com/")
+            .baseUrl("https://api.flickr.com/")
             .addConverterFactory(ScalarsConverterFactory.create())
             .build()
 
