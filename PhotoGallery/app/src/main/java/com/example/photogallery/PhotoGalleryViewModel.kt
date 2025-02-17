@@ -22,8 +22,9 @@ class PhotoGalleryViewModel : ViewModel() {
     init {
         viewModelScope.launch {
             try {
-                val response = PhotoRepository().fetchPhotos()
-                Log.d(TAG, "Response received: $response")
+                val items = PhotoRepository().fetchPhotos()
+                Log.d(TAG, "Items received: $items")
+                _galleryItems.value = items
             } catch (ex: Exception) {
                 Log.e(TAG, "Failed to fetch gallery items", ex)
             }
