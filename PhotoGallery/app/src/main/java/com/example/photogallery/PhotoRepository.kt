@@ -16,6 +16,7 @@ class PhotoRepository {
         flickrApi = retrofit.create(FlickrApi::class.java)
     }
 
-    suspend fun fetchPhotos() = flickrApi.fetchPhotos()
+    suspend fun fetchPhotos(): List<GalleryItem> =
+        flickrApi.fetchPhotos()
 
 }
