@@ -33,12 +33,14 @@ class PhotoGalleryFragment : Fragment(){
     }
 
     private val photoGalleryViewModel: PhotoGalleryViewModel by viewModels()
-    
+
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
 
             viewLifecycleOwner.lifecycleScope.launch {
-
+                photoGalleryViewModel.galleryItems.collect { items ->
+                    Log.d(TAG, "Response received: $items")
+                }
             }
         }
 
