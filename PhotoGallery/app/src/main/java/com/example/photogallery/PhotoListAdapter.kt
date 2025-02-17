@@ -1,5 +1,6 @@
 package com.example.photogallery
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.photogallery.api.GalleryItem
@@ -20,6 +21,15 @@ class PhotoListAdapter(
         parent: ViewGroup,
         viewType: Int
     ): PhotoViewHolder {
-
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ListItemGalleryBinding.inflate(inflater, parent, false)
+        return PhotoViewHolder(binding)
     }
+
+    override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
+        val item = galleryItems[position]
+        holder.bind(item)
+    }
+
+    override fun getItemCount() = galleryItems.size
 }
