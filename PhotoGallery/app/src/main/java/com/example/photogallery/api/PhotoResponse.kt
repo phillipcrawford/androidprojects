@@ -1,3 +1,6 @@
 package com.example.photogallery.api
 
-data class PhotoResponse()
+@JsonClass(generateAdapter = true)
+data class PhotoResponse(
+
+)
