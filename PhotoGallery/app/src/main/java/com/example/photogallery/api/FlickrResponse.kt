@@ -1,3 +1,5 @@
 package com.example.photogallery.api
 
-data class FlickrResponse()
+data class FlickrResponse(
+    val photos: PhotoResponse
+)
