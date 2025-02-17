@@ -2,7 +2,7 @@ package com.example.photogallery
 
 import com.example.photogallery.api.FlickrApi
 import retrofit2.Retrofit
-import retrofit2.converter.scalars.ScalarsConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 class PhotoRepository {
     private val flickrApi: FlickrApi
@@ -10,7 +10,7 @@ class PhotoRepository {
     init {
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl("https://api.flickr.com/")
-            .addConverterFactory(ScalarsConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create())
             .build()
 
         flickrApi = retrofit.create(FlickrApi::class.java)
