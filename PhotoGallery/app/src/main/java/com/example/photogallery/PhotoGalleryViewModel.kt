@@ -1,5 +1,6 @@
 package com.example.photogallery
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.photogallery.api.GalleryItem
@@ -21,9 +22,10 @@ class PhotoGalleryViewModel : ViewModel() {
     init {
         viewModelScope.launch {
             try {
-
+                val response = PhotoRepository().fetchPhotos()
+                Log.d(TAG, "Response received: $response")
             } catch (ex: Exception) {
-                
+                Log.e(TAG, "Failed to fetch gallery items", ex)
             }
         }
     }
