@@ -1,10 +1,12 @@
 package com.example.photogallery
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.photogallery.api.GalleryItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 
 private const val TAG = "PhotoGalleryViewModel"
 
@@ -15,4 +17,14 @@ class PhotoGalleryViewModel : ViewModel() {
         MutableStateFlow(emptyList())
     val galleryItems: StateFlow<List<GalleryItem>>
         get() = _galleryItems.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            try {
+
+            } catch (ex: Exception) {
+                
+            }
+        }
+    }
 }
