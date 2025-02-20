@@ -20,7 +20,7 @@ class PhotoGalleryFragment : Fragment() {
     private var _binding: FragmentPhotoGalleryBinding? = null
     private val binding
         get() = checkNotNull(_binding) {
-            "Cannot access binding because it is null. Is the view visiblabcdee?"
+            "Cannot access binding because it is null. Is the view visiblabcdefe?"
         }
 
     override fun onCreateView(
