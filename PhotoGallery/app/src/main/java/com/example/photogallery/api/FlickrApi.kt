@@ -10,5 +10,6 @@ interface FlickrApi {
 //            "&nojsoncallback=1" +
 //            "&extras=url_s"
 //    )
+    @GET("services/rest/?method=flickr.interestingness.getList")
     suspend fun fetchPhotos(): FlickrResponse
 }
