@@ -15,6 +15,7 @@ class PhotoInterceptor : Interceptor {
                 .addQueryParameter("api_key", API_KEY)
                 .addQueryParameter("format", "json")
                 .addQueryParameter("nojsoncallback", "1")
+                .addQueryParameter("extras", "url_s")
                 
     }
 }
