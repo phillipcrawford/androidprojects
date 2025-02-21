@@ -18,5 +18,9 @@ class PhotoInterceptor : Interceptor {
                 .addQueryParameter("extras", "url_s")
                 .addQueryParameter("safesearch", "1")
                 .build()
+
+        val newRequest: Request = originalRequest.newBuilder()
+                .url(newUrl)
+                .build()
     }
 }
