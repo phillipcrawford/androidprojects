@@ -22,5 +22,7 @@ class PhotoInterceptor : Interceptor {
         val newRequest: Request = originalRequest.newBuilder()
                 .url(newUrl)
                 .build()
+
+        return chain.proceed(newRequest)
     }
 }
