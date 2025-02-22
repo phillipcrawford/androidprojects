@@ -36,20 +36,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.trueButton.setOnClickListener {
-            Toast.makeText(
-                this,
-                R.string.correct_toast,
-                Toast.LENGTH_SHORT
-            ).show()
-
+            checkAnswer(true)
         }
 
         binding.falseButton.setOnClickListener {
-            Toast.makeText(
-                this,
-                R.string.incorrect_toast,
-                Toast.LENGTH_SHORT
-            ).show()
+            checkAnswer(false)
         }
 
         binding.nextButton.setOnClickListener {
