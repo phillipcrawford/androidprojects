@@ -11,4 +11,6 @@
     <string name="correct_toast">Correct!</string>
     <string name="incorrect_toast">Incorrect!</string>
     <string name="next_button">Next</string>
+    <string name="warning_text">Are you sure you want to do this?</string>
+    
 </resources>
