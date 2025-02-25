@@ -13,7 +13,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.geoquiz_2.databinding.ActivityMainBinding
 
-private const val TAG = "MainActivityabcdefghij"
+private const val TAG = "MainActivityabcdefghijk"
 
 class MainActivity : AppCompatActivity() {
 
