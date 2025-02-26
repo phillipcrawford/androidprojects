@@ -30,7 +30,6 @@ class CheatActivity : AppCompatActivity() {
                 else -> R.string.false_button
             }
             binding.answerTextView.setText(answerText)
-
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.cheat)) { v, insets ->
@@ -38,6 +37,13 @@ class CheatActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+    private fun setAnswerShownResult(isAnswerShown: Boolean) {
+        val data = Intent().apply {
+            putExtra(EXTRA_ANSWER_SHOWN, isAnswerShown)
+        }
+        setResult(RESULT_OK, data)
     }
 
     companion object {
