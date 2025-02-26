@@ -30,6 +30,7 @@ class CheatActivity : AppCompatActivity() {
                 else -> R.string.false_button
             }
             binding.answerTextView.setText(answerText)
+            setAnswerShownResult(true)
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.cheat)) { v, insets ->
