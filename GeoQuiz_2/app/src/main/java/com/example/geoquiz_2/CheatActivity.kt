@@ -22,7 +22,7 @@ class CheatActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityCheatBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        answerIsTrue = intent.getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false)
+        answerIsTrue = intent.getBooleanExtra(EXTRA_ANSWER_IS_TRUE, false)
 
 //        binding.showAnswerButton.setOnClickListener {
 //            val answerText = when {
