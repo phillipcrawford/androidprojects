@@ -68,8 +68,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         updateQuestion()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
-            blurCheatButton()
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+//            blurCheatButton()
     }
 
     private fun updateQuestion() {
