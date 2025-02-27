@@ -68,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         updateQuestion()
+        blurCheatButton()
     }
 
     private fun updateQuestion() {
