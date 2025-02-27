@@ -2,6 +2,8 @@ package com.example.geoquiz_2
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.RenderEffect
+import android.graphics.Shader
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -80,5 +82,9 @@ class MainActivity : AppCompatActivity() {
             else -> R.string.incorrect_toast
         }
         Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun blurCheatButton(){
+
     }
 }
