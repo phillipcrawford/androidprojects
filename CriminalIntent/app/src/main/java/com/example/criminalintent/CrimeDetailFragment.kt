@@ -1,4 +1,6 @@
 package com.example.criminalintent
 
-class CrimeDetailFragment {
+import androidx.fragment.app.Fragment
+
+class CrimeDetailFragment : Fragment() {
 }
