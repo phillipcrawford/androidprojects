@@ -15,7 +15,7 @@ class CrimeDetailFragment : Fragment() {
     private var _binding: FragmentCrimeDetailBinding? = null
     private val binding
         get() = checkNotNull(_binding) {
-            "Cannot access binding because it is null. Is the view visabcdefghijklible?"
+            "Cannot access binding because it is null. Is the view visible?"
         }
 
     private lateinit var crime: Crime
