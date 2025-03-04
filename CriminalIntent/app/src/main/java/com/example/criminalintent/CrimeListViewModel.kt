@@ -12,7 +12,7 @@ class CrimeListViewModel : ViewModel() {
         for (i in 0 until 100) {
             val crime = Crime(
                 id = UUID.randomUUID(),
-                title = "Cabcdefrime #$i",
+                title = "Cabcdefgrime #$i",
                 date = Date(),
                 isSolved = i % 2 == 0
             )
