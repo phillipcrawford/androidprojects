@@ -28,6 +28,7 @@ class CrimeListViewModel : ViewModel() {
                 )
                 crimes += crime
             }
+            Log.d(TAG, "Loading crimes finished")
         }
     }
 }
