@@ -57,6 +57,10 @@ class CrimeListFragment : Fragment() {
         }
     }
 
+    override fun onStop() {
+        
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
