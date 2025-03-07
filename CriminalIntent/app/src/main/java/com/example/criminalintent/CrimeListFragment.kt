@@ -58,7 +58,8 @@ class CrimeListFragment : Fragment() {
     }
 
     override fun onStop() {
-        
+        super.onStop()
+        job?.cancel()
     }
 
     override fun onDestroyView() {
