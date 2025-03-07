@@ -33,7 +33,7 @@ class CrimeListViewModel : ViewModel() {
                 date = Date(),
                 isSolved = i % 2 == 0
             )
-            crimes += crime
+            result += crime
         }
         return result
     }
