@@ -4,5 +4,5 @@ import androidx.room.Database
 import com.example.criminalintent.Crime
 
 @Database(entities = [ Crime::class ], version = 1)
-abstract class CrimeDatabase {
+abstract class CrimeDatabase : RoomDatabase() {
 }
