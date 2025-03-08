@@ -1,5 +1,6 @@
 package com.example.criminalintent
 
+import androidx.room.Entity
 import java.util.Date
 import java.util.UUID
 
