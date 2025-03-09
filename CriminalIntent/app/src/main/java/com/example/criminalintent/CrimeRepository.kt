@@ -11,7 +11,11 @@ class CrimeRepository private constructor(context: Context) {
             if (INSTANCE == null) {
                 INSTANCE = CrimeRepository(context)
             }
+        }
 
+        fun get(): CrimeRepository {
+            return INSTANCE ?:
+            throw IllegalStateException("CrimeRepository must be initialized")
         }
     }
 }
