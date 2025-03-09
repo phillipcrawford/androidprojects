@@ -8,4 +8,8 @@ import com.example.criminalintent.Crime
 interface CrimeDao {
     @Query("SELECT * FROM crime")
     suspend fun getCrimes(): List<Crime>
+
+    @Query("SELECT * FROM crime WHERE id=(:id)")
+    suspend fun getCrime(id: String): Crime
+
 }
