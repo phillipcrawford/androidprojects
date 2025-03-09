@@ -11,5 +11,4 @@ interface CrimeDao {
 
     @Query("SELECT * FROM crime WHERE id=(:id)")
     suspend fun getCrime(id: String): Crime
-
 }
