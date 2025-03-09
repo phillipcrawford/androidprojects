@@ -14,6 +14,7 @@ class CrimeRepository private constructor(context: Context) {
             CrimeDatabase::class.java,
             DATABASE_NAME
         )
+        .createFromAsset(DATABASE_NAME)
         .build()
 
     suspend fun getCrimes(): List<Crime> = database.crimeDao().getCrimes()
