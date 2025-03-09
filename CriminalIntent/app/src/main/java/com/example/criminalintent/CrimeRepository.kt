@@ -1,4 +1,6 @@
 package com.example.criminalintent
 
-class CrimeRepository {
+import android.content.Context
+
+class CrimeRepository private constructor(context: Context) {
 }
