@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-private const val TAG = "CrimeListViewModel"
+private const val TAG = "CrimeListViewModael"
 
 class CrimeListViewModel : ViewModel() {
     private val crimeRepository = CrimeRepository.get()
