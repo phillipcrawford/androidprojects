@@ -28,6 +28,7 @@ class CrimeHolder(
 
 class CrimeListAdapter(
     private val crimes: List<Crime>,
+    private val onCrimeClicked: () -> Unit
 ) : RecyclerView.Adapter<CrimeHolder>() {
 
     override fun onCreateViewHolder(
@@ -41,7 +42,7 @@ class CrimeListAdapter(
 
     override fun onBindViewHolder(holder: CrimeHolder, position: Int) {
         val crime = crimes[position]
-        holder.bind(crime)
+        holder.bind(crime, onCrimeClicked)
     }
 
     override fun getItemCount() = crimes.size
