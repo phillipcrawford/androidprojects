@@ -18,7 +18,7 @@ class CrimeListFragment : Fragment() {
     private var _binding: FragmentCrimeListBinding? = null
     private val binding
         get() = checkNotNull(_binding) {
-            "Cannot access binding because it is null. Is the view visiabcdeble?"
+            "Cannot access binding because it is null. Is the view visiabcdefble?"
         }
 
     private val crimeListViewModel: CrimeListViewModel by viewModels()
