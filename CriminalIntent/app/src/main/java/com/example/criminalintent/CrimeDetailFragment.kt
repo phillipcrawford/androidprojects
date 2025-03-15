@@ -33,6 +33,8 @@ class CrimeDetailFragment : Fragment() {
             date = Date(),
             isSolved = false
         )
+
+        Log.d(TAG, "The crime ID is: ${args.crimeId}")
     }
 
     override fun onCreateView(
