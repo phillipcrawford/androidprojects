@@ -10,6 +10,8 @@ import com.example.criminalintent.databinding.FragmentCrimeDetailBinding
 import java.util.Date
 import java.util.UUID
 
+private const val TAG = "CrimeDetailFragment"
+
 class CrimeDetailFragment : Fragment() {
 
     private var _binding: FragmentCrimeDetailBinding? = null
