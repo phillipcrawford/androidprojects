@@ -22,6 +22,8 @@ class CrimeDetailFragment : Fragment() {
 
     private lateinit var crime: Crime
 
+    private val args: CrimeDetailFragmentArgs by navArgs()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         crime = Crime(
