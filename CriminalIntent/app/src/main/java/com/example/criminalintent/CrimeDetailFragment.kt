@@ -70,7 +70,7 @@ class CrimeDetailFragment : Fragment() {
 
         setFragmentResultListener(
             DatePickerFragment.REQUEST_KEY_DATE
-        ) { requestKey, bundle ->
+        ) { _, bundle ->
             // TODO
         }
 
