@@ -1,4 +1,8 @@
 package com.example.criminalintent
 
-class DatePickerFragment {
+import androidx.fragment.app.DialogFragment
+
+class DatePickerFragment : DialogFragment()  {
+
+    
 }
