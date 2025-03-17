@@ -26,4 +26,8 @@ class DatePickerFragment : DialogFragment()  {
             initialDay
         )
     }
+
+    companion object {
+        const val REQUEST_KEY_DATE = "REQUEST_KEY_DATE"
+    }
 }
