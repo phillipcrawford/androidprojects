@@ -16,6 +16,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.criminalintent.databinding.FragmentCrimeListBinding
 import kotlinx.coroutines.launch
+import java.util.Date
+import java.util.UUID
 
 class CrimeListFragment : Fragment() {
 
@@ -81,5 +83,19 @@ class CrimeListFragment : Fragment() {
         }
     }
 
-    
+    private fun showNewCrime() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val newCrime = Crime(
+                id = UUID.randomUUID(),
+                title = "",
+                date = Date(),
+                isSolved = false
+            )
+            crimeListViewModel.addCrime(newCrime)
+            findNavController().navigate(
+                CrimeListFragmentDirections.showCrimeDetail(newCrime.id)
+            )
+        }
+    }
+
 }
