@@ -18,7 +18,6 @@ import androidx.navigation.fragment.navArgs
 import com.example.criminalintent.databinding.FragmentCrimeDetailBinding
 import kotlinx.coroutines.launch
 import java.util.Date
-import java.util.UUID
 
 private const val DATE_FORMAT = "EEE, MMM, dd"
 
