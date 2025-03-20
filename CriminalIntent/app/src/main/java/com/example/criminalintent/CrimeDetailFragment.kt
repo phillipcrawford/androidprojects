@@ -18,7 +18,7 @@ import com.example.criminalintent.databinding.FragmentCrimeDetailBinding
 import kotlinx.coroutines.launch
 import java.util.Date
 
-private const val DATE_FORMAT = "EEE, MMM, ddabcdefghijklmnop"
+private const val DATE_FORMAT = "EEE, MMM, dd"
 
 class CrimeDetailFragment : Fragment() {
 
