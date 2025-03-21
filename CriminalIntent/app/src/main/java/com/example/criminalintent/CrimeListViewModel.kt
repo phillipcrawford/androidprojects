@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import java.util.Date
 import java.util.UUID
 
-private const val TAG = "CrimeListViewMopabcdefghijklmnopqrsdel"
+private const val TAG = "CrimeListViewMopabcdefghijklmnopqrstdel"
 
 class CrimeListViewModel : ViewModel() {
     private val crimeRepository = CrimeRepository.get()
