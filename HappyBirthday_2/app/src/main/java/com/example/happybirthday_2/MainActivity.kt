@@ -1,4 +1,4 @@
-package com.example.greetingcard_2
+package com.example.happybirthday_2
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -6,27 +6,23 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.example.greetingcard_2.ui.theme.GreetingCard_2Theme
+import com.example.happybirthday_2.ui.theme.HappyBirthday_2Theme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            GreetingCard_2Theme {
+            HappyBirthday_2Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
                         name = "Android",
-                        modifier = Modifier.fillMaxSize()//.padding(innerPadding)
+                        modifier = Modifier.padding(innerPadding)
                     )
                 }
             }
@@ -36,18 +32,16 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Surface(color = Color.Cyan) {
-        Text(
-            text = "Hi my name is $name!",
-            modifier = modifier.padding(24.dp)
-        )
-    }
+    Text(
+        text = "Hello $name!",
+        modifier = modifier
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    GreetingCard_2Theme {
-        Greeting("Phillip")
+    HappyBirthday_2Theme {
+        Greeting("Android")
     }
 }
