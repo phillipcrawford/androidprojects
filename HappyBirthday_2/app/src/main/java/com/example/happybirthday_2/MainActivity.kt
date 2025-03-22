@@ -27,10 +27,17 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@Composable
+fun GreetingText(message: String, modifier: Modifier = Modifier) {
+    Text(
+        text = message,
+    )
+}
+
 @Preview(showBackground = true)
 @Composable
 fun BirthdayCardPreview() {
     HappyBirthday_2Theme {
-
+        GreetingText(message = "Happy Birthday Sam!")
     }
 }
