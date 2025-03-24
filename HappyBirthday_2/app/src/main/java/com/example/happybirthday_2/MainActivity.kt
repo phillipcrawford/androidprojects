@@ -80,6 +80,6 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
 @Composable
 fun BirthdayCardPreview() {
     HappyBirthday_2Theme {
-        GreetingImage(message = "Happy Birthfdaldjgekjicbay Sam!", from = "From Emma")
+        GreetingImage(message = "Happy Birthfdaldjgekjmicbay Sam!", from = "From Emma")
     }
 }
