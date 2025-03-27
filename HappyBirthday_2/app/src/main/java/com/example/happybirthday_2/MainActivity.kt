@@ -77,7 +77,11 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
             contentDescription = null
         )
         GreetingText(
-            
+            message = message,
+            from = from,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp)
         )
     }
 }
