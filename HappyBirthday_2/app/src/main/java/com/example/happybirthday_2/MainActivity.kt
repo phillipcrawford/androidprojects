@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
             HappyBirthday_2Theme {
 
                 Scaffold { innerPadding ->
-                    GreetingText(
+                    GreetingImage(
                         "Happy Birthday Sam!",
                         "From Emma",
                         modifier = Modifier
