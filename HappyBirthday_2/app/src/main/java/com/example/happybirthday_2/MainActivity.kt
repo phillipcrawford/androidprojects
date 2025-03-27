@@ -76,6 +76,9 @@ fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) 
             painter = image,
             contentDescription = null
         )
+        GreetingText(
+            
+        )
     }
 }
 
