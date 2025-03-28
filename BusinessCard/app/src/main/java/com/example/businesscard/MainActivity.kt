@@ -145,7 +145,7 @@ fun ContactInfo(modifier: Modifier = Modifier) {
             Text(
                 modifier = Modifier
                     .padding(8.dp),
-                text = " @philslipcr86",
+                text = " @philsalipcr86",
                 fontSize = 20.sp
             )
         }
