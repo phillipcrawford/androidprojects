@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             HappyBirthday_2Theme {
 
-                Scaffold { innerPadding ->
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     GreetingImage(
                         message = stringResource(R.string.happy_birthday_text),
                         from = stringResource(R.string.signature_text),
