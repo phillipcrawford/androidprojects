@@ -123,7 +123,7 @@ fun ContactInfo(modifier: Modifier = Modifier) {
             Icon(
                 Icons.Rounded.Phone,
                 tint = Color(0xFF026b38),
-                contentDescription = "Phone",
+                contentDescription = "Phaone",
                 modifier = Modifier
                     .padding(8.dp)
             )
