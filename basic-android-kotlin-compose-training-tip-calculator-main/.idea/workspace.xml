@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="65979c6e-2403-44f0-a5a6-9cfe23e10c4b" name="Changes" comment="" />
+    <list default="true" id="65979c6e-2403-44f0-a5a6-9cfe23e10c4b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../ArtSpace/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ArtSpace/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ArtSpace/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ArtSpace/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ArtSpace/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ArtSpace/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ArtSpace/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ArtSpace/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ArtSpace/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ArtSpace/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ArtSpace/.idea/other.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../basic-android-kotlin-compose-training-tip-calculator-starter/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../basic-android-kotlin-compose-training-tip-calculator-starter/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../basic-android-kotlin-compose-training-tip-calculator-starter/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../basic-android-kotlin-compose-training-tip-calculator-starter/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,9 +24,12 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2jn2zudEEcD1a6aQXP1j7GHsUE8" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -28,8 +42,9 @@
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/phill/AndroidStudioProjects/basic-android-kotlin-compose-training-tip-calculator-main"
+    "last_opened_file_path": "C:/Users/phill/androidprojects/basic-android-kotlin-compose-training-tip-calculator-starter"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
