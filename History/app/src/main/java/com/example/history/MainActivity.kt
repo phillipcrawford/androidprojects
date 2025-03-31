@@ -35,7 +35,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun TwoBySixteen(name: String, modifier: Modifier = Modifier) {
     Column {
-        Row {
+        Row(Modifier.weight(1f)) {
             Text(
                 text = "Hello $name!",
                 modifier = modifier
@@ -45,7 +45,7 @@ fun TwoBySixteen(name: String, modifier: Modifier = Modifier) {
                 modifier = modifier
             )
         }
-        Row {
+        Row(Modifier.weight(1f)) {
             Text(
                 text = "Hello $name!",
                 modifier = modifier
