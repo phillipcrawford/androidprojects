@@ -45,6 +45,16 @@ fun TwoBySixteen(name: String, modifier: Modifier = Modifier) {
                 modifier = modifier
             )
         }
+        Row {
+            Text(
+                text = "Hello $name!",
+                modifier = modifier
+            )
+            Text(
+                text = "Hello $name!",
+                modifier = modifier
+            )
+        }
     }
 }
 
