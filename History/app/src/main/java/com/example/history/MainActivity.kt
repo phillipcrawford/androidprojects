@@ -141,13 +141,13 @@ fun TwoBySixteen(name: String, modifier: Modifier = Modifier) {
                 modifier = Modifier.weight(1f)
             )
             Text(
-                text = "Hello $name!",
+                text = "No alliums",
                 modifier = Modifier.weight(1f)
             )
         }
         Row(Modifier.weight(1f)) {
             Text(
-                text = "Hello $name!",
+                text = "No Pork Products",
                 modifier = Modifier.weight(1f)
             )
             Text(
