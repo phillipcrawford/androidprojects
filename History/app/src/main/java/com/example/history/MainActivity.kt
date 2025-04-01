@@ -151,7 +151,7 @@ fun TwoBySixteen(name: String, modifier: Modifier = Modifier) {
                 modifier = Modifier.weight(1f)
             )
             Text(
-                text = "Hello $name!",
+                text = "No Red Meat",
                 modifier = Modifier.weight(1f)
             )
         }
