@@ -205,6 +205,16 @@ fun TwoBySixteen(name: String, modifier: Modifier = Modifier) {
                 modifier = Modifier.weight(1f)
             )
         }
+        Row(Modifier.weight(1f)) {
+            Text(
+                text = "Gluten-Free",
+                modifier = Modifier.weight(1f)
+            )
+            Text(
+                text = "No Soy",
+                modifier = Modifier.weight(1f)
+            )
+        }
     }
 }
 
