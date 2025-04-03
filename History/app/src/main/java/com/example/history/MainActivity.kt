@@ -190,7 +190,7 @@ fun TwoBySixteen(name: String, modifier: Modifier = Modifier) {
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = "Kosher",
+                    text = "Beef",
                     modifier = Modifier.weight(1f)
                 )
             }
