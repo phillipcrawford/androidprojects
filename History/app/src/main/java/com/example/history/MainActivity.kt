@@ -50,10 +50,17 @@ fun TwoBySixteen(name: String, modifier: Modifier = Modifier) {
                     modifier = Modifier.weight(1f)
                 )
             }
-            Text(
-                text = "Pescetarian",
+            Button(
+                onClick = {
+
+                }, shape = RoundedCornerShape(8.dp),
                 modifier = Modifier.weight(1f)
-            )
+            ) {
+                Text(
+                    text = "Pescetarian",
+                    modifier = Modifier.weight(1f)
+                )
+            }
         }
         Row(Modifier.weight(1f)) {
             Text(
