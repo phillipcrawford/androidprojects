@@ -142,7 +142,7 @@ fun TwoBySixteen(name: String, modifier: Modifier = Modifier) {
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = "Locally Sourced",
+                    text = "Entree",
                     modifier = Modifier.weight(1f)
                 )
             }
@@ -153,7 +153,7 @@ fun TwoBySixteen(name: String, modifier: Modifier = Modifier) {
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = "Raw",
+                    text = "Sweet",
                     modifier = Modifier.weight(1f)
                 )
             }
