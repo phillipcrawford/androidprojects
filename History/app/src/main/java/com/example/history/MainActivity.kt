@@ -42,7 +42,7 @@ fun TwoBySixteen(name: String, modifier: Modifier = Modifier) {
             Button(
                 onClick = {
 
-                }, shape = RoundedCornerShape(40.dp),
+                }, shape = RoundedCornerShape(8.dp),
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
