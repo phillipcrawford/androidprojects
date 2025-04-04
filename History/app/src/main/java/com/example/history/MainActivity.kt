@@ -273,7 +273,7 @@ fun TwoBySixteen(name: String, modifier: Modifier = Modifier) {
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = "High Protein",
+                    text = "No Alliums",
                     modifier = Modifier.weight(1f)
                 )
             }
