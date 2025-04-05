@@ -406,7 +406,7 @@ fun TwoBySixteen(name: String, modifier: Modifier = Modifier) {
                 modifier = Modifier.weight(1f)
             ) {
                 Text(
-                    text = "No Peanuts",
+                    text = "Gluten-Free",
                     modifier = Modifier.weight(1f)
                 )
             }
