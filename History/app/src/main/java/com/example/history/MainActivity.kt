@@ -36,6 +36,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+fun Header (name: String, modifier: Modifier = Modifier) {
+
+}
+
+@Composable
 fun TwoBySixteen(name: String, modifier: Modifier = Modifier) {
     Column {
         Row(Modifier.weight(1f)) {
