@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DietprefsStartPage (name: String, modifier: Modifier = Modifier) {
     Column (modifier = Modifier) {}
-    Text(text = "Preferwrqspternyopnvpbcoes", modifier = modifier)
+    Text(text = "Preferwrqspternyopnvpbmcoes", modifier = modifier)
 }
 
 @Composable
