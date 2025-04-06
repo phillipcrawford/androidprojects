@@ -41,8 +41,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun DietprefsStartPage (name: String, modifier: Modifier = Modifier) {
-    Column (modifier = Modifier) {}
-    Text(text = "Preferences", modifier = modifier)
+    Column (modifier = Modifier) {
+        Text(text = "Preferences", modifier = modifier)
+    }
 }
 
 @Composable
