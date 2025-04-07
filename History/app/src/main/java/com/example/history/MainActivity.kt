@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DietprefsStartPage (name: String, modifier: Modifier = Modifier) {
     Column (modifier = Modifier) {
-        Header(name = "Prefereances", modifier = modifier)
+        Header(name = "Prefereabnces", modifier = modifier)
         TwoBySixteen(name = name, modifier = modifier)
     }
 }
