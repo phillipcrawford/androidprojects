@@ -51,8 +51,8 @@ fun DietprefsStartPage (name: String, modifier: Modifier = Modifier) {
 @Composable
 fun Header(name: String, modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier
-
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center
     ) {
         Text(
             text = "$name",
