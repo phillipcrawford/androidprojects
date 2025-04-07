@@ -52,7 +52,8 @@ fun DietprefsStartPage (name: String, modifier: Modifier = Modifier) {
 fun Header(name: String, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
             text = "$name",
