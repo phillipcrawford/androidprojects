@@ -48,6 +48,8 @@ fun DietprefsStartPage (name: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
+
+@Composable
 fun TwoBySixteen(name: String, modifier: Modifier = Modifier) {
     Column {
         Row(Modifier.weight(1f)) {
