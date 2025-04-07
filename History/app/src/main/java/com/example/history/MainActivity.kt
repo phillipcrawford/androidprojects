@@ -5,6 +5,7 @@ import androidx.compose.material3.Button
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -49,10 +50,12 @@ fun DietprefsStartPage (name: String, modifier: Modifier = Modifier) {
 
 @Composable
 fun Header(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "$name",
-        modifier = modifier
-    )
+    Column() {
+        Text(
+            text = "$name",
+            modifier = modifier,
+        )
+    }
 }
 
 @Composable
