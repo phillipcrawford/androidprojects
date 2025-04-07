@@ -43,6 +43,7 @@ class MainActivity : ComponentActivity() {
 fun DietprefsStartPage (name: String, modifier: Modifier = Modifier) {
     Column (modifier = Modifier) {
         Text(text = "Preferences", modifier = modifier)
+        TwoBySixteen(name = name, modifier = modifier)
     }
 }
 
