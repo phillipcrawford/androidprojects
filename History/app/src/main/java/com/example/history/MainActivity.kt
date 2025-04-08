@@ -60,10 +60,12 @@ fun Header(name: String, modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(
-            text = "$name",
-            modifier = modifier,
-        )
+        Row(Modifier.weight(1f)) {
+            Text(
+                text = "$name",
+                modifier = modifier,
+            )
+        }
     }
 }
 
