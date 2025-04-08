@@ -56,7 +56,8 @@ fun DietprefsStartPage (name: String, modifier: Modifier = Modifier) {
 fun Header(name: String, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .weight(1f),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
