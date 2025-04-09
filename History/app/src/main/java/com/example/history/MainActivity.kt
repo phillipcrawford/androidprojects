@@ -68,8 +68,12 @@ fun Header(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun TwoBySixteen(name: String, modifier: Modifier = Modifier) {
     Column {
-        Row(Modifier.weight(1f)){
-            
+        Row(
+            Modifier.weight(1f),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            Text()
         }
         Row(Modifier.weight(1f)) {
             Button(
