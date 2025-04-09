@@ -28,10 +28,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             HistoryTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-//                    TwoBySixteen(
-//                        name = "Android",
-//                        modifier = Modifier.padding(innerPadding)
-//                    )
                     DietprefsStartPage(
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
@@ -47,7 +43,7 @@ fun DietprefsStartPage (name: String, modifier: Modifier = Modifier) {
     Column (
         modifier = modifier
     ) {
-        Header(name = "Preferences", modifier = modifier)
+        //Header(name = "Preferences", modifier = modifier)
         TwoBySixteen(name = name, modifier = modifier)
     }
 }
@@ -60,7 +56,7 @@ fun Header(name: String, modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row(modifier.weight(1f)) {
+        Row(modifier.weight(12f)) {
             Text(
                 text = "$name",
                 modifier = modifier,
