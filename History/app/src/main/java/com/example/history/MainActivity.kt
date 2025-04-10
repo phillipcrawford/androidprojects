@@ -75,7 +75,7 @@ fun TwoBySixteen(name: String, modifier: Modifier = Modifier) {
             verticalAlignment = Alignment.CenterVertically
         ){
             Text(
-                text = "Preferencaes",
+                text = "Preferencbaes",
                 modifier = Modifier.weight(1f),
                 textAlign = TextAlign.Center
             )
