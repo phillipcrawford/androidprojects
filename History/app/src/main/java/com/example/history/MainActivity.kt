@@ -49,22 +49,22 @@ fun DietprefsStartPage (name: String, modifier: Modifier = Modifier) {
     }
 }
 
-//@Composable
-//fun Header(name: String, modifier: Modifier = Modifier) {
-//    Column(
-//        modifier = modifier
-//            .fillMaxWidth(),
-//        verticalArrangement = Arrangement.Center,
-//        horizontalAlignment = Alignment.CenterHorizontally
-//    ) {
-//        Row(modifier.weight(12f)) {
-//            Text(
-//                text = "$name",
-//                modifier = modifier,
-//            )
-//        }
-//    }
-//}
+@Composable
+fun Header(name: String, modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Row(modifier.weight(12f)) {
+            Text(
+                text = "$name",
+                modifier = modifier,
+            )
+        }
+    }
+}
 
 @Composable
 fun TwoBySixteen(name: String, modifier: Modifier = Modifier) {
