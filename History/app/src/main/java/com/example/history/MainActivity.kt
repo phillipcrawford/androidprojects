@@ -59,7 +59,7 @@ fun Header(name: String, modifier: Modifier = Modifier) {
     ) {
         Row(modifier.weight(12f)) {
             Text(
-                text = "$namea!",
+                text = "$nameab!",
                 modifier = modifier,
             )
         }
