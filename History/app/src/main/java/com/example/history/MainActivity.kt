@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
             HistoryTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     DietprefsStartPage(
-                        name = "Androidfcghijmklncedbca!",
+                        name = "Androidfcghbijmklncedbca!",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
