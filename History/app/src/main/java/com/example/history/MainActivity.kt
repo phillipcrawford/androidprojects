@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.history.ui.theme.BlackOne
 import com.example.history.ui.theme.HistoryTheme
 
 class MainActivity : ComponentActivity() {
@@ -65,7 +66,7 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
 
                 }, shape = RoundedCornerShape(topStart = 8.dp, bottomEnd = 16.dp),
                 modifier = Modifier.weight(6f),
-                colors = ButtonDefaults.buttonColors(containerColor = Color.Yellow)
+                colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
                 //colors = #333333 //rgb 51,51,51
             ) {
                 Text(
