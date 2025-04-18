@@ -11,12 +11,15 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -30,7 +33,7 @@ class MainActivity : ComponentActivity() {
             HistoryTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     DietprefsStartPage(
-                        name = "Androied!",
+                        name = "Android!",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -39,46 +42,48 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun DietprefsStartPage (name: String, modifier: Modifier = Modifier) {
-    Column (
-        modifier = modifier
-    ) {
-        //Header(name = "Preferences", modifier = modifier)
-        TwoBySixteen(name = name, modifier = modifier)
-    }
-}
-
 //@Composable
-//fun Header(name: String, modifier: Modifier = Modifier) {
-//    Column(
+//fun DietprefsStartPage (name: String, modifier: Modifier = Modifier) {
+//    Column (
 //        modifier = modifier
-//            .fillMaxWidth(),
-//        verticalArrangement = Arrangement.Center,
-//        horizontalAlignment = Alignment.CenterHorizontally
 //    ) {
-//        Row(modifier.weight(12f)) {
-//            Text(
-//                text = "$name",
-//                modifier = modifier,
-//            )
-//        }
+//        //Header(name = "Preferences", modifier = modifier)
+//        TwoBySixteen(name = name, modifier = modifier)
 //    }
 //}
 
 @Composable
-fun TwoBySixteen(name: String, modifier: Modifier = Modifier) {
+fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
     Column {
         Row(
             modifier.weight(1f),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ){
-            Text(
-                text = "Preferences",
-                modifier = Modifier.weight(1f),
-                textAlign = TextAlign.Center
-            )
+            Button(
+                onClick = {
+
+                }, shape = RoundedCornerShape(topStart = 8.dp, bottomEnd = 16.dp),
+                modifier = Modifier.weight(6f),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Yellow)
+                //colors = #333333 //rgb 51,51,51
+            ) {
+                Text(
+                    text = "Preferences",
+                    modifier = Modifier.weight(1f)
+                )
+            }
+            Button(
+                onClick = {
+
+                }, shape = RoundedCornerShape(8.dp),
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(
+                    text = "Login",
+                    modifier = Modifier.weight(1f)
+                )
+            }
         }
         Row(Modifier.weight(1f)) {
             Button(
