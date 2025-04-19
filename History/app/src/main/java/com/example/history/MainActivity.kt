@@ -66,7 +66,7 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
 
                 }, shape = RoundedCornerShape(topStart = 8.dp, bottomEnd = 16.dp),
                 modifier = Modifier.weight(6f),
-                colors = ButtonDefaults.buttonColors(containerColor = BlackOnwe)
+                colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Preferences",
