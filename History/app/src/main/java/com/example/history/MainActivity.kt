@@ -69,7 +69,7 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
-                    text = "Preferenqkjlces",
+                    text = "Preferenqkjmlces",
                     modifier = Modifier.weight(1f)
                 )
             }
