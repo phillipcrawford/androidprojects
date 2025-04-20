@@ -1,10 +1,12 @@
 package com.example.history
 
+import android.os.Build
 import android.os.Bundle
 import androidx.compose.material3.Button
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,8 +25,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.history.ui.theme.BlackOne
 import com.example.history.ui.theme.HistoryTheme
+import java.time.format.TextStyle
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +57,7 @@ class MainActivity : ComponentActivity() {
 //    }
 //}
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
     Column {
@@ -70,7 +75,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
             ) {
                 Text(
                     text = "Preferences",
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
+                    //style = TextStyle(fontSize = 20.sp)
                 )
             }
             Button(
