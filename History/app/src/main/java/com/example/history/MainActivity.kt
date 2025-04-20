@@ -76,7 +76,7 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 Text(
                     text = "Preferences",
                     modifier = Modifier.weight(1f),
-                    //style = TextStyle(fontSize = 20.sp)
+                    fontSize = 24.sp
                 )
             }
             Button(
