@@ -62,7 +62,7 @@ class MainActivity : ComponentActivity() {
 fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
     Column {
         Row(
-            modifier.weight(1f),
+            modifier.weight(2f),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ){
