@@ -57,7 +57,7 @@ class MainActivity : ComponentActivity() {
 //    }
 //}
 
-@RequiresApi(Build.VERSION_CODES.O)
+//@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
     Column {
