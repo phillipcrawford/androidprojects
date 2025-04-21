@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.history.ui.theme.BlackOne
+import com.example.history.ui.theme.DOrange
 import com.example.history.ui.theme.DTeal
 import com.example.history.ui.theme.HistoryTheme
 import com.example.history.ui.theme.LRed
@@ -72,12 +73,12 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 onClick = {
 
                 }, shape = RoundedCornerShape(topStart = 8.dp, bottomEnd = 16.dp),
-                modifier = Modifier.weight(6f),
+                modifier = modifier.weight(6f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Preferences",
-                    modifier = Modifier.weight(1f),
+                    modifier = modifier.weight(1f),
                     fontSize = 24.sp,
                     color = LRed
                 )
@@ -86,229 +87,229 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Login",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
         }
-        Row(Modifier.weight(1f)) {
+        Row(modifier.weight(1f)) {
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Vegetarian",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Pescatarian",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
         }
-        Row(Modifier.weight(1f)) {
+        Row(modifier.weight(1f)) {
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Vegan",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Keto",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
         }
-        Row(Modifier.weight(1f)) {
+        Row(modifier.weight(1f)) {
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Organic",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "GMO-Free",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
         }
-        Row(Modifier.weight(1f)) {
+        Row(modifier.weight(1f)) {
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Locally Sourced",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Raw",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
         }
-        Row(Modifier.weight(1f)) {
+        Row(modifier.weight(1f)) {
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Entree",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Sweet",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
         }
-        Row(Modifier.weight(1f)) {
+        Row(modifier.weight(1f)) {
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Kosher",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Halal",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
         }
-        Row(Modifier.weight(1f)) {
+        Row(modifier.weight(1f)) {
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Beef",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Chicken",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
         }
-        Row(Modifier.weight(1f)) {
+        Row(modifier.weight(1f)) {
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Bacon/Pork/Ham",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Seafood",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
         }
-        Row(Modifier.weight(1f)) {
+        Row(modifier.weight(1f)) {
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = DTeal)
             ) {
                 Text(
@@ -320,220 +321,220 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = DTeal)
             ) {
                 Text(
                     text = "High Protein",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
         }
-        Row(Modifier.weight(1f)) {
+        Row(modifier.weight(1f)) {
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = DTeal)
             ) {
                 Text(
                     text = "Low Carb",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = DTeal)
             ) {
                 Text(
                     text = "No Alliums",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
         }
-        Row(Modifier.weight(1f)) {
+        Row(modifier.weight(1f)) {
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = DTeal)
             ) {
                 Text(
                     text = "No Pork Products",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = DTeal)
             ) {
                 Text(
                     text = "No Red Meat",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
         }
-        Row(Modifier.weight(1f)) {
+        Row(modifier.weight(1f)) {
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = DTeal)
             ) {
                 Text(
                     text = "No MSG",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = DTeal)
             ) {
                 Text(
                     text = "No Sesame",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
         }
-        Row(Modifier.weight(1f)) {
+        Row(modifier.weight(1f)) {
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = DTeal)
             ) {
                 Text(
                     text = "No Milk",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = DTeal)
             ) {
                 Text(
                     text = "No Eggs",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
         }
-        Row(Modifier.weight(1f)) {
+        Row(modifier.weight(1f)) {
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = DTeal)
             ) {
                 Text(
                     text = "No Fish",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = DTeal)
             ) {
                 Text(
                     text = "No Shellfish",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
         }
-        Row(Modifier.weight(1f)) {
+        Row(modifier.weight(1f)) {
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = DTeal)
             ) {
                 Text(
                     text = "No Peanuts",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = DTeal)
             ) {
                 Text(
                     text = "No Tree Nuts",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
         }
-        Row(Modifier.weight(1f)) {
+        Row(modifier.weight(1f)) {
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = DTeal)
             ) {
                 Text(
                     text = "Gluten-Free",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = DTeal)
             ) {
                 Text(
                     text = "No Soy",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
         }
-        Row(Modifier.weight(1f)) {
+        Row(modifier.weight(1f)) {
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Low Price",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
+                modifier = modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Second User",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f)
                 )
             }
         }
@@ -546,12 +547,12 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(6f),
+                modifier = modifier.weight(6f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Search",
-                    modifier = Modifier.weight(1f),
+                    modifier = modifier.weight(1f),
                     fontSize = 24.sp,
                     color = LRed
                 )
@@ -560,12 +561,13 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f),
-                colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
+                modifier = modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(containerColor = DOrange)
             ) {
                 Text(
                     text = "C",
-                    modifier = Modifier.weight(1f)
+                    modifier = modifier.weight(1f),
+                    fontSize = 24.sp
                 )
             }
 //            Button(
