@@ -227,7 +227,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Kosher",
@@ -238,7 +239,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Halal",
@@ -251,7 +253,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Beef",
@@ -262,7 +265,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Chicken",
@@ -275,7 +279,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Bacon/Pork/Ham",
@@ -286,7 +291,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Seafood",
@@ -299,7 +305,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Low Sugar",
@@ -310,7 +317,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "High Protein",
@@ -323,7 +331,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Low Carb",
@@ -334,7 +343,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "No Alliums",
