@@ -487,55 +487,55 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 )
             }
         }
-        Row(modifier.weight(1f)) {
+        Row(Modifier.weight(1f)) {
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = modifier.weight(1f),
+                modifier = Modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = DTeal)
             ) {
                 Text(
                     text = "Gluten-Free",
-                    modifier = modifier.weight(1f)
+                    modifier = Modifier.weight(1f)
                 )
             }
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = modifier.weight(1f),
+                modifier = Modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = DTeal)
             ) {
                 Text(
                     text = "No Soy",
-                    modifier = modifier.weight(1f)
+                    modifier = Modifier.weight(1f)
                 )
             }
         }
-        Row(modifier.weight(1f)) {
+        Row(Modifier.weight(1f)) {
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = modifier.weight(1f),
+                modifier = Modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Low Price",
-                    modifier = modifier.weight(1f)
+                    modifier = Modifier.weight(1f)
                 )
             }
             Button(
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = modifier.weight(1f),
+                modifier = Modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Second User",
-                    modifier = modifier.weight(1f)
+                    modifier = Modifier.weight(1f)
                 )
             }
         }
@@ -571,19 +571,6 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                     fontSize = 24.sp
                 )
             }
-//            Button(
-//                onClick = {
-//
-//                }, shape = RoundedCornerShape(topStart = 8.dp, bottomEnd = 16.dp),
-//                modifier = Modifier.weight(6f),
-//                colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
-//            ) {
-//                Text(
-//                    text = "Preferences",
-//                    modifier = Modifier.weight(1f),
-//                    fontSize = 24.sp
-//                )
-//            }
         }
     }
 }
