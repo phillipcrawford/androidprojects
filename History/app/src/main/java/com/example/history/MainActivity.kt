@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import com.example.history.ui.theme.BlackOne
 import com.example.history.ui.theme.DTeal
 import com.example.history.ui.theme.HistoryTheme
+import com.example.history.ui.theme.LRed
 import java.time.format.TextStyle
 
 class MainActivity : ComponentActivity() {
@@ -77,7 +78,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 Text(
                     text = "Preferences",
                     modifier = Modifier.weight(1f),
-                    fontSize = 24.sp
+                    fontSize = 24.sp,
+                    color = LRed
                 )
             }
             Button(
@@ -550,7 +552,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 Text(
                     text = "Search",
                     modifier = Modifier.weight(1f),
-                    fontSize = 24.sp
+                    fontSize = 24.sp,
+                    color = LRed
                 )
             }
             Button(
