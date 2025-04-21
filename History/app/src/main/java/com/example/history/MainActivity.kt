@@ -535,7 +535,11 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 )
             }
         }
-        Row(Modifier.weight(2f)) {
+        Row(
+            modifier.weight(2f),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Button(
                 onClick = {
 
@@ -544,8 +548,9 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
-                    text = "Low Price",
-                    modifier = Modifier.weight(1f)
+                    text = "Search",
+                    modifier = Modifier.weight(1f),
+                    fontSize = 24.sp
                 )
             }
             Button(
@@ -556,10 +561,23 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
-                    text = "Second User",
+                    text = "C",
                     modifier = Modifier.weight(1f)
                 )
             }
+//            Button(
+//                onClick = {
+//
+//                }, shape = RoundedCornerShape(topStart = 8.dp, bottomEnd = 16.dp),
+//                modifier = Modifier.weight(6f),
+//                colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
+//            ) {
+//                Text(
+//                    text = "Preferences",
+//                    modifier = Modifier.weight(1f),
+//                    fontSize = 24.sp
+//                )
+//            }
         }
     }
 }
