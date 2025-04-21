@@ -535,6 +535,32 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 )
             }
         }
+        Row(Modifier.weight(2f)) {
+            Button(
+                onClick = {
+
+                }, shape = RoundedCornerShape(8.dp),
+                modifier = Modifier.weight(6f),
+                colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
+            ) {
+                Text(
+                    text = "Low Price",
+                    modifier = Modifier.weight(1f)
+                )
+            }
+            Button(
+                onClick = {
+
+                }, shape = RoundedCornerShape(8.dp),
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
+            ) {
+                Text(
+                    text = "Second User",
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        }
     }
 }
 
