@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.history.ui.theme.BlackOne
+import com.example.history.ui.theme.DTeal
 import com.example.history.ui.theme.HistoryTheme
 import java.time.format.TextStyle
 
@@ -332,7 +333,7 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
 
                 }, shape = RoundedCornerShape(8.dp),
                 modifier = Modifier.weight(1f),
-                colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
+                colors = ButtonDefaults.buttonColors(containerColor = DTeal)
             ) {
                 Text(
                     text = "Low Carb",
