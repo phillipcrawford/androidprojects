@@ -83,7 +83,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 onClick = {
 
                 }, shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
             ) {
                 Text(
                     text = "Login",
