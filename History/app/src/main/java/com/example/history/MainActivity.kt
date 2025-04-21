@@ -29,6 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.history.ui.theme.BlackOne
+import com.example.history.ui.theme.BlackTwo
 import com.example.history.ui.theme.DOrange
 import com.example.history.ui.theme.DTeal
 import com.example.history.ui.theme.HistoryTheme
@@ -64,7 +65,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
-    Surface(color= Color.Cyan) {
+    Surface(color= BlackTwo) {
         Column {
             Row(
                 Modifier.weight(2f),
