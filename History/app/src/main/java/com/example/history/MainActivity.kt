@@ -76,12 +76,13 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                     onClick = {
 
                     }, shape = RoundedCornerShape(topStart = 8.dp, bottomEnd = 16.dp),
-                    modifier = Modifier.weight(6f),
+                    modifier = Modifier.weight(6f)
+                        .padding(4.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
                 ) {
                     Text(
                         text = "Preferences",
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.weight(1f),//.padding(8.dp),
                         fontSize = 24.sp,
                         color = LRed,
                         lineHeight = 80.sp
@@ -91,7 +92,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                     onClick = {
 
                     }, shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier.weight(1f)
+                        .padding(0.dp, 4.dp, 4.dp, 4.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
                 ) {
                     Text(
@@ -107,7 +109,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                     onClick = {
 
                     }, shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier.weight(1f)
+                        .padding(4.dp, 0.dp, 2.dp, 4.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
                 ) {
                     Text(
@@ -119,7 +122,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                     onClick = {
 
                     }, shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier.weight(1f)
+                        .padding(2.dp, 0.dp, 4.dp, 4.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
                 ) {
                     Text(
@@ -134,6 +138,7 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
 
                     }, shape = RoundedCornerShape(8.dp),
                     modifier = Modifier.weight(1f)
+                        .padding(4.dp, 0.dp, 2.dp, 4.dp)
                         .defaultMinSize(minWidth = 1.dp, minHeight = 1.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
                 ) {
@@ -146,7 +151,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                     onClick = {
 
                     }, shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier.weight(1f)
+                        .padding(2.dp, 0.dp, 4.dp, 4.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
                 ) {
                     Text(
@@ -172,7 +178,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                     onClick = {
 
                     }, shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier.weight(1f)
+                        .padding(2.dp, 0.dp, 4.dp, 4.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
                 ) {
                     Text(
@@ -198,7 +205,8 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                     onClick = {
 
                     }, shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier.weight(1f)
+                    .padding(2.dp, 0.dp, 4.dp, 4.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
                 ) {
                     Text(
