@@ -75,14 +75,14 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                 Button(
                     onClick = {
 
-                    }, shape = RoundedCornerShape(topStart = 8.dp, bottomEnd = 16.dp),
+                    }, shape = RoundedCornerShape(8.dp),
                     modifier = Modifier.weight(5f)
-                        .padding(4.dp),
+                        .padding(4.dp, 4.dp, 2.dp, 4.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
                 ) {
                     Text(
                         text = "Preferences",
-                        modifier = Modifier.weight(1f),//.padding(8.dp),
+                        modifier = Modifier.weight(1f),
                         fontSize = 24.sp,
                         color = LRed,
                         lineHeight = 80.sp
@@ -93,12 +93,13 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
 
                     }, shape = RoundedCornerShape(8.dp),
                     modifier = Modifier.weight(1f)
-                        .padding(0.dp, 0.dp, 4.dp, 4.dp),
+                        .padding(2.dp, 4.dp, 4.dp, 4.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = BlackOne)
                 ) {
                     Text(
-                        text = "Login",
+                        text = "L",
                         modifier = Modifier.weight(1f),
+                        fontSize = 24.sp,
                         lineHeight = 80.sp
 
                     )
@@ -615,7 +616,6 @@ fun DietprefsStartPage(name: String, modifier: Modifier = Modifier) {
                         modifier = Modifier.weight(1f),
                         fontSize = 24.sp,
                         lineHeight = 80.sp
-
                     )
                 }
             }
