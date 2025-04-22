@@ -1,5 +1,6 @@
 package com.example.history
 
+import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import androidx.compose.material3.Button
@@ -50,6 +51,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
     }
 }
 
