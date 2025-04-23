@@ -9,11 +9,17 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navigation
 import com.example.nestednavigationgraphsguide.ui.theme.NestedNavigationGraphsGuideTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,8 +30,19 @@ class MainActivity : ComponentActivity() {
             NestedNavigationGraphsGuideTheme {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "home") {
-                    composable(route = "login"){
+                    navigation(
+                        startDestination = "login",
+                        route = "auth"
+                    ) {
+                        composable(route = "login") {
+                            val viewModel = it.sharedViewModel<SampleViewModel>(navController)
+                        }
+                        composable(route = "register") {
 
+                        }
+                        composable(route = "forgot_password") {
+
+                        }
                     }
                 }
             }
@@ -34,17 +51,10 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    NestedNavigationGraphsGuideTheme {
-        Greeting("Android")
+inline fun <reified T : ViewModel> NavBackStackEntry.sharedViewModel(navController: NavController): T {
+    val navGraphRoute = destination.parent?.route ?: return viewModel()
+    val parentEntry = remember(this){
+        navController.getBackStackEntry(navGraphRoute)
     }
+    return viewModel(parentEntry)
 }
