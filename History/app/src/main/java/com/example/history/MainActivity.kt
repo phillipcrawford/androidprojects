@@ -30,6 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
 import com.example.history.ui.theme.BlackOne
@@ -48,22 +49,20 @@ class MainActivity : ComponentActivity() {
             HistoryTheme {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "home") {
-                    navigation(
-
-                    )
+//
                     composable(route = "login"){
 
                     }
                 }
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    DietprefsStartPage(
-                        name = "Android!",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+//                    DietprefsStartPage(
+//                        name = "Android!",
+//                        modifier = Modifier.padding(innerPadding)
+//                    )
+//                }
             }
         }
-        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+        //this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
     }
 }
 
