@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navigation
 import com.example.history.ui.theme.BlackOne
 import com.example.history.ui.theme.BlackTwo
 import com.example.history.ui.theme.DOrange
@@ -47,7 +48,12 @@ class MainActivity : ComponentActivity() {
             HistoryTheme {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "home") {
+                    navigation(
 
+                    )
+                    composable(route = "login"){
+
+                    }
                 }
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     DietprefsStartPage(
