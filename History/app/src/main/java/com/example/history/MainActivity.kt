@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "home") {
 //
-                    composable(route = "loabccgefghijkodpnmqlin"){
+                    composable(route = "loqin"){
 
                     }
                 }
