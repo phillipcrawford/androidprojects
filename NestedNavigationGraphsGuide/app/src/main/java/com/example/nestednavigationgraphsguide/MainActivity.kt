@@ -31,10 +31,10 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "home") {
                     navigation(
-                        startDestination = "logcdin",
+                        startDestination = "login",
                         route = "auth"
                     ) {
-                        composable(route = "logein") {
+                        composable(route = "login") {
                             val viewModel = it.sharedViewModel<SampleViewModel>(navController)
                         }
                         composable(route = "register") {
