@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                         startDestination = "logcdin",
                         route = "auth"
                     ) {
-                        composable(route = "login") {
+                        composable(route = "logein") {
                             val viewModel = it.sharedViewModel<SampleViewModel>(navController)
                         }
                         composable(route = "register") {
