@@ -31,7 +31,7 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "home") {
                     navigation(
-                        startDestination = "logdin",
+                        startDestination = "logrin",
                         route = "auth"
                     ) {
                         composable(route = "login") {
