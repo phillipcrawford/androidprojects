@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun HelloWorldText() {
-    Text(text = "Hello, Wocrld!")
+    Text(text = "Hello, Woqrld!")
 }
 
 @Preview(showBackground = true)
