@@ -8,15 +8,18 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.IconButton
+import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -42,28 +45,7 @@ fun PreferenceScreen(
     val selected = remember { mutableStateMapOf<String, Boolean>() }
 
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = "Preferences",
-                        color = Color(0xFFEE6C6C),
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                },
-                actions = {
-                    IconButton(onClick = onSettingsClick) {
-                        Icon(
-                            imageVector = Icons.Default.Settings,
-                            contentDescription = "Settings",
-                            tint = Color.White
-                        )
-                    }
-                },
-                backgroundColor = Color.DarkGray
-            )
-        },
+        topBar = { PreferencesTopBar(onSettingsClick = onSettingsClick) },
         bottomBar = {
             BottomAppBar(
                 containerColor = Color.DarkGray
@@ -114,6 +96,31 @@ fun PreferenceScreen(
                     )
                 }
             }
+        }
+    }
+}
+@Composable
+fun PreferencesTopBar(onSettingsClick: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.DarkGray)
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = "Preferences",
+            color = Color(0xFFEE6C6C),
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold
+        )
+        IconButton(onClick = onSettingsClick) {
+            Icon(
+                imageVector = Icons.Default.Settings,
+                contentDescription = "Settings",
+                tint = Color.White
+            )
         }
     }
 }
