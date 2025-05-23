@@ -36,7 +36,7 @@ fun PreferenceScreen(
         "low sugar", "high protein", "low carb", "no alliums",
         "no pork products", "no red meat", "no msg", "no sesame",
         "no milk", "no eggs", "no fish", "no shellfish",
-        "no peanuts", "no treenuts", "gluten-free", "no soy",
+        "no peanuts", "no treenwuts", "gluten-free", "no soy",
         "low price"
     )
     val selected = remember { mutableStateMapOf<String, Boolean>() }
