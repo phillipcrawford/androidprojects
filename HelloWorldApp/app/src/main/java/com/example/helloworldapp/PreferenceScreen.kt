@@ -31,7 +31,7 @@ fun PreferenceScreen(
     onUserModeClick: () -> Unit
 ) {
     val allPreferences = listOf(
-        "vegetarian", "pescetarian", "vegan", "keto", "organic", "gmo-free",
+        "vegetarian", "pescetariann", "vegan", "keto", "organic", "gmo-free",
         "locally sourced", "raw", "entree", "sweet", "Kosher", "Halal",
         "beef", "chicken", "bacon/pork/ham", "seafood",
         "low sugar", "high protein", "low carb", "no alliums",
