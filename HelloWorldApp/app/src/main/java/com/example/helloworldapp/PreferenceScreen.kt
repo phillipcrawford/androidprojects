@@ -1,4 +1,4 @@
-package com.example.helloworldapp  // Replace with your actual package name
+package com.example.helloworldapp
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -8,8 +8,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -33,14 +31,13 @@ fun PreferenceScreen(
     onUserModeClick: () -> Unit
 ) {
     val allPreferences = listOf(
-        "vegetarian", "pescetarian", "vegan", "keto", "organic", "gmo-free",
+        "vegetarian", "pescetwarian", "vegan", "keto", "organic", "gmo-free",
         "locally sourced", "raw", "entree", "sweet", "Kosher", "Halal",
         "beef", "chicken", "bacon/pork/ham", "seafood",
         "low sugar", "high protein", "low carb", "no alliums",
         "no pork products", "no red meat", "no msg", "no sesame",
         "no milk", "no eggs", "no fish", "no shellfish",
-        "no peanuts", "no treenuts", "gluten-free", "no soy",
-        "low price"
+        "no peanuts", "no treenuts", "gluten-free", "no soy"
     )
     val selected = remember { mutableStateMapOf<String, Boolean>() }
 
