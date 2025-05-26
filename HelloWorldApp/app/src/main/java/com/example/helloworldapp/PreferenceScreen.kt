@@ -1,5 +1,6 @@
 package com.example.helloworldapp
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -21,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+@SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun PreferenceScreen(
     onSearchClick: () -> Unit,
@@ -70,16 +72,17 @@ fun PreferenceScreen(
     ) { padding ->
         Column(
             modifier = Modifier
-                .padding(padding)
-                .padding(4.dp)
-                .fillMaxWidth()
-                .wrapContentHeight(),
+                .fillMaxSize()
+                .padding(padding),
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            // 16 rows of 2 preferences each
-            preferences.chunked(2).forEach { rowPrefs ->
+            val rows = preferences.chunked(2).take(16)
+
+            rows.forEach { rowPrefs ->
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f), // 🔥 Ensures equal vertical space
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     rowPrefs.forEach { pref ->
@@ -87,12 +90,14 @@ fun PreferenceScreen(
                         Box(
                             modifier = Modifier
                                 .weight(1f)
+                                .fillMaxHeight()
                                 .background(
                                     if (isSelected) Color(0xFF005B5B) else Color.DarkGray,
                                     shape = RoundedCornerShape(4.dp)
                                 )
                                 .clickable { selected[pref] = !isSelected }
-                                .padding(8.dp)
+                                .padding(12.dp),
+                            contentAlignment = Alignment.CenterStart
                         ) {
                             Text(
                                 text = pref,
@@ -107,23 +112,26 @@ fun PreferenceScreen(
                 }
             }
 
-//             Final row: "low price" + icon
+            // Final row (optional if "low price" is to be used)
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f), // 🔥 This row too gets equal height
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 val pref = "low price"
                 val isSelected = selected[pref] ?: false
-
                 Box(
                     modifier = Modifier
                         .weight(1f)
+                        .fillMaxHeight()
                         .background(
                             if (isSelected) Color(0xFF005B5B) else Color.DarkGray,
                             shape = RoundedCornerShape(4.dp)
                         )
                         .clickable { selected[pref] = !isSelected }
-                        .padding(12.dp)
+                        .padding(12.dp),
+                    contentAlignment = Alignment.CenterStart
                 ) {
                     Text(
                         text = pref,
@@ -131,20 +139,7 @@ fun PreferenceScreen(
                         fontSize = 14.sp
                     )
                 }
-
-//                IconButton(
-//                    onClick = { /* Handle add-person */ },
-//                    modifier = Modifier
-//                        .weight(1f)
-//                        .height(48.dp)
-//                        .background(Color(0xFFB35100), RoundedCornerShape(4.dp))
-//                ) {
-//                    Icon(
-//                        imageVector = Icons.Default.PersonAdd,
-//                        contentDescription = "Add User",
-//                        tint = Color.White
-//                    )
-//                }
+                Spacer(modifier = Modifier.weight(1f))
             }
         }
     }
