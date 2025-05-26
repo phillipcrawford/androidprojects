@@ -70,13 +70,18 @@ fun PreferenceScreen(
             }
         }
     ) { padding ->
-        Column(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding)
-                .padding(horizontal = 4.dp, vertical = 4.dp),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
+                .padding(padding) // Scaffold's inner padding (top/bottom bars)
+                //.padding(horizontal = 12.dp, vertical = 8.dp)
+                .background(Color(0xFF1A1A1A)) // Darker background
+                .padding(4.dp) // Inner padding inside background box
         ) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(4.dp),
+                modifier = Modifier.fillMaxSize()
+            ) {
             val rows = preferences.chunked(2).take(16)
 
             rows.forEach { rowPrefs ->
@@ -141,6 +146,7 @@ fun PreferenceScreen(
                     )
                 }
                 Spacer(modifier = Modifier.weight(1f))
+                }
             }
         }
     }
