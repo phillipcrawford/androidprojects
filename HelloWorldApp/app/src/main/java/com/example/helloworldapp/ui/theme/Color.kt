@@ -15,3 +15,4 @@ val selectedGrey = Color(0xFF595959)     // lighter grey
 val aiLRed = Color(0xFFEE6C6C) //maybe it was onto something?
 val dietprefsTeal2 = Color(0xFF005B5B)
 val dietprefsTeal = Color(0xFF004D4D)
+val selectedTeal = Color(0xFF008080)

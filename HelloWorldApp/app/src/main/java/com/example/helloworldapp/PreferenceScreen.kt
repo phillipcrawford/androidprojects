@@ -23,7 +23,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 import com.example.helloworldapp.ui.theme.dietprefsGrey
+import com.example.helloworldapp.ui.theme.dietprefsTeal
 import com.example.helloworldapp.ui.theme.selectedGrey
+import com.example.helloworldapp.ui.theme.selectedTeal
 
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
@@ -86,7 +88,9 @@ fun PreferenceScreen(
             ) {
             val rows = preferences.chunked(2).take(16)
 
-            rows.forEach { rowPrefs ->
+            rows.forEachIndexed { rowIndex, rowPrefs ->
+                val isTeal = rowIndex >= 8
+
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -95,12 +99,18 @@ fun PreferenceScreen(
                 ) {
                     rowPrefs.forEach { pref ->
                         val isSelected = selected[pref] ?: false
+                        val bgColor = when {
+                            isTeal && isSelected -> selectedTeal
+                            isTeal && !isSelected -> dietprefsTeal
+                            isSelected -> selectedGrey
+                            else -> dietprefsGrey
+                        }
                         Box(
                             modifier = Modifier
                                 .weight(1f)
                                 .fillMaxHeight()
                                 .background(
-                                    if (isSelected) Color(0xFF005B5B) else Color.DarkGray,
+                                    bgColor,
                                     shape = RoundedCornerShape(4.dp)
                                 )
                                 .clickable { selected[pref] = !isSelected }
@@ -134,7 +144,7 @@ fun PreferenceScreen(
                         .weight(1f)
                         .fillMaxHeight()
                         .background(
-                            if (isSelected) Color(0xFF005B5B) else Color.DarkGray,
+                            if (isSelected) selectedGrey else dietprefsGrey,
                             shape = RoundedCornerShape(4.dp)
                         )
                         .clickable { selected[pref] = !isSelected }
