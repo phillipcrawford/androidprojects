@@ -73,7 +73,8 @@ fun PreferenceScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding),
+                .padding(padding)
+                .padding(horizontal = 4.dp, vertical = 4.dp),
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             val rows = preferences.chunked(2).take(16)
@@ -83,7 +84,7 @@ fun PreferenceScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f), // 🔥 Ensures equal vertical space
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
                     rowPrefs.forEach { pref ->
                         val isSelected = selected[pref] ?: false
