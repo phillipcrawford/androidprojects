@@ -63,7 +63,7 @@ fun PreferenceScreen(
                         .padding(8.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFB35100))
                 ) {
-                    Text("C", color = Color.White, fontSize = 20.sp)
+                    Text("Ca", color = Color.White, fontSize = 20.sp)
                 }
             }
         }
