@@ -74,9 +74,8 @@ fun PreferenceScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding) // Scaffold's inner padding (top/bottom bars)
-                //.padding(horizontal = 12.dp, vertical = 8.dp)
-                .background(Color(0xFF1A1A1A)) // Darker background
-                .padding(4.dp) // Inner padding inside background box
+                .background(Color(0xFF2C2C2C)) // Darker background
+                .padding(0.dp, 4.dp) // Inner padding inside background box
         ) {
             Column(
                 verticalArrangement = Arrangement.spacedBy(4.dp),
