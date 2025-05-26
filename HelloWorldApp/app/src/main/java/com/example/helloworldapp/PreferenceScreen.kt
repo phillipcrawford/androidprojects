@@ -47,8 +47,16 @@ fun PreferenceScreen(
     )
     val selected = remember { mutableStateMapOf<String, Boolean>() }
 
+    // Build the dynamic title
+    val selectedPrefs = selected.filterValues { it }.keys.toList()
+    val title = if (selectedPrefs.isEmpty()) {
+        "Preferences"
+    } else {
+        selectedPrefs.joinToString(" & ")
+    }
+
     Scaffold(
-        topBar = { PreferencesTopBar(onSettingsClick = onSettingsClick) },
+        topBar = { PreferencesTopBar(title = title, onSettingsClick = onSettingsClick) },
         bottomBar = {
             Row(
                 modifier = Modifier
@@ -188,7 +196,7 @@ fun PreferenceScreen(
 }
 
 @Composable
-fun PreferencesTopBar(onSettingsClick: () -> Unit) {
+fun PreferencesTopBar(title: String, onSettingsClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -198,7 +206,7 @@ fun PreferencesTopBar(onSettingsClick: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = "Preferences",
+            text = title,
             color = Color(0xFFEE6C6C),
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold
