@@ -133,50 +133,54 @@ fun PreferenceScreen(
             }
 
             // Final row (optional if "low price" is to be used)
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f), // 🔥 This row too gets equal height
-                horizontalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                val pref = "low price"
-                val isSelected = selected[pref] ?: false
-                Box(
+                val lowPricePref = "low price"
+                val addPersonPref = "add person"
+                val isLowPriceSelected = selected[lowPricePref] ?: false
+                val isAddPersonSelected = selected[addPersonPref] ?: false
+
+                Row(
                     modifier = Modifier
-                        .weight(1f)
-                        .fillMaxHeight()
-                        .background(
-                            if (isSelected) selectedGrey else dietprefsGrey,
-                            shape = RoundedCornerShape(4.dp)
-                        )
-                        .clickable { selected[pref] = !isSelected }
-                        .padding(12.dp, 0.dp, 0.dp, 0.dp),
-                    contentAlignment = Alignment.CenterStart
+                        .fillMaxWidth()
+                        .weight(1f),
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                    Text(
-                        text = pref,
-                        color = Color.White,
-                        fontSize = 16.sp
-                    )
-                }
-                Box(
-                    modifier = Modifier
-                        .weight(1f)
-                        .fillMaxHeight()
-                        .background(
-                            dietprefsTeal,
-                            shape = RoundedCornerShape(4.dp)
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxHeight()
+                            .background(
+                                if (isLowPriceSelected) selectedGrey else dietprefsGrey,
+                                shape = RoundedCornerShape(4.dp)
+                            )
+                            .clickable { selected[lowPricePref] = !isLowPriceSelected }
+                            .padding(12.dp, 0.dp, 0.dp, 0.dp),
+                        contentAlignment = Alignment.CenterStart
+                    ) {
+                        Text(
+                            text = lowPricePref,
+                            color = Color.White,
+                            fontSize = 16.sp
                         )
-                        .clickable { /* TODO: Handle add person logic */ }
-                        .padding(12.dp, 0.dp, 0.dp, 0.dp),
-                    contentAlignment = Alignment.CenterStart
-                ) {
-                    Icon(
-                        imageVector = Icons.Filled.Person,
-                        contentDescription = "Add person",
-                        tint = Color.White
-                    )
-                }
+                    }
+
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxHeight()
+                            .background(
+                                if (isAddPersonSelected) selectedGrey else dietprefsGrey,
+                                shape = RoundedCornerShape(4.dp)
+                            )
+                            .clickable { selected[addPersonPref] = !isAddPersonSelected }
+                            .padding(0.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.Person,
+                            contentDescription = "Add person",
+                            tint = Color.White
+                        )
+                    }
                 }
             }
         }
