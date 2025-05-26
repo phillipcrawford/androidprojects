@@ -22,6 +22,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+import androidx.compose.material.icons.filled.Person
+
 import com.example.helloworldapp.ui.theme.dietprefsGrey
 import com.example.helloworldapp.ui.theme.dietprefsTeal
 import com.example.helloworldapp.ui.theme.selectedGrey
@@ -157,7 +159,24 @@ fun PreferenceScreen(
                         fontSize = 16.sp
                     )
                 }
-                Spacer(modifier = Modifier.weight(1f))
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight()
+                        .background(
+                            dietprefsTeal,
+                            shape = RoundedCornerShape(4.dp)
+                        )
+                        .clickable { /* TODO: Handle add person logic */ }
+                        .padding(12.dp, 0.dp, 0.dp, 0.dp),
+                    contentAlignment = Alignment.CenterStart
+                ) {
+                    Icon(
+                        imageVector = Icons.Filled.Person,
+                        contentDescription = "Add person",
+                        tint = Color.White
+                    )
+                }
                 }
             }
         }
