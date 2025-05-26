@@ -44,8 +44,12 @@ fun PreferenceScreen(
     Scaffold(
         topBar = { PreferencesTopBar(onSettingsClick = onSettingsClick) },
         bottomBar = {
-            BottomAppBar(
-                containerColor = Color.DarkGray
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.DarkGray)
+                    .padding(8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Button(
                     onClick = onSearchClick,
@@ -58,7 +62,8 @@ fun PreferenceScreen(
                 }
                 Button(
                     onClick = onUserModeClick,
-                    modifier = Modifier.padding(8.dp),
+                    modifier = Modifier
+                        .padding(8.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFB35100))
                 ) {
                     Text("C", color = Color.White)
