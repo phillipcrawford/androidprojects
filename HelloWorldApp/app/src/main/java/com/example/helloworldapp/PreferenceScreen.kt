@@ -159,7 +159,7 @@ fun PreferencesTopBar(onSettingsClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.DarkGray)
+            .background(dietprefsGrey)
             .padding(16.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically

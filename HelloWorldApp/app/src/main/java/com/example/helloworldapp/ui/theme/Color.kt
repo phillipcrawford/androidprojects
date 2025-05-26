@@ -13,3 +13,5 @@ val Pink40 = Color(0xFF7D5260)
 val dietprefsGrey = Color(0xFF333333)    // dark grey
 val selectedGrey = Color(0xFF595959)     // lighter grey
 val aiLRed = Color(0xFFEE6C6C) //maybe it was onto something?
+val dietprefsTeal2 = Color(0xFF005B5B)
+val dietprefsTeal = Color(0xFF004D4D)
