@@ -97,13 +97,13 @@ fun PreferenceScreen(
                                     shape = RoundedCornerShape(4.dp)
                                 )
                                 .clickable { selected[pref] = !isSelected }
-                                .padding(12.dp),
+                                .padding(12.dp, 0.dp, 0.dp, 0.dp),
                             contentAlignment = Alignment.CenterStart
                         ) {
                             Text(
                                 text = pref,
                                 color = Color.White,
-                                fontSize = 14.sp
+                                fontSize = 16.sp
                             )
                         }
                     }
@@ -118,7 +118,7 @@ fun PreferenceScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f), // 🔥 This row too gets equal height
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 val pref = "low price"
                 val isSelected = selected[pref] ?: false
@@ -131,13 +131,13 @@ fun PreferenceScreen(
                             shape = RoundedCornerShape(4.dp)
                         )
                         .clickable { selected[pref] = !isSelected }
-                        .padding(12.dp),
+                        .padding(12.dp, 0.dp, 0.dp, 0.dp),
                     contentAlignment = Alignment.CenterStart
                 ) {
                     Text(
                         text = pref,
                         color = Color.White,
-                        fontSize = 14.sp
+                        fontSize = 16.sp
                     )
                 }
                 Spacer(modifier = Modifier.weight(1f))
