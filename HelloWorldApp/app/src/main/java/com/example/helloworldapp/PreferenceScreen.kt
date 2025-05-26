@@ -75,7 +75,9 @@ fun PreferenceScreen(
                     Text("Search", color = Color(0xFFEE6C6C), fontSize = 20.sp)
                 }
                 Button(
-                    onClick = onUserModeClick,
+                    onClick = {
+                        selected.keys.forEach { key -> selected[key] = false }
+                    },
                     modifier = Modifier
                         .padding(8.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFB35100))
