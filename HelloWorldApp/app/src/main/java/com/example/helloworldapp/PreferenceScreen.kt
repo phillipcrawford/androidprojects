@@ -22,6 +22,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+import com.example.helloworldapp.ui.theme.dietprefsGrey
+import com.example.helloworldapp.ui.theme.selectedGrey
+
 @SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun PreferenceScreen(
@@ -46,7 +49,7 @@ fun PreferenceScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color.DarkGray)
+                    .background(dietprefsGrey)
                     .padding(4.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
