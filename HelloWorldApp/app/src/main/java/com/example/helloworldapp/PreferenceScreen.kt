@@ -3,9 +3,6 @@ package com.example.helloworldapp
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 
 import androidx.compose.material3.Icon
@@ -30,7 +27,7 @@ fun PreferenceScreen(
     onSettingsClick: () -> Unit,
     onUserModeClick: () -> Unit
 ) {
-    val allPreferences = listOf(
+    val preferences = listOf(
         "vegetarian", "pescetarian", "vegan", "keto", "organic", "gmo-free",
         "locally sourced", "raw", "entree", "sweet", "Kosher", "Halal",
         "beef", "chicken", "bacon/pork/ham", "seafood",
@@ -48,7 +45,7 @@ fun PreferenceScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Color.DarkGray)
-                    .padding(8.dp),
+                    .padding(4.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Button(
@@ -71,19 +68,56 @@ fun PreferenceScreen(
             }
         }
     ) { padding ->
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
+        Column(
             modifier = Modifier
                 .padding(padding)
-                .padding(horizontal = 8.dp)
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                .padding(4.dp)
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            items(allPreferences) { pref ->
+            // 16 rows of 2 preferences each
+            preferences.chunked(2).forEach { rowPrefs ->
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    rowPrefs.forEach { pref ->
+                        val isSelected = selected[pref] ?: false
+                        Box(
+                            modifier = Modifier
+                                .weight(1f)
+                                .background(
+                                    if (isSelected) Color(0xFF005B5B) else Color.DarkGray,
+                                    shape = RoundedCornerShape(4.dp)
+                                )
+                                .clickable { selected[pref] = !isSelected }
+                                .padding(8.dp)
+                        ) {
+                            Text(
+                                text = pref,
+                                color = Color.White,
+                                fontSize = 14.sp
+                            )
+                        }
+                    }
+                    if (rowPrefs.size == 1) {
+                        Spacer(modifier = Modifier.weight(1f))
+                    }
+                }
+            }
+
+//             Final row: "low price" + icon
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                val pref = "low price"
                 val isSelected = selected[pref] ?: false
+
                 Box(
                     modifier = Modifier
+                        .weight(1f)
                         .background(
                             if (isSelected) Color(0xFF005B5B) else Color.DarkGray,
                             shape = RoundedCornerShape(4.dp)
@@ -97,10 +131,25 @@ fun PreferenceScreen(
                         fontSize = 14.sp
                     )
                 }
+
+//                IconButton(
+//                    onClick = { /* Handle add-person */ },
+//                    modifier = Modifier
+//                        .weight(1f)
+//                        .height(48.dp)
+//                        .background(Color(0xFFB35100), RoundedCornerShape(4.dp))
+//                ) {
+//                    Icon(
+//                        imageVector = Icons.Default.PersonAdd,
+//                        contentDescription = "Add User",
+//                        tint = Color.White
+//                    )
+//                }
             }
         }
     }
 }
+
 @Composable
 fun PreferencesTopBar(onSettingsClick: () -> Unit) {
     Row(
