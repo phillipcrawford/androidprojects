@@ -252,6 +252,7 @@ fun PreferencesTopBar(title: AnnotatedString, onSettingsClick: () -> Unit,  onUs
     Box(
         modifier = Modifier
             .fillMaxWidth()
+            .height(64.dp)
             .background(dietprefsGrey)
             .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
