@@ -70,7 +70,9 @@ fun PreferenceScreen(
             }
         }
         if (user1Selected.isEmpty() && user2Selected.isEmpty()) {
-            append("Preferences")
+            withStyle(style = SpanStyle(color = Color(0xFFEE6C6C))) {
+                append("Preferences")
+            }
         }
     }
 
