@@ -1,6 +1,5 @@
 package com.example.helloworldapp
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -29,7 +28,6 @@ import com.example.helloworldapp.ui.theme.dietprefsTeal
 import com.example.helloworldapp.ui.theme.selectedGrey
 import com.example.helloworldapp.ui.theme.selectedTeal
 
-@SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun PreferenceScreen(
     onSearchClick: () -> Unit,
