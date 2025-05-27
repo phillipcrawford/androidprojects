@@ -79,7 +79,11 @@ fun PreferenceScreen(
 
     Scaffold(
         topBar = {
-            PreferencesTopBar(title = title, onSettingsClick = onSettingsClick)
+            PreferencesTopBar(
+                title = title,
+                onSettingsClick = onSettingsClick,
+                onUserModeClick = onUserModeClick // <-- Add this line
+            )
         },
         bottomBar = {
             Row(
@@ -244,7 +248,7 @@ fun PreferenceScreen(
 }
 
 @Composable
-fun PreferencesTopBar(title: AnnotatedString, onSettingsClick: () -> Unit) {
+fun PreferencesTopBar(title: AnnotatedString, onSettingsClick: () -> Unit,  onUserModeClick: () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -252,23 +256,26 @@ fun PreferencesTopBar(title: AnnotatedString, onSettingsClick: () -> Unit) {
             .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
         // Left-aligned Person Icon
-        Icon(
-            imageVector = Icons.Default.Person,
-            contentDescription = "Person",
-            tint = Color.White,
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.align(Alignment.CenterStart)
-        )
-
-        // Center Title with wrapping
-        Text(
-            text = title,
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.White,
-            modifier = Modifier
-                .align(Alignment.Center)
-                .padding(horizontal = 48.dp) // padding to prevent overlap with icons
-        )
+        ) {
+            IconButton(onClick = onUserModeClick) {
+                Icon(
+                    imageVector = Icons.Default.Person,
+                    contentDescription = "Toggle Person",
+                    tint = Color.White
+                )
+            }
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(
+                text = title,
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White, // Or use AnnotatedString color if mixed colors
+                maxLines = 2
+            )
+        }
 
         // Right-aligned Settings Icon
         IconButton(
