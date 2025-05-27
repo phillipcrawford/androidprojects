@@ -22,6 +22,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 
 import com.example.helloworldapp.ui.theme.dietprefsGrey
 import com.example.helloworldapp.ui.theme.dietprefsTeal
@@ -43,18 +47,37 @@ fun PreferenceScreen(
         "no milk", "no eggs", "no fish", "no shellfish",
         "no peanuts", "no treenuts", "gluten-free", "no soy"
     )
-    val selected = remember { mutableStateMapOf<String, Boolean>() }
 
-    // Build the dynamic title
-    val selectedPrefs = selected.filterValues { it }.keys.toList()
-    val title = if (selectedPrefs.isEmpty()) {
-        "Preferences"
-    } else {
-        selectedPrefs.joinToString(" & ")
+    val user1Prefs = remember { mutableStateMapOf<String, Boolean>() }
+    val user2Prefs = remember { mutableStateMapOf<String, Boolean>() }
+    val isUser2Active = remember { mutableStateOf(false) }
+
+    val user1Selected = user1Prefs.filterValues { it }.keys.toList()
+    val user2Selected = user2Prefs.filterValues { it }.keys.toList()
+
+    val title = buildAnnotatedString {
+        if (user1Selected.isNotEmpty()) {
+            withStyle(style = SpanStyle(color = Color(0xFFEE6C6C))) {
+                append(user1Selected.joinToString(" & "))
+            }
+        }
+        if (user1Selected.isNotEmpty() && user2Selected.isNotEmpty()) {
+            append(" & ")
+        }
+        if (user2Selected.isNotEmpty()) {
+            withStyle(style = SpanStyle(color = Color.Magenta)) {
+                append(user2Selected.joinToString(" & "))
+            }
+        }
+        if (user1Selected.isEmpty() && user2Selected.isEmpty()) {
+            append("Preferences")
+        }
     }
 
     Scaffold(
-        topBar = { PreferencesTopBar(title = title, onSettingsClick = onSettingsClick) },
+        topBar = {
+            PreferencesTopBar(title = title, onSettingsClick = onSettingsClick)
+        },
         bottomBar = {
             Row(
                 modifier = Modifier
@@ -74,7 +97,9 @@ fun PreferenceScreen(
                 }
                 Button(
                     onClick = {
-                        selected.keys.forEach { key -> selected[key] = false }
+                        user1Prefs.clear()
+                        user2Prefs.clear()
+                        isUser2Active.value = false
                     },
                     modifier = Modifier
                         .padding(8.dp),
@@ -88,70 +113,71 @@ fun PreferenceScreen(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(padding) // Scaffold's inner padding (top/bottom bars)
-                .background(Color(0xFF2C2C2C)) // Darker background
-                .padding(0.dp, 4.dp) // Inner padding inside background box
+                .padding(padding)
+                .background(Color(0xFF2C2C2C))
+                .padding(0.dp, 4.dp)
         ) {
             Column(
                 verticalArrangement = Arrangement.spacedBy(4.dp),
                 modifier = Modifier.fillMaxSize()
             ) {
-            val rows = preferences.chunked(2).take(16)
+                val rows = preferences.chunked(2).take(16)
 
-            rows.forEachIndexed { rowIndex, rowPrefs ->
-                val isTeal = rowIndex >= 8
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f), // 🔥 Ensures equal vertical space
-                    horizontalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
-                    rowPrefs.forEach { pref ->
-                        val isSelected = selected[pref] ?: false
-                        val bgColor = when {
-                            isTeal && isSelected -> selectedTeal
-                            isTeal && !isSelected -> dietprefsTeal
-                            isSelected -> selectedGrey
-                            else -> dietprefsGrey
-                        }
-                        Box(
-                            modifier = Modifier
-                                .weight(1f)
-                                .fillMaxHeight()
-                                .background(
-                                    bgColor,
-                                    shape = RoundedCornerShape(4.dp)
+                rows.forEachIndexed { rowIndex, rowPrefs ->
+                    val isTeal = rowIndex >= 8
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .weight(1f),
+                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        rowPrefs.forEach { pref ->
+                            val activePrefs = if (isUser2Active.value) user2Prefs else user1Prefs
+                            val isSelected = activePrefs[pref] ?: false
+                            val bgColor = when {
+                                isTeal && isSelected -> selectedTeal
+                                isTeal && !isSelected -> dietprefsTeal
+                                isSelected -> selectedGrey
+                                else -> dietprefsGrey
+                            }
+                            Box(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .fillMaxHeight()
+                                    .background(
+                                        bgColor,
+                                        shape = RoundedCornerShape(4.dp)
+                                    )
+                                    .clickable {
+                                        activePrefs[pref] = !(activePrefs[pref] ?: false)
+                                    }
+                                    .padding(12.dp, 0.dp, 0.dp, 0.dp),
+                                contentAlignment = Alignment.CenterStart
+                            ) {
+                                Text(
+                                    text = pref,
+                                    color = Color.White,
+                                    fontSize = 16.sp
                                 )
-                                .clickable { selected[pref] = !isSelected }
-                                .padding(12.dp, 0.dp, 0.dp, 0.dp),
-                            contentAlignment = Alignment.CenterStart
-                        ) {
-                            Text(
-                                text = pref,
-                                color = Color.White,
-                                fontSize = 16.sp
-                            )
+                            }
                         }
-                    }
-                    if (rowPrefs.size == 1) {
-                        Spacer(modifier = Modifier.weight(1f))
+                        if (rowPrefs.size == 1) {
+                            Spacer(modifier = Modifier.weight(1f))
+                        }
                     }
                 }
-            }
 
-            // Final row (optional if "low price" is to be used)
-                val lowPricePref = "low price"
-                val addPersonPref = "add person"
-                val isLowPriceSelected = selected[lowPricePref] ?: false
-                val isAddPersonSelected = selected[addPersonPref] ?: false
-
+                // Final row: low price + person toggle
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f),
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
+                    val activePrefs = if (isUser2Active.value) user2Prefs else user1Prefs
+                    val lowPricePref = "low price"
+                    val isLowPriceSelected = activePrefs[lowPricePref] ?: false
+
                     Box(
                         modifier = Modifier
                             .weight(1f)
@@ -160,7 +186,9 @@ fun PreferenceScreen(
                                 if (isLowPriceSelected) selectedGrey else dietprefsGrey,
                                 shape = RoundedCornerShape(4.dp)
                             )
-                            .clickable { selected[lowPricePref] = !isLowPriceSelected }
+                            .clickable {
+                                activePrefs[lowPricePref] = !isLowPriceSelected
+                            }
                             .padding(12.dp, 0.dp, 0.dp, 0.dp),
                         contentAlignment = Alignment.CenterStart
                     ) {
@@ -176,16 +204,18 @@ fun PreferenceScreen(
                             .weight(1f)
                             .fillMaxHeight()
                             .background(
-                                if (isAddPersonSelected) selectedGrey else dietprefsGrey,
+                                if (isUser2Active.value) selectedGrey else dietprefsGrey,
                                 shape = RoundedCornerShape(4.dp)
                             )
-                            .clickable { selected[addPersonPref] = !isAddPersonSelected }
+                            .clickable {
+                                isUser2Active.value = !isUser2Active.value
+                            }
                             .padding(0.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
                             imageVector = Icons.Filled.Person,
-                            contentDescription = "Add person",
+                            contentDescription = "Toggle Person",
                             tint = Color.White
                         )
                     }
@@ -196,7 +226,7 @@ fun PreferenceScreen(
 }
 
 @Composable
-fun PreferencesTopBar(title: String, onSettingsClick: () -> Unit) {
+fun PreferencesTopBar(title: AnnotatedString, onSettingsClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -207,7 +237,6 @@ fun PreferencesTopBar(title: String, onSettingsClick: () -> Unit) {
     ) {
         Text(
             text = title,
-            color = Color(0xFFEE6C6C),
             fontSize = 24.sp,
             fontWeight = FontWeight.Bold
         )
