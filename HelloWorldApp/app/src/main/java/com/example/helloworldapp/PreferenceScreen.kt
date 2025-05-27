@@ -10,6 +10,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Settings
 
 import androidx.compose.material3.*
@@ -209,17 +210,32 @@ fun PreferenceScreen(
                                 if (isUser2Active.value) selectedGrey else dietprefsGrey,
                                 shape = RoundedCornerShape(4.dp)
                             )
-                            .clickable {
-                                isUser2Active.value = !isUser2Active.value
+                            .clickable(enabled = user1Selected.isNotEmpty() || user2Selected.isNotEmpty() || isUser2Active.value) {
+                                if (user1Selected.isEmpty() && user2Selected.isEmpty()) {
+                                    isUser2Active.value = false // Reset to default (user1)
+                                } else {
+                                    isUser2Active.value = !isUser2Active.value
+                                }
                             }
                             .padding(0.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        Icon(
-                            imageVector = Icons.Filled.Person,
-                            contentDescription = "Toggle Person",
-                            tint = Color.White
-                        )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Add,
+                                contentDescription = "Add",
+                                tint = Color.White
+                            )
+                            Icon(
+                                imageVector = Icons.Default.Person,
+                                contentDescription = "Person",
+                                tint = Color.White
+                            )
+
+                        }
                     }
                 }
             }
@@ -229,20 +245,36 @@ fun PreferenceScreen(
 
 @Composable
 fun PreferencesTopBar(title: AnnotatedString, onSettingsClick: () -> Unit) {
-    Row(
+    Box(
         modifier = Modifier
             .fillMaxWidth()
             .background(dietprefsGrey)
-            .padding(16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+            .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
+        // Left-aligned Person Icon
+        Icon(
+            imageVector = Icons.Default.Person,
+            contentDescription = "Person",
+            tint = Color.White,
+            modifier = Modifier.align(Alignment.CenterStart)
+        )
+
+        // Center Title with wrapping
         Text(
             text = title,
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.White,
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(horizontal = 48.dp) // padding to prevent overlap with icons
         )
-        IconButton(onClick = onSettingsClick) {
+
+        // Right-aligned Settings Icon
+        IconButton(
+            onClick = onSettingsClick,
+            modifier = Modifier.align(Alignment.CenterEnd)
+        ) {
             Icon(
                 imageVector = Icons.Default.Settings,
                 contentDescription = "Settings",
