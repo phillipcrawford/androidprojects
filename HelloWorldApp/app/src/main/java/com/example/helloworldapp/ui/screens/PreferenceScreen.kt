@@ -32,12 +32,14 @@ import com.example.helloworldapp.ui.theme.dietprefsGrey
 import com.example.helloworldapp.ui.theme.dietprefsTeal
 import com.example.helloworldapp.ui.theme.selectedGrey
 import com.example.helloworldapp.ui.theme.selectedTeal
+import com.example.helloworldapp.ui.viewmodel.SharedViewModel
 
 @Composable
 fun PreferenceScreen(
     onSearchClick: () -> Unit,
     onSettingsClick: () -> Unit,
-    onUserModeClick: () -> Unit
+    onUserModeClick: () -> Unit,
+    sharedViewModel: SharedViewModel
 ) {
     val preferences = listOf(
         "vegetarian", "pescetarian", "vegan", "keto", "organic", "gmo-free",
@@ -94,7 +96,11 @@ fun PreferenceScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Button(
-                    onClick = onSearchClick,
+                    onClick = {
+                        sharedViewModel.setUser1Prefs(user1Selected)
+                        sharedViewModel.setUser2Prefs(user2Selected)
+                        onSearchClick()
+                    },
                     modifier = Modifier
                         .weight(1f)
                         .padding(8.dp),

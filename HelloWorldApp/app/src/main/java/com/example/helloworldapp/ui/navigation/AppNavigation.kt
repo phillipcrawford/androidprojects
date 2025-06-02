@@ -4,11 +4,16 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.helloworldapp.ui.navigation.Screen
 import com.example.helloworldapp.ui.screens.PreferenceScreen
+import com.example.helloworldapp.ui.screens.SearchResultsScreen
+import com.example.helloworldapp.ui.viewmodel.SharedViewModel
 
 @Composable
-fun AppNavigation(navController: NavHostController) {
+fun AppNavigation(sharedViewModel: SharedViewModel) {
+    val navController = rememberNavController()
+
     NavHost(
         navController = navController,
         startDestination = Screen.Preferences.route
@@ -19,11 +24,16 @@ fun AppNavigation(navController: NavHostController) {
                     navController.navigate(Screen.SearchResults.route)
                 },
                 onSettingsClick = { /* Handle settings */ },
-                onUserModeClick = { /* Handle user switch */ }
+                onUserModeClick = { /* Handle user switch */ },
+                sharedViewModel = sharedViewModel
             )
         }
         composable(Screen.SearchResults.route) {
-            SearchResultsScreen()
+            SearchResultsScreen(
+                onBackClick = { navController.popBackStack() },
+                onSettingsClick = { /* handle */ },
+                sharedViewModel = sharedViewModel
+            )
         }
     }
 }
