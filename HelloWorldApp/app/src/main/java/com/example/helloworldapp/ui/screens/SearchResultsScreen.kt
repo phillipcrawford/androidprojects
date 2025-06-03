@@ -8,9 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,7 +23,7 @@ fun SearchResultsScreen(
     onSettingsClick: () -> Unit,
     sharedViewModel: SharedViewModel
 ) {
-    val user1Prefs by sharedViewModel.user1Prefs.collectAsState()
+    val user1Prefs by sharedViewModel.user1Prefs.collsectAsState()
     val user2Prefs by sharedViewModel.user2Prefs.collectAsState()
 
     val user1PrefsSummary = user1Prefs.joinToString(", ")
