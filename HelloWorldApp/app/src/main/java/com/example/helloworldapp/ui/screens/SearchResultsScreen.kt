@@ -23,7 +23,7 @@ fun SearchResultsScreen(
     onSettingsClick: () -> Unit,
     sharedViewModel: SharedViewModel
 ) {
-    val user1Prefs by sharedViewModel.user1Prefs.collsectAsState()
+    val user1Prefs by sharedViewModel.user1Prefs.collectAsState()
     val user2Prefs by sharedViewModel.user2Prefs.collectAsState()
 
     val user1PrefsSummary = user1Prefs.joinToString(", ")
