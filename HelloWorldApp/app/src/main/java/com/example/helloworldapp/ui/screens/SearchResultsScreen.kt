@@ -58,7 +58,7 @@ fun SearchResultsScreen(
                             modifier = Modifier.weight(1f),
                             fontSize = 16.sp
                         )
-                        Text(text = "2.sss5 mi", fontSize = 14.sp)
+                        Text(text = "2.5 mi", fontSize = 14.sp)
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(text = "3 | 11", fontSize = 14.sp)
                     }
