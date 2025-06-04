@@ -13,10 +13,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.helloworldapp.ui.viewmodel.SharedViewModel
+
+// Replace with your real app's grey if needed
+val dietprefsGrey = Color(0xFF555555)
 
 @Composable
 fun SearchResultsScreen(
@@ -24,17 +28,14 @@ fun SearchResultsScreen(
     onSettingsClick: () -> Unit,
     sharedViewModel: SharedViewModel
 ) {
-    val user1Prefs by sharedViewModel.user1Prefs.collectAsState()
-    val user2Prefs by sharedViewModel.user2Prefs.collectAsState()
     var searchQuery by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
             SearchResultsTopBar(
-                user1PrefsSummary = user1Prefs.joinToString(", "),
-                user2PrefsSummary = user2Prefs.takeIf { it.isNotEmpty() }?.joinToString(", "),
-                onSettingsClick = onSettingsClick,
-                onBackClick = onBackClick
+                sharedViewModel = sharedViewModel,
+                onBackClick = onBackClick,
+                onSettingsClick = onSettingsClick
             )
         }
     ) { innerPadding ->
@@ -43,7 +44,7 @@ fun SearchResultsScreen(
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
-            // Table of vendors
+            // Vendor List
             LazyColumn(
                 modifier = Modifier
                     .weight(1f)
@@ -61,7 +62,11 @@ fun SearchResultsScreen(
                             modifier = Modifier.weight(1f),
                             fontSize = 16.sp
                         )
-                        Text(text = "2.5 mi", fontSize = 14.sp, modifier = Modifier.padding(horizontal = 8.dp))
+                        Text(
+                            text = "2.5 mi",
+                            fontSize = 14.sp,
+                            modifier = Modifier.padding(horizontal = 8.dp)
+                        )
                         Text(text = "3 | 11", fontSize = 14.sp)
                     }
                 }
@@ -106,49 +111,58 @@ fun SearchResultsScreen(
 
 @Composable
 fun SearchResultsTopBar(
-    user1PrefsSummary: String,
-    user2PrefsSummary: String?,
-    onSettingsClick: () -> Unit,
-    onBackClick: () -> Unit
+    sharedViewModel: SharedViewModel,
+    onBackClick: () -> Unit,
+    onSettingsClick: () -> Unit
 ) {
+    val user1Prefs by sharedViewModel.user1Prefs.collectAsState()
+    val user2Prefs by sharedViewModel.user2Prefs.collectAsState()
+
+    val title = buildAnnotatedString {
+        append(user1Prefs.joinToString(", "))
+        if (user2Prefs.isNotEmpty()) {
+            append("\n")
+            append(user2Prefs.joinToString(", "))
+        }
+    }
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(64.dp)
-            .background(MaterialTheme.colorScheme.surface),
+            .height(128.dp)
+            .background(dietprefsGrey)
+            .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            modifier = Modifier.align(Alignment.CenterStart)
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                IconButton(onClick = onBackClick) {
-                    Icon(Icons.Default.ArrowBack, contentDescription = "Back")
-                }
-                Column {
-                    Text(
-                        text = user1PrefsSummary,
-                        fontSize = 14.sp,
-                        color = Color.Red,
-                        fontWeight = FontWeight.Bold
-                    )
-                    if (!user2PrefsSummary.isNullOrBlank()) {
-                        Text(
-                            text = user2PrefsSummary,
-                            fontSize = 14.sp,
-                            color = Color(0xFFB57EDC), // lavender
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                }
+            IconButton(onClick = onBackClick) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Back",
+                    tint = Color.White
+                )
             }
+            Spacer(modifier = Modifier.width(8.dp))
+            Text(
+                text = title,
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                maxLines = 2
+            )
+        }
 
-            IconButton(onClick = onSettingsClick) {
-                Icon(Icons.Default.Settings, contentDescription = "Settings")
-            }
+        IconButton(
+            onClick = onSettingsClick,
+            modifier = Modifier.align(Alignment.CenterEnd)
+        ) {
+            Icon(
+                imageVector = Icons.Default.Settings,
+                contentDescription = "Settings",
+                tint = Color.White
+            )
         }
     }
 }
