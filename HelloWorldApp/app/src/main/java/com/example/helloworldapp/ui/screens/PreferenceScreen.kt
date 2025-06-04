@@ -4,16 +4,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
-
+import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
-
-import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,13 +16,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.withStyle
-
 import com.example.helloworldapp.ui.theme.dietprefsGrey
 import com.example.helloworldapp.ui.theme.dietprefsTeal
 import com.example.helloworldapp.ui.theme.selectedGrey
@@ -58,33 +46,13 @@ fun PreferenceScreen(
     val user1Selected = user1Prefs.filterValues { it }.keys.toList()
     val user2Selected = user2Prefs.filterValues { it }.keys.toList()
 
-    val title = buildAnnotatedString {
-        if (user1Selected.isNotEmpty()) {
-            withStyle(style = SpanStyle(color = Color(0xFFEE6C6C))) {
-                append(user1Selected.joinToString(" & "))
-            }
-        }
-        if (user1Selected.isNotEmpty() && user2Selected.isNotEmpty()) {
-            append(" & ")
-        }
-        if (user2Selected.isNotEmpty()) {
-            withStyle(style = SpanStyle(color = Color.Magenta)) {
-                append(user2Selected.joinToString(" & "))
-            }
-        }
-        if (user1Selected.isEmpty() && user2Selected.isEmpty()) {
-            withStyle(style = SpanStyle(color = Color(0xFFEE6C6C))) {
-                append("Preferences")
-            }
-        }
-    }
-
     Scaffold(
         topBar = {
             PreferencesTopBar(
-                title = title,
+                user1PrefsSummary = user1Selected.joinToString(", "),
+                user2PrefsSummary = user2Selected.joinToString(", ").takeIf { it.isNotEmpty() },
                 onSettingsClick = onSettingsClick,
-                onUserModeClick = onUserModeClick // <-- Add this line
+                onUserModeClick = onUserModeClick
             )
         },
         bottomBar = {
@@ -222,7 +190,7 @@ fun PreferenceScreen(
                             )
                             .clickable(enabled = user1Selected.isNotEmpty() || user2Selected.isNotEmpty() || isUser2Active.value) {
                                 if (user1Selected.isEmpty() && user2Selected.isEmpty()) {
-                                    isUser2Active.value = false // Reset to default (user1)
+                                    isUser2Active.value = false
                                 } else {
                                     isUser2Active.value = !isUser2Active.value
                                 }
@@ -244,7 +212,6 @@ fun PreferenceScreen(
                                 contentDescription = "Person",
                                 tint = Color.White
                             )
-
                         }
                     }
                 }
@@ -254,7 +221,12 @@ fun PreferenceScreen(
 }
 
 @Composable
-fun PreferencesTopBar(title: AnnotatedString, onSettingsClick: () -> Unit,  onUserModeClick: () -> Unit) {
+fun PreferencesTopBar(
+    user1PrefsSummary: String,
+    user2PrefsSummary: String?,
+    onSettingsClick: () -> Unit,
+    onUserModeClick: () -> Unit
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -262,7 +234,6 @@ fun PreferencesTopBar(title: AnnotatedString, onSettingsClick: () -> Unit,  onUs
             .background(dietprefsGrey)
             .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
-        // Left-aligned Person Icon
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.align(Alignment.CenterStart)
@@ -275,16 +246,24 @@ fun PreferencesTopBar(title: AnnotatedString, onSettingsClick: () -> Unit,  onUs
                 )
             }
             Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = title,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White, // Or use AnnotatedString color if mixed colors
-                maxLines = 2
-            )
+            Column {
+                Text(
+                    text = user1PrefsSummary,
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White
+                )
+                if (!user2PrefsSummary.isNullOrBlank()) {
+                    Text(
+                        text = user2PrefsSummary,
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFFB57EDC) // lavender
+                    )
+                }
+            }
         }
 
-        // Right-aligned Settings Icon
         IconButton(
             onClick = onSettingsClick,
             modifier = Modifier.align(Alignment.CenterEnd)
