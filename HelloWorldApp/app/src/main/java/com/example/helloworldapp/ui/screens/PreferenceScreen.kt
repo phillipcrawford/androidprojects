@@ -256,7 +256,7 @@ fun PreferencesTopBar(
                 if (!user2PrefsSummary.isNullOrBlank()) {
                     Text(
                         text = user2PrefsSummary,
-                        fontSize = 224.sp,
+                        fontSize = 24.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color(0xFFB57EDC) // lavender
                     )
