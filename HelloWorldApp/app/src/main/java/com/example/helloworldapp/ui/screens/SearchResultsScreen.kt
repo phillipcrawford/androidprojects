@@ -184,5 +184,5 @@ fun FilterButton(label: String) {
 val sampleVendors = listOf(
     "Pacific Pita", "Baja Fresh", "Fresh Grill", "It's Greek to Me",
     "Petra Grill", "Charlie Hong Kong", "Star of India", "Gold Leaf Collective",
-    "Heart Ethiopia", "Chiptotle"
+    "Heart Ethiopia", "Chipttle"
 )
