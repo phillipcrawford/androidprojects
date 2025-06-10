@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -247,12 +248,15 @@ fun PreferencesTopBar(
                 Icon(
                     imageVector = Icons.Default.Person,
                     contentDescription = null,
-                    tint = Color.Transparent // invisible
+                    modifier = Modifier
+                        .size(52.dp)
+                        .alpha(0f), // Fully transparent
+                    tint = Color.Transparent
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = "Preferences",
-                    fontSize = 24.sp,
+                    fontSize = 40.sp,
                     fontWeight = FontWeight.Bold,
                     color = user1Color,
                     maxLines = 1,
@@ -318,7 +322,8 @@ fun PreferencesTopBar(
             Icon(
                 imageVector = Icons.Default.Settings,
                 contentDescription = "Settings",
-                tint = Color.White
+                tint = Color.White,
+                modifier = Modifier.size(32.dp)
             )
         }
     }
