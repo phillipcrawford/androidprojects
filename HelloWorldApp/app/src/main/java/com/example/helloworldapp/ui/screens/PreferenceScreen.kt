@@ -48,12 +48,31 @@ fun PreferenceScreen(
 
     Scaffold(
         topBar = {
-            PreferencesTopBar(
-                user1PrefsSummary = user1Selected.joinToString(", "),
-                user2PrefsSummary = user2Selected.joinToString(", ").takeIf { it.isNotEmpty() },
-                onSettingsClick = onSettingsClick,
-                onUserModeClick = onUserModeClick
-            )
+            if (user1Selected.isEmpty() && user2Selected.isEmpty()) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(128.dp)
+                        .background(dietprefsGrey)
+                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "Preferences",
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.White
+                    )
+                }
+            } else {
+                PreferencesTopBar(
+                    user1PrefsSummary = user1Selected.joinToString(", "),
+                    user2PrefsSummary = user2Selected.joinToString(", ").takeIf { it.isNotEmpty() },
+                    onSettingsClick = onSettingsClick,
+                    onUserModeClick = onUserModeClick
+                )
+            }
+
         },
         bottomBar = {
             Row(
