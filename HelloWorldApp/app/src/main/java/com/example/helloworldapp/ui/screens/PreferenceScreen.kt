@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.helloworldapp.ui.theme.dietprefsGrey
@@ -48,31 +49,12 @@ fun PreferenceScreen(
 
     Scaffold(
         topBar = {
-            if (user1Selected.isEmpty() && user2Selected.isEmpty()) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(128.dp)
-                        .background(dietprefsGrey)
-                        .padding(horizontal = 16.dp, vertical = 12.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "Preferences",
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.White
-                    )
-                }
-            } else {
-                PreferencesTopBar(
-                    user1PrefsSummary = user1Selected.joinToString(", "),
-                    user2PrefsSummary = user2Selected.joinToString(", ").takeIf { it.isNotEmpty() },
-                    onSettingsClick = onSettingsClick,
-                    onUserModeClick = onUserModeClick
-                )
-            }
-
+            PreferencesTopBar(
+                user1Selected = user1Selected,
+                user2Selected = user2Selected,
+                onSettingsClick = onSettingsClick,
+                onUserModeClick = onUserModeClick
+            )
         },
         bottomBar = {
             Row(
@@ -241,11 +223,14 @@ fun PreferenceScreen(
 
 @Composable
 fun PreferencesTopBar(
-    user1PrefsSummary: String,
-    user2PrefsSummary: String?,
+    user1Selected: List<String>,
+    user2Selected: List<String>,
     onSettingsClick: () -> Unit,
     onUserModeClick: () -> Unit
 ) {
+    val user1Color = Color(0xFFEE6C6C)
+    val user2Color = Color(0xFFFF77FF)
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -253,32 +238,75 @@ fun PreferencesTopBar(
             .background(dietprefsGrey)
             .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.align(Alignment.CenterStart)
-        ) {
-            IconButton(onClick = onUserModeClick) {
+        if (user1Selected.isEmpty() && user2Selected.isEmpty()) {
+            // Add invisible person icon to reserve space
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.align(Alignment.CenterStart)
+            ) {
                 Icon(
                     imageVector = Icons.Default.Person,
-                    contentDescription = "Toggle Person",
-                    tint = Color.White
+                    contentDescription = null,
+                    tint = Color.Transparent // invisible
                 )
-            }
-            Spacer(modifier = Modifier.width(8.dp))
-            Column {
+                Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = user1PrefsSummary,
+                    text = "Preferences",
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White
+                    color = user1Color,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1f)
                 )
-                if (!user2PrefsSummary.isNullOrBlank()) {
-                    Text(
-                        text = user2PrefsSummary,
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = Color(0xFFB57EDC) // lavender
-                    )
+            }
+        } else {
+            Column(
+                modifier = Modifier
+                    .align(Alignment.CenterStart)
+                    .fillMaxWidth(0.85f), // reserve space for settings icon
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                if (user1Selected.isNotEmpty()) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        IconButton(onClick = onUserModeClick) {
+                            Icon(
+                                imageVector = Icons.Default.Person,
+                                contentDescription = "User 1",
+                                tint = user1Color
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = user1Selected.joinToString(", "),
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = user1Color,
+                            maxLines = if (user2Selected.isEmpty()) 4 else 2,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                }
+
+                if (user2Selected.isNotEmpty()) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        IconButton(onClick = onUserModeClick) {
+                            Icon(
+                                imageVector = Icons.Default.Person,
+                                contentDescription = "User 2",
+                                tint = user2Color
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = user2Selected.joinToString(", "),
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = user2Color,
+                            maxLines = if (user1Selected.isEmpty()) 4 else 2,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
                 }
             }
         }
