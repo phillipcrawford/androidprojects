@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -118,13 +119,8 @@ fun SearchResultsTopBar(
     val user1Prefs by sharedViewModel.user1Prefs.collectAsState()
     val user2Prefs by sharedViewModel.user2Prefs.collectAsState()
 
-    val title = buildAnnotatedString {
-        append(user1Prefs.joinToString(", "))
-        if (user2Prefs.isNotEmpty()) {
-            append("\n")
-            append(user2Prefs.joinToString(", "))
-        }
-    }
+    val user1Color = Color(0xFFEE6C6C)
+    val user2Color = Color(0xFFFF77FF)
 
     Box(
         modifier = Modifier
@@ -133,27 +129,65 @@ fun SearchResultsTopBar(
             .background(dietprefsGrey)
             .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
+        // Left: Back arrow
+        IconButton(
+            onClick = onBackClick,
             modifier = Modifier.align(Alignment.CenterStart)
         ) {
-            IconButton(onClick = onBackClick) {
-                Icon(
-                    imageVector = Icons.Default.ArrowBack,
-                    contentDescription = "Back",
-                    tint = Color.White
-                )
-            }
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = title,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color.White,
-                maxLines = 2
+            Icon(
+                imageVector = Icons.Default.ArrowBack,
+                contentDescription = "Back",
+                tint = Color.White
             )
         }
 
+        // Center: Preferences display (with room left for back icon and right for settings icon)
+        Column(
+            modifier = Modifier
+                .align(Alignment.Center)
+                .fillMaxWidth(0.75f),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+            horizontalAlignment = Alignment.Start
+        ) {
+            if (user1Prefs.isNotEmpty()) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Default.Person,
+                        contentDescription = "User 1",
+                        tint = user1Color,
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = user1Prefs.joinToString(", "),
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = user1Color,
+                        maxLines = if (user2Prefs.isEmpty()) 4 else 2
+                    )
+                }
+            }
+            if (user2Prefs.isNotEmpty()) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Default.Person,
+                        contentDescription = "User 2",
+                        tint = user2Color,
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = user2Prefs.joinToString(", "),
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = user2Color,
+                        maxLines = if (user1Prefs.isEmpty()) 4 else 2
+                    )
+                }
+            }
+        }
+
+        // Right: Settings icon
         IconButton(
             onClick = onSettingsClick,
             modifier = Modifier.align(Alignment.CenterEnd)
@@ -161,11 +195,13 @@ fun SearchResultsTopBar(
             Icon(
                 imageVector = Icons.Default.Settings,
                 contentDescription = "Settings",
-                tint = Color.White
+                tint = Color.White,
+                modifier = Modifier.size(32.dp)
             )
         }
     }
 }
+
 
 @Composable
 fun FilterButton(label: String) {
