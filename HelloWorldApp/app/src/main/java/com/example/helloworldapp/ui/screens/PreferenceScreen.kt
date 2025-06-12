@@ -76,7 +76,7 @@ fun PreferenceScreen(
                         .padding(0.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
                 ) {
-                    Text("Search", color = Color(0xFFEE6C6C), fontSize = 32.sp)
+                    Text("Sedarch", color = Color(0xFFEE6C6C), fontSize = 32.sp)
                 }
                 Button(
                     onClick = {
