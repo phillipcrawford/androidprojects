@@ -73,10 +73,10 @@ fun PreferenceScreen(
                     },
                     modifier = Modifier
                         .weight(1f)
-                        .padding(8.dp),
+                        .padding(0.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
                 ) {
-                    Text("Search", color = Color(0xFFEE6C6C), fontSize = 20.sp)
+                    Text("Search", color = Color(0xFFEE6C6C), fontSize = 32.sp)
                 }
                 Button(
                     onClick = {
