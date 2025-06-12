@@ -76,7 +76,7 @@ fun PreferenceScreen(
                         .padding(0.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
                 ) {
-                    Text("Sewdarch", color = Color(0xFFEE6C6C), fontSize = 32.sp)
+                    Text("Sewdarhch", color = Color(0xFFEE6C6C), fontSize = 32.sp)
                 }
                 Button(
                     onClick = {
