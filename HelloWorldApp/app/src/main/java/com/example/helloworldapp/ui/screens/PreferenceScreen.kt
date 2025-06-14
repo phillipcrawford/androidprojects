@@ -72,7 +72,7 @@ fun PreferenceScreen(
                         onSearchClick()
                     },
                     modifier = Modifier
-                        .weight(3f)
+                        .weight(1f)
                         .padding(0.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
                 ) {
