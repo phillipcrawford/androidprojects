@@ -62,7 +62,7 @@ fun PreferenceScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(dietprefsGrey)
-                    .padding(4.dp),
+                    .padding(54.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Button(
