@@ -2,7 +2,6 @@ package com.example.helloworldapp.ui.viewmodel
 
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 
 class SharedViewModel : ViewModel() {
     private val _user1Prefs = mutableStateMapOf<String, Boolean>()
