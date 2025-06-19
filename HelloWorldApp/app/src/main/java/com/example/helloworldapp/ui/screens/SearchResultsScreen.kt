@@ -14,14 +14,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.helloworldapp.ui.theme.dietprefsGrey
 import com.example.helloworldapp.ui.viewmodel.SharedViewModel
-
-// Replace with your real app's grey if needed
 
 @Composable
 fun SearchResultsScreen(
@@ -119,6 +115,9 @@ fun SearchResultsTopBar(
     val user1Prefs by sharedViewModel.user1Prefs.collectAsState()
     val user2Prefs by sharedViewModel.user2Prefs.collectAsState()
 
+    val user1Selected = user1Prefs.filterValues { it }.keys
+    val user2Selected = user2Prefs.filterValues { it }.keys
+
     val user1Color = Color(0xFFEE6C6C)
     val user2Color = Color(0xFFFF77FF)
 
@@ -129,7 +128,7 @@ fun SearchResultsTopBar(
             .background(dietprefsGrey)
             .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
-        // Left: Back arrow
+        // Back arrow
         IconButton(
             onClick = onBackClick,
             modifier = Modifier.align(Alignment.CenterStart)
@@ -141,7 +140,7 @@ fun SearchResultsTopBar(
             )
         }
 
-        // Center: Preferences display (with room left for back icon and right for settings icon)
+        // Center text area
         Column(
             modifier = Modifier
                 .align(Alignment.Center)
@@ -149,7 +148,7 @@ fun SearchResultsTopBar(
             verticalArrangement = Arrangement.spacedBy(4.dp),
             horizontalAlignment = Alignment.Start
         ) {
-            if (user1Prefs.isNotEmpty()) {
+            if (user1Selected.isNotEmpty()) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
                         imageVector = Icons.Default.Person,
@@ -159,15 +158,15 @@ fun SearchResultsTopBar(
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = user1Prefs.joinToString(", "),
+                        text = user1Selected.joinToString(", "),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
                         color = user1Color,
-                        maxLines = if (user2Prefs.isEmpty()) 4 else 2
+                        maxLines = if (user2Selected.isEmpty()) 4 else 2
                     )
                 }
             }
-            if (user2Prefs.isNotEmpty()) {
+            if (user2Selected.isNotEmpty()) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
                         imageVector = Icons.Default.Person,
@@ -177,17 +176,17 @@ fun SearchResultsTopBar(
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = user2Prefs.joinToString(", "),
+                        text = user2Selected.joinToString(", "),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
                         color = user2Color,
-                        maxLines = if (user1Prefs.isEmpty()) 4 else 2
+                        maxLines = if (user1Selected.isEmpty()) 4 else 2
                     )
                 }
             }
         }
 
-        // Right: Settings icon
+        // Settings icon
         IconButton(
             onClick = onSettingsClick,
             modifier = Modifier.align(Alignment.CenterEnd)
@@ -201,7 +200,6 @@ fun SearchResultsTopBar(
         }
     }
 }
-
 
 @Composable
 fun FilterButton(label: String) {

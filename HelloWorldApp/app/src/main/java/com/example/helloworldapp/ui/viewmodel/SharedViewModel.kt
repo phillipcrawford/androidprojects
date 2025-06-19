@@ -1,22 +1,25 @@
 package com.example.helloworldapp.ui.viewmodel
 
+import androidx.compose.runtime.mutableStateMapOf
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 
 class SharedViewModel : ViewModel() {
+    private val _user1Prefs = mutableStateMapOf<String, Boolean>()
+    private val _user2Prefs = mutableStateMapOf<String, Boolean>()
 
-    private val _user1Prefs = MutableStateFlow<List<String>>(emptyList())
-    val user1Prefs: StateFlow<List<String>> = _user1Prefs
+    val user1Prefs: Map<String, Boolean> get() = _user1Prefs
+    val user2Prefs: Map<String, Boolean> get() = _user2Prefs
 
-    private val _user2Prefs = MutableStateFlow<List<String>>(emptyList())
-    val user2Prefs: StateFlow<List<String>> = _user2Prefs
-
-    fun setUser1Prefs(prefs: List<String>) {
-        _user1Prefs.value = prefs
+    fun toggleUser1Pref(pref: String) {
+        _user1Prefs[pref] = !(_user1Prefs[pref] ?: false)
     }
 
-    fun setUser2Prefs(prefs: List<String>) {
-        _user2Prefs.value = prefs
+    fun toggleUser2Pref(pref: String) {
+        _user2Prefs[pref] = !(_user2Prefs[pref] ?: false)
+    }
+
+    fun clearPrefs() {
+        _user1Prefs.clear()
+        _user2Prefs.clear()
     }
 }

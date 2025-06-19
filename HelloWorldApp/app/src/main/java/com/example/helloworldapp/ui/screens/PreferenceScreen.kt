@@ -41,8 +41,8 @@ fun PreferenceScreen(
         "no peanuts", "no treenuts", "gluten-free", "no soy"
     )
 
-    val user1Prefs = remember { mutableStateMapOf<String, Boolean>() }
-    val user2Prefs = remember { mutableStateMapOf<String, Boolean>() }
+    val user1Prefs = sharedViewModel.user1Prefs.toMutableMap()
+    val user2Prefs = sharedViewModel.user2Prefs.toMutableMap()
     val isUser2Active = remember { mutableStateOf(false) }
 
     val user1Selected = user1Prefs.filterValues { it }.keys.toList()
@@ -67,8 +67,6 @@ fun PreferenceScreen(
             ) {
                 Button(
                     onClick = {
-                        sharedViewModel.setUser1Prefs(user1Selected)
-                        sharedViewModel.setUser2Prefs(user2Selected)
                         onSearchClick()
                     },
                     modifier = Modifier
@@ -132,7 +130,11 @@ fun PreferenceScreen(
                                         shape = RoundedCornerShape(4.dp)
                                     )
                                     .clickable {
-                                        activePrefs[pref] = !(activePrefs[pref] ?: false)
+                                        if (isUser2Active.value) {
+                                            sharedViewModel.toggleUser2Pref(pref)
+                                        } else {
+                                            sharedViewModel.toggleUser1Pref(pref)
+                                        }
                                     }
                                     .padding(12.dp, 0.dp, 0.dp, 0.dp),
                                 contentAlignment = Alignment.CenterStart
@@ -170,7 +172,11 @@ fun PreferenceScreen(
                                 shape = RoundedCornerShape(4.dp)
                             )
                             .clickable {
-                                activePrefs[lowPricePref] = !isLowPriceSelected
+                                if (isUser2Active.value) {
+                                    sharedViewModel.toggleUser2Pref("low price")
+                                } else {
+                                    sharedViewModel.toggleUser1Pref("low price")
+                                }
                             }
                             .padding(12.dp, 0.dp, 0.dp, 0.dp),
                         contentAlignment = Alignment.CenterStart
