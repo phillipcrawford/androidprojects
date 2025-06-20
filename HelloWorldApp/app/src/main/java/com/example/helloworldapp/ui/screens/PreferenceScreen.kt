@@ -1,14 +1,15 @@
+// PreferenceScreen.kt
 package com.example.helloworldapp.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,8 +42,8 @@ fun PreferenceScreen(
         "no peanuts", "no treenuts", "gluten-free", "no soy"
     )
 
-    val user1Prefs = sharedViewModel.user1Prefs.toMutableMap()
-    val user2Prefs = sharedViewModel.user2Prefs.toMutableMap()
+    val user1Prefs by sharedViewModel.user1Prefs.collectAsState()
+    val user2Prefs by sharedViewModel.user2Prefs.collectAsState()
     val isUser2Active = remember { mutableStateOf(false) }
 
     val user1Selected = user1Prefs.filterValues { it }.keys.toList()
@@ -66,9 +67,7 @@ fun PreferenceScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Button(
-                    onClick = {
-                        onSearchClick()
-                    },
+                    onClick = onSearchClick,
                     modifier = Modifier
                         .weight(1f)
                         .padding(0.dp),
@@ -77,11 +76,7 @@ fun PreferenceScreen(
                     Text("Search", color = Color(0xFFEE6C6C), fontSize = 32.sp)
                 }
                 Button(
-                    onClick = {
-                        user1Prefs.clear()
-                        user2Prefs.clear()
-                        isUser2Active.value = false
-                    },
+                    onClick = { sharedViewModel.clearPrefs(); isUser2Active.value = false },
                     modifier = Modifier
                         .padding(8.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFB35100))
@@ -113,8 +108,7 @@ fun PreferenceScreen(
                         horizontalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         rowPrefs.forEach { pref ->
-                            val activePrefs = if (isUser2Active.value) user2Prefs else user1Prefs
-                            val isSelected = activePrefs[pref] ?: false
+                            val isSelected = if (isUser2Active.value) user2Prefs[pref] == true else user1Prefs[pref] == true
                             val bgColor = when {
                                 isTeal && isSelected -> selectedTeal
                                 isTeal && !isSelected -> dietprefsTeal
@@ -125,10 +119,7 @@ fun PreferenceScreen(
                                 modifier = Modifier
                                     .weight(1f)
                                     .fillMaxHeight()
-                                    .background(
-                                        bgColor,
-                                        shape = RoundedCornerShape(4.dp)
-                                    )
+                                    .background(bgColor, shape = RoundedCornerShape(4.dp))
                                     .clickable {
                                         if (isUser2Active.value) {
                                             sharedViewModel.toggleUser2Pref(pref)
@@ -152,17 +143,14 @@ fun PreferenceScreen(
                     }
                 }
 
-                // Final row: low price + person toggle
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f),
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                    val activePrefs = if (isUser2Active.value) user2Prefs else user1Prefs
                     val lowPricePref = "low price"
-                    val isLowPriceSelected = activePrefs[lowPricePref] ?: false
-
+                    val isLowPriceSelected = if (isUser2Active.value) user2Prefs[lowPricePref] == true else user1Prefs[lowPricePref] == true
                     Box(
                         modifier = Modifier
                             .weight(1f)
@@ -173,9 +161,9 @@ fun PreferenceScreen(
                             )
                             .clickable {
                                 if (isUser2Active.value) {
-                                    sharedViewModel.toggleUser2Pref("low price")
+                                    sharedViewModel.toggleUser2Pref(lowPricePref)
                                 } else {
-                                    sharedViewModel.toggleUser1Pref("low price")
+                                    sharedViewModel.toggleUser1Pref(lowPricePref)
                                 }
                             }
                             .padding(12.dp, 0.dp, 0.dp, 0.dp),
@@ -202,8 +190,7 @@ fun PreferenceScreen(
                                 } else {
                                     isUser2Active.value = !isUser2Active.value
                                 }
-                            }
-                            .padding(0.dp),
+                            },
                         contentAlignment = Alignment.Center
                     ) {
                         Row(
@@ -246,7 +233,6 @@ fun PreferencesTopBar(
             .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
         if (user1Selected.isEmpty() && user2Selected.isEmpty()) {
-            // Add invisible person icon to reserve space
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.align(Alignment.CenterStart)
@@ -256,7 +242,7 @@ fun PreferencesTopBar(
                     contentDescription = null,
                     modifier = Modifier
                         .size(52.dp)
-                        .alpha(0f), // Fully transparent
+                        .alpha(0f),
                     tint = Color.Transparent
                 )
                 Spacer(modifier = Modifier.width(8.dp))
@@ -274,7 +260,7 @@ fun PreferencesTopBar(
             Column(
                 modifier = Modifier
                     .align(Alignment.CenterStart)
-                    .fillMaxWidth(0.85f), // reserve space for settings icon
+                    .fillMaxWidth(0.85f),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 if (user1Selected.isNotEmpty()) {

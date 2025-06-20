@@ -1,3 +1,4 @@
+// SearchResultsScreen.kt
 package com.example.helloworldapp.ui.screens
 
 import androidx.compose.foundation.background
@@ -14,6 +15,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.helloworldapp.ui.theme.dietprefsGrey
@@ -41,7 +43,6 @@ fun SearchResultsScreen(
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
-            // Vendor List
             LazyColumn(
                 modifier = Modifier
                     .weight(1f)
@@ -69,7 +70,6 @@ fun SearchResultsScreen(
                 }
             }
 
-            // Search Bar
             TextField(
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
@@ -88,7 +88,6 @@ fun SearchResultsScreen(
                 )
             )
 
-            // Filter Buttons
             Column(modifier = Modifier.padding(12.dp)) {
                 for (row in 0 until 2) {
                     Row(
@@ -115,9 +114,6 @@ fun SearchResultsTopBar(
     val user1Prefs by sharedViewModel.user1Prefs.collectAsState()
     val user2Prefs by sharedViewModel.user2Prefs.collectAsState()
 
-    val user1Selected = user1Prefs.filterValues { it }.keys
-    val user2Selected = user2Prefs.filterValues { it }.keys
-
     val user1Color = Color(0xFFEE6C6C)
     val user2Color = Color(0xFFFF77FF)
 
@@ -140,7 +136,7 @@ fun SearchResultsTopBar(
             )
         }
 
-        // Center text area
+        // Center content: preferences
         Column(
             modifier = Modifier
                 .align(Alignment.Center)
@@ -148,7 +144,7 @@ fun SearchResultsTopBar(
             verticalArrangement = Arrangement.spacedBy(4.dp),
             horizontalAlignment = Alignment.Start
         ) {
-            if (user1Selected.isNotEmpty()) {
+            if (user1Prefs.isNotEmpty()) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
                         imageVector = Icons.Default.Person,
@@ -158,15 +154,15 @@ fun SearchResultsTopBar(
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = user1Selected.joinToString(", "),
+                        text = user1Prefs.filterValues { it }.keys.joinToString(", "),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
                         color = user1Color,
-                        maxLines = if (user2Selected.isEmpty()) 4 else 2
+                        maxLines = if (user2Prefs.isEmpty()) 4 else 2
                     )
                 }
             }
-            if (user2Selected.isNotEmpty()) {
+            if (user2Prefs.isNotEmpty()) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
                         imageVector = Icons.Default.Person,
@@ -176,11 +172,11 @@ fun SearchResultsTopBar(
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = user2Selected.joinToString(", "),
+                        text = user2Prefs.filterValues { it }.keys.joinToString(", "),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
                         color = user2Color,
-                        maxLines = if (user1Selected.isEmpty()) 4 else 2
+                        maxLines = if (user1Prefs.isEmpty()) 4 else 2
                     )
                 }
             }
@@ -204,7 +200,7 @@ fun SearchResultsTopBar(
 @Composable
 fun FilterButton(label: String) {
     Button(
-        onClick = { /* TODO: Implement filter logic */ },
+        onClick = { /* TODO */ },
         shape = RoundedCornerShape(50),
         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFEEEEEE)),
         modifier = Modifier
