@@ -149,7 +149,7 @@ fun PreferenceScreen(
                         .weight(1f),
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                    val lowPricePref = "low price"
+                    val lowPricePref = "low prscratchice"
                     val isLowPriceSelected = if (isUser2Active.value) user2Prefs[lowPricePref] == true else user1Prefs[lowPricePref] == true
                     Box(
                         modifier = Modifier
