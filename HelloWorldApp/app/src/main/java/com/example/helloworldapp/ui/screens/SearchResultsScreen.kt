@@ -173,7 +173,7 @@ fun SearchResultsTopBar(
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = user2Prefs.filterValues { it }.keys.joinToString(", "),
-                        fontSize = 18.sp,
+                        fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
                         color = user2Color,
                         maxLines = if (user1Prefs.isEmpty()) 4 else 2
