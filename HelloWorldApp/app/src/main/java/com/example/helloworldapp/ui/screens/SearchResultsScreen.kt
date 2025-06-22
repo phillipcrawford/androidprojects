@@ -88,7 +88,7 @@ fun SearchResultsScreen(
                 )
             )
 
-            Column(modifier = Modifier.padding(16a.dp)) {
+            Column(modifier = Modifier.padding(16.dp)) {
                 for (row in 0 until 2) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
