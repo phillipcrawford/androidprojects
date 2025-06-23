@@ -98,7 +98,7 @@ fun SearchResultsScreen(
                             FilterButton("Filter ${(row * 5) + col + 1}")
                         }
                     }
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(48.dp))
                 }
             }
         }
