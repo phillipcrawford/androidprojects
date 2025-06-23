@@ -65,7 +65,7 @@ fun SearchResultsScreen(
                             fontSize = 14.sp,
                             modifier = Modifier.padding(horizontal = 8.dp)
                         )
-                        Text(text = "3 | 01", fontSize = 14.sp)
+                        Text(text = "3 | 11", fontSize = 14.sp)
                     }
                 }
             }
