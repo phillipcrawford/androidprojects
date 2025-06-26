@@ -94,7 +94,7 @@ fun SearchResultsScreen(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
-                        for (col in 0 until 5) {
+                        for (col in 1 until 5) {
                             FilterButton("Filter ${(row * 5) + col + 1}")
                         }
                     }
