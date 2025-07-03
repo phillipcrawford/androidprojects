@@ -1,6 +1,6 @@
 package com.example.helloworldapp.ui.navigation
 
 sealed class Screen(val route: String) {
-    object Preferences : Screen("preferencses")
+    object Preferences : Screen("preferencsdes")
     object SearchResults : Screen("searchResults")
 }
