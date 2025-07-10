@@ -8,6 +8,7 @@ import com.example.helloworldapp.data.VendorWithItems
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import android.util.Log
 
 data class DisplayVendor(
     val vendorName: String,
