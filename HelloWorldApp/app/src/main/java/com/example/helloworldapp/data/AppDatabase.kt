@@ -5,6 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @Database(
     entities = [VendorEntity::class, ItemEntity::class],
@@ -26,8 +29,8 @@ abstract class AppDatabase : RoomDatabase() {
                     .addCallback(object : Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
-                            ioThread {
-                                INSTANCE?.let { database ->
+                            INSTANCE?.let { database ->
+                                CoroutineScope(Dispatchers.IO).launch {
                                     populateDatabase(database.vendorDao())
                                 }
                             }
@@ -41,7 +44,7 @@ abstract class AppDatabase : RoomDatabase() {
     }
 }
 
-private fun populateDatabase(dao: VendorDao) {
+private suspend fun populateDatabase(dao: VendorDao) {
     val vendors = (1..10).map {
         VendorEntity(
             name = "Vendor $it",
@@ -115,5 +118,3 @@ private fun populateDatabase(dao: VendorDao) {
     dao.insertVendors(vendors)
     dao.insertItems(items)
 }
-
-private fun ioThread(f: () -> Unit) = Thread(f).start()
