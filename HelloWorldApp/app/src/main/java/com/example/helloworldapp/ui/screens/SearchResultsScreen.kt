@@ -1,4 +1,3 @@
-// SearchResultsScreen.kt
 package com.example.helloworldapp.ui.screens
 
 import androidx.compose.foundation.background
@@ -15,9 +14,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.helloworldapp.data.AppDatabase
 import com.example.helloworldapp.ui.theme.dietprefsGrey
 import com.example.helloworldapp.viewmodel.SharedViewModel
 
@@ -28,6 +29,12 @@ fun SearchResultsScreen(
     sharedViewModel: SharedViewModel
 ) {
     var searchQuery by remember { mutableStateOf("") }
+    val displayVendors by sharedViewModel.displayVendors.collectAsState()
+
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        sharedViewModel.loadAndComputeResults(AppDatabase.getDatabase(context))
+    }
 
     Scaffold(
         topBar = {
@@ -48,7 +55,7 @@ fun SearchResultsScreen(
                     .weight(1f)
                     .padding(horizontal = 12.dp)
             ) {
-                items(sampleVendors) { vendor ->
+                items(displayVendors) { vendor ->
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -56,7 +63,7 @@ fun SearchResultsScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = vendor,
+                            text = vendor.vendorName,
                             modifier = Modifier.weight(1f),
                             fontSize = 16.sp
                         )
@@ -65,7 +72,11 @@ fun SearchResultsScreen(
                             fontSize = 14.sp,
                             modifier = Modifier.padding(horizontal = 8.dp)
                         )
-                        Text(text = "3 | 11", fontSize = 14.sp)
+                        Text(
+                            text = "${vendor.user1Count} | ${vendor.user2Count}",
+                            fontSize = 14.sp,
+                            modifier = Modifier.padding(horizontal = 8.dp)
+                        )
                     }
                 }
             }
@@ -124,7 +135,7 @@ fun SearchResultsTopBar(
             .background(dietprefsGrey)
             .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
-        // Back arrow
+        // Back arrow using the lambda you pass from NavHost
         IconButton(
             onClick = onBackClick,
             modifier = Modifier.align(Alignment.CenterStart)
@@ -210,9 +221,3 @@ fun FilterButton(label: String) {
         Text(label, fontSize = 12.sp, color = Color.DarkGray)
     }
 }
-
-val sampleVendors = listOf(
-    "Pacific Pita", "Baja Fresh", "Fresh Grill", "It's Greek to Me",
-    "Petra Grill", "Charlie Hong Kong", "Star of India", "Gold Leaf Collectives",
-    "Heart Ethiopia", "Chipotle"
-)
