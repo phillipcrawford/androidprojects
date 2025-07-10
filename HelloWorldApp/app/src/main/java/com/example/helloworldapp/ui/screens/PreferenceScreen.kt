@@ -23,7 +23,7 @@ import com.example.helloworldapp.ui.theme.dietprefsGrey
 import com.example.helloworldapp.ui.theme.dietprefsTeal
 import com.example.helloworldapp.ui.theme.selectedGrey
 import com.example.helloworldapp.ui.theme.selectedTeal
-import com.example.helloworldapp.ui.viewmodel.SharedViewModel
+import com.example.helloworldapp.viewmodel.SharedViewModel
 
 @Composable
 fun PreferenceScreen(

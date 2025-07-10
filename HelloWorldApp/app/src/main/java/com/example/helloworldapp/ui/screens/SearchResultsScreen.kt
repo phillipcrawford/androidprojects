@@ -19,7 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.helloworldapp.ui.theme.dietprefsGrey
-import com.example.helloworldapp.ui.viewmodel.SharedViewModel
+import com.example.helloworldapp.viewmodel.SharedViewModel
 
 @Composable
 fun SearchResultsScreen(

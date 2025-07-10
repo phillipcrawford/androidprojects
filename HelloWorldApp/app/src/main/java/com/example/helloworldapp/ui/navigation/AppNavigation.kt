@@ -7,7 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.helloworldapp.ui.navigation.Screen
 import com.example.helloworldapp.ui.screens.PreferenceScreen
 import com.example.helloworldapp.ui.screens.SearchResultsScreen
-import com.example.helloworldapp.ui.viewmodel.SharedViewModel
+import com.example.helloworldapp.viewmodel.SharedViewModel
 
 @Composable
 fun AppNavigation(sharedViewModel: SharedViewModel) {

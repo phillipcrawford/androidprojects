@@ -1,5 +1,4 @@
-// SharedViewModel.kt
-package com.example.helloworldapp.ui.viewmodel
+package com.example.helloworldapp.viewmodel
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
