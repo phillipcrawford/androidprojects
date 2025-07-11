@@ -1,10 +1,9 @@
-package com.example.helloworldapp
+package com.example.helloworldapp.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.helloworldapp.ui.navigation.Screen
 import com.example.helloworldapp.ui.screens.PreferenceScreen
 import com.example.helloworldapp.ui.screens.SearchResultsScreen
 import com.example.helloworldapp.viewmodel.SharedViewModel
