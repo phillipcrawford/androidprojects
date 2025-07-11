@@ -47,6 +47,11 @@ class SharedViewModel : ViewModel() {
         viewModelScope.launch {
             val allVendorsWithItems = db.vendorDao().getVendorsWithItems()
             computeResults(allVendorsWithItems)
+            Log.d("FilterDebug", "Starting to compute results...")
+
+            Log.d("FilterDebug", "User1 active prefs: ${user1Prefs.value.filterValues { it }}")
+            Log.d("FilterDebug", "User2 active prefs: ${user2Prefs.value.filterValues { it }}")
+            Log.d("FilterDebug", "Loaded vendors from DB: ${allVendors.size}")
         }
     }
 
