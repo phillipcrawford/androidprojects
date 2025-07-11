@@ -46,12 +46,11 @@ class SharedViewModel : ViewModel() {
     fun loadAndComputeResults(db: AppDatabase) {
         viewModelScope.launch {
             val allVendorsWithItems = db.vendorDao().getVendorsWithItems()
-            computeResults(allVendorsWithItems)
-            Log.d("FilterDebug", "Starting to compute results...")
-
+            Log.d("FilterDebug", "Loaded vendors from DB: ${allVendorsWithItems.size}")
             Log.d("FilterDebug", "User1 active prefs: ${user1Prefs.value.filterValues { it }}")
             Log.d("FilterDebug", "User2 active prefs: ${user2Prefs.value.filterValues { it }}")
-            Log.d("FilterDebug", "Loaded vendors from DB: ${allVendors.size}")
+
+            computeResults(allVendorsWithItems)
         }
     }
 
@@ -72,6 +71,7 @@ class SharedViewModel : ViewModel() {
 
             if (user1Count > 0) user1Results[vendorName] = user1Count
             if (user2Count > 0) user2Results[vendorName] = user2Count
+            Log.d("FilterDebug", "Vendor: ${vendorName}, user1Count: ${user1Count}, user2Count: ${user2Count}")
         }
 
         val finalResults = mutableListOf<DisplayVendor>()
