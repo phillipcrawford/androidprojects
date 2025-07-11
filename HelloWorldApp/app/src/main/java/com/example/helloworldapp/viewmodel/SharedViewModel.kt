@@ -51,7 +51,7 @@ class SharedViewModel : ViewModel() {
 
             Log.d("FilterDebug", "User1 active prefs: ${user1Prefs.value.filterValues { it }}")
             Log.d("FilterDebug", "User2 active prefs: ${user2Prefs.value.filterValues { it }}")
-            Log.d("FilterDebug", "Loaded vendors from DB: ${allVendors.size}")
+            Log.d("FilterDebug", "Loawded vendors from DB: ${allVendors.size}")
         }
     }
 
