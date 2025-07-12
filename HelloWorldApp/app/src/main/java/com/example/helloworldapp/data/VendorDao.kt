@@ -1,22 +1,20 @@
 package com.example.helloworldapp.data
 
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Transaction
 
 @Dao
 interface VendorDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertVendor(vendor: VendorEntity): Long
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertItem(item: ItemEntity): Long
+
     @Transaction
     @Query("SELECT * FROM vendors")
     suspend fun getVendorsWithItems(): List<VendorWithItems>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertVendors(vendors: List<VendorEntity>)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertItems(items: List<ItemEntity>)
-
-    @Query("DELETE FROM vendors")
-    suspend fun clearVendors()
-
-    @Query("DELETE FROM items")
-    suspend fun clearItems()
 }

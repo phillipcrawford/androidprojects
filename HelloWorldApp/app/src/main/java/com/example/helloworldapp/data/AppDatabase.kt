@@ -9,112 +9,116 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(
-    entities = [VendorEntity::class, ItemEntity::class],
-    version = 1
-)
+@Database(entities = [VendorEntity::class, ItemEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun vendorDao(): VendorDao
 
     companion object {
-        @Volatile private var INSTANCE: AppDatabase? = null
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
 
         fun getDatabase(context: Context): AppDatabase {
             return INSTANCE ?: synchronized(this) {
-                val db = Room.databaseBuilder(
+                val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "foodapp.db"
+                    "app_database"
                 )
-                    .addCallback(object : Callback() {
-                        override fun onCreate(db: SupportSQLiteDatabase) {
-                            super.onCreate(db)
-                            INSTANCE?.let { database ->
-                                CoroutineScope(Dispatchers.IO).launch {
-                                    populateDatabase(database.vendorDao())
-                                }
-                            }
-                        }
-                    })
+                    .addCallback(DatabaseCallback())
                     .build()
-                INSTANCE = db
-                db
+                INSTANCE = instance
+                instance
+            }
+        }
+    }
+
+    private class DatabaseCallback : RoomDatabase.Callback() {
+        override fun onCreate(db: SupportSQLiteDatabase) {
+            super.onCreate(db)
+            // Ensures database is only seeded on first creation
+            INSTANCE?.let { database ->
+                CoroutineScope(Dispatchers.IO).launch {
+                    populateDatabase(database.vendorDao())
+                }
             }
         }
     }
 }
 
-private suspend fun populateDatabase(dao: VendorDao) {
-    val vendors = (1..10).map {
-        VendorEntity(
-            name = "Vendor $it",
-            lat = 44.0 + it,
-            lng = 110.0 + it,
-            region = it,
-            delivery = it % 2 == 0,
-            takeout = true,
-            website = "www.vendor$it.com",
-            grubhub = true,
-            doordash = true,
-            ubereats = false,
-            postmates = false,
-            yelp = true,
-            googleReviews = true,
-            tripadvisor = false,
-            hours = "mon:7-23|tues:8-22|wed:8-22|thurs:8-22|fri:7-23|sat:9-23|sun:9-22",
-            seo = "american|burgers",
-            phone = 6512228888 + it,
-            address = "25$it Lake Ave, St. Paul",
-            zipcode = 55110 + it,
-            customByNature = false
-        )
-    }
+// Function that seeds the database with initial vendors and items
+suspend fun populateDatabase(dao: VendorDao) {
+    for (i in 1..10) {
+        val vendor = VendorEntity(
+            name = "Vendor $i",
+            address = "123 Vendor St, Town $i",
+            customByNature = i % 2 == 0,
+            delivery = i % 3 == 0,
+            doordash = i % 4 == 0,
+            googleReviews = i % 2 != 0,
+            grubhub = i % 5 == 0,
+            hours = "Mon-Fri 10am-9pm",
+            lat = 37.7749,
+            lng = -122.4194,
+            postmates = i % 6 == 0,
+            phone = 1234567890,
+            region = i,
+            seo = "food,restaurants",
+            takeout = i % 7 == 0,
+            tripadvisor = i % 8 == 0,
+            ubereats = i % 9 == 0,
+            website = "https://www.example.com",
+            zipcode = 12345,
+            yelp = i % 10 == 0
 
-    val items = vendors.flatMap { vendor ->
-        (1..10).map { i ->
-            ItemEntity(
-                vendorId = vendor.id, // Will fix later with generated ids
-                name = "Item $i for Vendor ${vendor.name}",
-                vegetarian = false,
-                pescetarian = false,
+        )
+        val vendorId = dao.insertVendor(vendor)
+
+        for (j in 1..5) {
+            val guaranteedOrganic = i <= 3 // first 3 vendors organic
+            val guaranteedGmoFree = i in 4..6 // next 3 vendors gmoFree
+            val guaranteedBoth = i == 7       // vendor 7 both organic and gmoFree
+
+            val item = ItemEntity(
+                vendorId = vendorId.toInt(),
+                name = "Item $j",
+                vegetarian = (j % 3 == 0),
+                pescetarian = (j % 2 == 0),
                 vegan = false,
-                keto = true,
-                organic = i % 2 == 0,
-                gmoFree = i % 3 == 0,
-                locallySourced = i % 4 == 0,
+                keto = false,
+                organic = guaranteedOrganic || guaranteedBoth,
+                gmoFree = guaranteedGmoFree || guaranteedBoth,
+                locallySourced = false,
                 raw = false,
-                entree = true,
+                entree = false,
                 sweet = false,
-                kosher = true,
-                halal = true,
-                beef = true,
+                kosher = false,
+                halal = false,
+                beef = false,
                 chicken = false,
                 pork = false,
                 seafood = false,
                 lowSugar = false,
-                highProtein = true,
+                highProtein = false,
                 lowCarb = false,
                 noAlliums = false,
-                noPorkProducts = true,
+                noPorkProducts = false,
                 noRedMeat = false,
-                noMsg = true,
-                noSesame = true,
-                noMilk = true,
-                noEggs = true,
-                noFish = true,
-                noShellfish = true,
-                noPeanuts = true,
-                noTreenuts = true,
+                noMsg = false,
+                noSesame = false,
+                noMilk = false,
+                noEggs = false,
+                noFish = false,
+                noShellfish = false,
+                noPeanuts = false,
+                noTreenuts = false,
                 glutenFree = false,
-                noSoy = true,
-                price = 7.99 + i,
-                upvotes = i,
-                totalVotes = i + 5,
-                pictures = "burger$i.jpg,pizza$i.jpg"
+                noSoy = false,
+                price = 10.0,
+                upvotes = 0,
+                totalVotes = 0,
+                pictures = ""
             )
+            dao.insertItem(item)
         }
     }
-
-    dao.insertVendors(vendors)
-    dao.insertItems(items)
 }
