@@ -74,10 +74,6 @@ suspend fun populateDatabase(dao: VendorDao) {
         val vendorId = dao.insertVendor(vendor)
 
         for (j in 1..5) {
-            val guaranteedOrganic = i <= 3 // first 3 vendors organic
-            val guaranteedGmoFree = i in 4..6 // next 3 vendors gmoFree
-            val guaranteedBoth = i == 7       // vendor 7 both organic and gmoFree
-
             val item = ItemEntity(
                 vendorId = vendorId.toInt(),
                 name = "Item $j",
@@ -85,8 +81,8 @@ suspend fun populateDatabase(dao: VendorDao) {
                 pescetarian = (j % 2 == 0),
                 vegan = false,
                 keto = false,
-                organic = guaranteedOrganic || guaranteedBoth,
-                gmoFree = guaranteedGmoFree || guaranteedBoth,
+                organic = true,
+                gmoFree = true,
                 locallySourced = false,
                 raw = false,
                 entree = false,
