@@ -3,7 +3,7 @@ package com.example.helloworldapp.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "venddedors")
+@Entity(tableName = "venddwedors")
 data class VendorEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val name: String,
