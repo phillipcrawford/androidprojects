@@ -142,7 +142,7 @@ fun SearchResultsTopBar(
         ) {
             Icon(
                 imageVector = Icons.Default.ArrowBack,
-                contentDescription = "Bawwsweeck",
+                contentDescription = "Bawwwsweeck",
                 tint = Color.White
             )
         }
