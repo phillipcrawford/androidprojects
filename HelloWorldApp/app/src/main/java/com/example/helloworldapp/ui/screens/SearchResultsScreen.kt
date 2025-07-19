@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -13,6 +14,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
@@ -21,6 +23,8 @@ import androidx.compose.ui.unit.sp
 import com.example.helloworldapp.data.AppDatabase
 import com.example.helloworldapp.ui.theme.dietprefsGrey
 import com.example.helloworldapp.viewmodel.SharedViewModel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @Composable
 fun SearchResultsScreen(
@@ -28,10 +32,16 @@ fun SearchResultsScreen(
     onSettingsClick: () -> Unit,
     sharedViewModel: SharedViewModel
 ) {
-    var searchQuery by remember { mutableStateOf("") }
+    val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+
+    val user1Prefs by sharedViewModel.user1Prefs.collectAsState()
+    val user2Prefs by sharedViewModel.user2Prefs.collectAsState()
     val displayVendors by sharedViewModel.displayVendors.collectAsState()
 
-    val context = LocalContext.current
+    var searchQuery by remember { mutableStateOf("") }
+
+    // Load results on first launch
     LaunchedEffect(Unit) {
         sharedViewModel.loadAndComputeResults(AppDatabase.getDatabase(context))
     }
@@ -39,7 +49,8 @@ fun SearchResultsScreen(
     Scaffold(
         topBar = {
             SearchResultsTopBar(
-                sharedViewModel = sharedViewModel,
+                user1Prefs = user1Prefs,
+                user2Prefs = user2Prefs,
                 onBackClick = onBackClick,
                 onSettingsClick = onSettingsClick
             )
@@ -50,44 +61,46 @@ fun SearchResultsScreen(
                 .padding(innerPadding)
                 .fillMaxSize()
         ) {
-            LazyColumn(
+            // Table Header
+            Row(
                 modifier = Modifier
-                    .weight(1f)
-                    .padding(horizontal = 12.dp)
+                    .fillMaxWidth()
+                    .background(Color(0xFFEFEFEF))
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                items(displayVendors) { vendor ->
+                Text("Vendor", fontWeight = FontWeight.Bold, modifier = Modifier.weight(2f))
+                Text("Dist", fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+                Text("U1 | U2", fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+            }
+
+            // Table Content
+            LazyColumn(modifier = Modifier.weight(1f)) {
+                items(displayVendors.filter {
+                    it.vendorName.contains(searchQuery, ignoreCase = true)
+                }) { vendor ->
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 8.dp),
+                            .padding(horizontal = 16.dp, vertical = 12.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(
-                            text = vendor.vendorName,
-                            modifier = Modifier.weight(1f),
-                            fontSize = 16.sp
-                        )
-                        Text(
-                            text = "2.5 mi",
-                            fontSize = 14.sp,
-                            modifier = Modifier.padding(horizontal = 8.dp)
-                        )
-                        Text(
-                            text = "${vendor.user1Count} | ${vendor.user2Count}",
-                            fontSize = 14.sp,
-                            modifier = Modifier.padding(horizontal = 8.dp)
-                        )
+                        Text(vendor.vendorName, modifier = Modifier.weight(2f))
+                        Text("${"%.1f".format(vendor.distanceMiles)} mi", modifier = Modifier.weight(1f))
+                        Text("${vendor.user1Count} | ${vendor.user2Count}", modifier = Modifier.weight(1f))
                     }
                 }
             }
 
+            // Search Bar
             TextField(
                 value = searchQuery,
                 onValueChange = { searchQuery = it },
                 placeholder = { Text("Search vendors...") },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 12.dp, vertical = 8.dp),
+                    .padding(horizontal = 16.dp, vertical = 8.dp),
                 shape = RoundedCornerShape(24.dp),
                 colors = TextFieldDefaults.colors(
                     focusedContainerColor = Color(0xFFF0F0F0),
@@ -99,6 +112,7 @@ fun SearchResultsScreen(
                 )
             )
 
+            // Filter Buttons
             Column(modifier = Modifier.padding(12.dp)) {
                 for (row in 0 until 2) {
                     Row(
@@ -106,7 +120,8 @@ fun SearchResultsScreen(
                         horizontalArrangement = Arrangement.SpaceEvenly
                     ) {
                         for (col in 0 until 5) {
-                            FilterButton("Filter ${(row * 5) + col + 1}")
+                            val filterName = "Filter ${(row * 5) + col + 1}"
+                            FilterButton(label = filterName)
                         }
                     }
                     Spacer(modifier = Modifier.height(8.dp))
@@ -118,13 +133,11 @@ fun SearchResultsScreen(
 
 @Composable
 fun SearchResultsTopBar(
-    sharedViewModel: SharedViewModel,
+    user1Prefs: Map<String, Boolean>,
+    user2Prefs: Map<String, Boolean>,
     onBackClick: () -> Unit,
     onSettingsClick: () -> Unit
 ) {
-    val user1Prefs by sharedViewModel.user1Prefs.collectAsState()
-    val user2Prefs by sharedViewModel.user2Prefs.collectAsState()
-
     val user1Color = Color(0xFFEE6C6C)
     val user2Color = Color(0xFFFF77FF)
 
@@ -135,19 +148,10 @@ fun SearchResultsTopBar(
             .background(dietprefsGrey)
             .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
-        // Back arrow using the lambda you pass from NavHost
-        IconButton(
-            onClick = onBackClick,
-            modifier = Modifier.align(Alignment.CenterStart)
-        ) {
-            Icon(
-                imageVector = Icons.Default.ArrowBack,
-                contentDescription = "Back",
-                tint = Color.White
-            )
+        IconButton(onClick = onBackClick, modifier = Modifier.align(Alignment.CenterStart)) {
+            Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = Color.White)
         }
 
-        // Center content: preferences
         Column(
             modifier = Modifier
                 .align(Alignment.Center)
@@ -157,15 +161,10 @@ fun SearchResultsTopBar(
         ) {
             if (user1Prefs.isNotEmpty()) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        imageVector = Icons.Default.Person,
-                        contentDescription = "User 1",
-                        tint = user1Color,
-                        modifier = Modifier.size(20.dp)
-                    )
+                    Icon(Icons.Default.Person, contentDescription = "User 1", tint = user1Color, modifier = Modifier.size(20.dp))
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = user1Prefs.filterValues { it }.keys.joinToString(", "),
+                        user1Prefs.filterValues { it }.keys.joinToString(", "),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
                         color = user1Color,
@@ -175,15 +174,10 @@ fun SearchResultsTopBar(
             }
             if (user2Prefs.isNotEmpty()) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        imageVector = Icons.Default.Person,
-                        contentDescription = "User 2",
-                        tint = user2Color,
-                        modifier = Modifier.size(20.dp)
-                    )
+                    Icon(Icons.Default.Person, contentDescription = "User 2", tint = user2Color, modifier = Modifier.size(20.dp))
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = user2Prefs.filterValues { it }.keys.joinToString(", "),
+                        user2Prefs.filterValues { it }.keys.joinToString(", "),
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
                         color = user2Color,
@@ -193,17 +187,8 @@ fun SearchResultsTopBar(
             }
         }
 
-        // Settings icon
-        IconButton(
-            onClick = onSettingsClick,
-            modifier = Modifier.align(Alignment.CenterEnd)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Settings,
-                contentDescription = "Settings",
-                tint = Color.White,
-                modifier = Modifier.size(32.dp)
-            )
+        IconButton(onClick = onSettingsClick, modifier = Modifier.align(Alignment.CenterEnd)) {
+            Icon(Icons.Default.Settings, contentDescription = "Settings", tint = Color.White, modifier = Modifier.size(32.dp))
         }
     }
 }
@@ -211,7 +196,7 @@ fun SearchResultsTopBar(
 @Composable
 fun FilterButton(label: String) {
     Button(
-        onClick = { /* TODO */ },
+        onClick = { /* TODO: Add filtering logic */ },
         shape = RoundedCornerShape(50),
         colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFEEEEEE)),
         modifier = Modifier
