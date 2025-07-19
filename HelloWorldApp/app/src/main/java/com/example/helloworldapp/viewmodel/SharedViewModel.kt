@@ -1,5 +1,6 @@
 package com.example.helloworldapp.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.helloworldapp.data.AppDatabase
@@ -8,13 +9,6 @@ import com.example.helloworldapp.data.VendorWithItems
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import android.util.Log
-
-data class DisplayVendor(
-    val vendorName: String,
-    val user1Count: Int,
-    val user2Count: Int
-)
 
 class SharedViewModel : ViewModel() {
     private val _user1Prefs = MutableStateFlow<Map<String, Boolean>>(emptyMap())
@@ -71,7 +65,6 @@ class SharedViewModel : ViewModel() {
 
             if (user1Count > 0) user1Results[vendorName] = user1Count
             if (user2Count > 0) user2Results[vendorName] = user2Count
-            Log.d("FilterDebug", "Vendor: ${vendorName}, user1Count: ${user1Count}, user2Count: ${user2Count}")
         }
 
         val finalResults = mutableListOf<DisplayVendor>()
