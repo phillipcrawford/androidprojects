@@ -73,7 +73,7 @@ fun SearchResultsScreen(
             ) {
                 Text("Vendor", fontWeight = FontWeight.Bold, modifier = Modifier.weight(2f))
                 Text("Dist", fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
-                Text("U1 | U2", fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+                Text("Uw1 | U2", fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
             }
 
             // Table Content
