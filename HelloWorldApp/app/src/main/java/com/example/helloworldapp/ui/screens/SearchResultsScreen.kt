@@ -81,12 +81,28 @@ fun SearchResultsScreen(
                     .fillMaxWidth()
                     .background(Color(0xFFEFEFEF))
                     .padding(horizontal = 16.dp, vertical = 8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text("Vendor", fontWeight = FontWeight.Bold, modifier = Modifier.weight(2f))
+                Box(modifier = Modifier.weight(2f)) {
+                    Text(
+                        text = "Vendor",
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.align(Alignment.CenterStart)
+                    )
+                    if (totalResults > 0) {
+                        Text(
+                            text = "${visibleRange.first}–${visibleRange.second} of $totalResults",
+                            fontWeight = FontWeight.Normal,
+                            fontSize = 12.sp,
+                            color = Color.DarkGray,
+                            modifier = Modifier.align(Alignment.CenterEnd)
+                        )
+                    }
+                }
                 Text("Dist", fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
                 Text("U1 | U2", fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
             }
+
             if (totalResults > 0) {
                 Row(
                     modifier = Modifier
