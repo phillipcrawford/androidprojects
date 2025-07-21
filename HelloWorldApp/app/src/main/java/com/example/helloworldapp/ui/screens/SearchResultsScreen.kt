@@ -95,7 +95,9 @@ fun SearchResultsScreen(
                             fontWeight = FontWeight.Normal,
                             fontSize = 12.sp,
                             color = Color.DarkGray,
-                            modifier = Modifier.align(Alignment.CenterEnd).padding(end = 8.dp)
+                            modifier = Modifier
+                                .align(Alignment.CenterEnd)
+                                .padding(end = 8.dp)
                         )
                     }
                 }
