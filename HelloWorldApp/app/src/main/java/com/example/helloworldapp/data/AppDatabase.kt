@@ -47,7 +47,7 @@ abstract class AppDatabase : RoomDatabase() {
 
 // Function that seeds the database with initial vendors and items
 suspend fun populateDatabase(dao: VendorDao) {
-    for (i in 1..10) {
+    for (i in 1..20) {
         val vendor = VendorEntity(
             name = "Vendor $i",
             address = "123 Vendor St, Town $i",

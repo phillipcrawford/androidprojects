@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -40,6 +41,7 @@ fun SearchResultsScreen(
     val displayVendors by sharedViewModel.displayVendors.collectAsState()
 
     var searchQuery by remember { mutableStateOf("") }
+    val pagedVendors by sharedViewModel.pagedVendors.collectAsState()
 
     // Load results on first launch
     LaunchedEffect(Unit) {
@@ -76,9 +78,15 @@ fun SearchResultsScreen(
 
             // Table Content
             LazyColumn(modifier = Modifier.weight(1f)) {
-                items(displayVendors.filter {
+                itemsIndexed(pagedVendors.filter {
                     it.vendorName.contains(searchQuery, ignoreCase = true)
-                }) { vendor ->
+                }) { index, vendor ->
+                    if (index >= pagedVendors.size - 2) {
+                        LaunchedEffect(index) {
+                            sharedViewModel.loadNextPage()
+                        }
+                    }
+
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
