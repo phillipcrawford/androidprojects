@@ -87,9 +87,7 @@ fun SearchResultsScreen(
                     Text(
                         text = "Vendor",
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier
-                            .align(Alignment.CenterStart)
-                            .padding(end = 8.dp)
+                        modifier = Modifier.align(Alignment.CenterStart)
                     )
                     if (totalResults > 0) {
                         Text(
@@ -97,7 +95,7 @@ fun SearchResultsScreen(
                             fontWeight = FontWeight.Normal,
                             fontSize = 12.sp,
                             color = Color.DarkGray,
-                            modifier = Modifier.align(Alignment.CenterEnd)
+                            modifier = Modifier.align(Alignment.CenterEnd).padding(end = 8.dp)
                         )
                     }
                 }
