@@ -20,11 +20,22 @@ class SharedViewModel : ViewModel() {
     private val _displayVendors = MutableStateFlow<List<DisplayVendor>>(emptyList())
     val displayVendors: StateFlow<List<DisplayVendor>> = _displayVendors
 
+    private val _totalResultsCount = MutableStateFlow(0)
+    val totalResultsCount: StateFlow<Int> = _totalResultsCount
+
+    private val _visibleRange = MutableStateFlow(0 to 0)
+    val visibleRange: StateFlow<Pair<Int, Int>> = _visibleRange
+
     private val _pagedVendors = MutableStateFlow<List<DisplayVendor>>(emptyList())
     val pagedVendors: StateFlow<List<DisplayVendor>> = _pagedVendors
 
     private var currentPage = 0
     private val pageSize = 10
+
+
+    fun updateVisibleRange(start: Int, end: Int) {
+        _visibleRange.value = start to end
+    }
 
     fun toggleUser1Pref(pref: String) {
         _user1Prefs.value = _user1Prefs.value.toMutableMap().also {
@@ -97,6 +108,7 @@ class SharedViewModel : ViewModel() {
         }
 
         _displayVendors.value = finalResults
+        _totalResultsCount.value = finalResults.size
         // Reset pagination
         currentPage = 0
         _pagedVendors.value = finalResults.take(pageSize)

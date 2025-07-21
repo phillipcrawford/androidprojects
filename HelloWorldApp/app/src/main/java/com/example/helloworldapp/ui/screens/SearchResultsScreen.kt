@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -43,6 +45,16 @@ fun SearchResultsScreen(
     var searchQuery by remember { mutableStateOf("") }
     val pagedVendors by sharedViewModel.pagedVendors.collectAsState()
 
+    val listState = rememberLazyListState()
+    val visibleRange by sharedViewModel.visibleRange.collectAsState()
+    val totalResults by sharedViewModel.totalResultsCount.collectAsState()
+
+    LaunchedEffect(listState.firstVisibleItemIndex, displayVendors.size) {
+        val start = listState.firstVisibleItemIndex + 1
+        val end = (start + listState.layoutInfo.visibleItemsInfo.size - 1).coerceAtMost(displayVendors.size)
+        sharedViewModel.updateVisibleRange(start, end)
+    }
+
     // Load results on first launch
     LaunchedEffect(Unit) {
         sharedViewModel.loadAndComputeResults(AppDatabase.getDatabase(context))
@@ -75,9 +87,26 @@ fun SearchResultsScreen(
                 Text("Dist", fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
                 Text("U1 | U2", fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
             }
+            if (totalResults > 0) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Color(0xFFF7F7F7))
+                        .padding(horizontal = 16.dp, vertical = 4.dp),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = "${visibleRange.first}–${visibleRange.second} of $totalResults",
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 14.sp,
+                        color = Color.Gray
+                    )
+                }
+            }
+
 
             // Table Content
-            LazyColumn(modifier = Modifier.weight(1f)) {
+            LazyColumn(modifier = Modifier.weight(1f), state = listState) {
                 itemsIndexed(pagedVendors.filter {
                     it.vendorName.contains(searchQuery, ignoreCase = true)
                 }) { index, vendor ->
