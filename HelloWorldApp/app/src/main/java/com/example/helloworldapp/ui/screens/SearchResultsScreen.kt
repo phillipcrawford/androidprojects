@@ -87,7 +87,9 @@ fun SearchResultsScreen(
                     Text(
                         text = "Vendor",
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.align(Alignment.CenterStart)
+                        modifier = Modifier
+                            .align(Alignment.CenterStart)
+                            .padding(end = 8.dp)
                     )
                     if (totalResults > 0) {
                         Text(
@@ -103,22 +105,22 @@ fun SearchResultsScreen(
                 Text("U1 | U2", fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
             }
 
-            if (totalResults > 0) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(Color(0xFFF7F7F7))
-                        .padding(horizontal = 16.dp, vertical = 4.dp),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Text(
-                        text = "${visibleRange.first}–${visibleRange.second} of $totalResults",
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 14.sp,
-                        color = Color.Gray
-                    )
-                }
-            }
+//            if (totalResults > 0) {
+//                Row(
+//                    modifier = Modifier
+//                        .fillMaxWidth()
+//                        .background(Color(0xFFF7F7F7))
+//                        .padding(horizontal = 16.dp, vertical = 4.dp),
+//                    horizontalArrangement = Arrangement.Center
+//                ) {
+//                    Text(
+//                        text = "${visibleRange.first}–${visibleRange.second} of $totalResults",
+//                        fontWeight = FontWeight.SemiBold,
+//                        fontSize = 14.sp,
+//                        color = Color.Gray
+//                    )
+//                }
+//            }
 
 
             // Table Content
