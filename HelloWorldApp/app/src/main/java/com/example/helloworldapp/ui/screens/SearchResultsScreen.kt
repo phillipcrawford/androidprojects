@@ -23,9 +23,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.helloworldapp.data.AppDatabase
 import com.example.helloworldapp.ui.theme.dietprefsGrey
 import com.example.helloworldapp.viewmodel.SharedViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -65,7 +67,7 @@ fun SearchResultsScreen(
             SearchResultsTopBar(
                 user1Prefs = user1Prefs,
                 user2Prefs = user2Prefs,
-                onBackClick = onBackClick,
+                navController = navController,
                 onSettingsClick = onSettingsClick
             )
         }
@@ -190,12 +192,14 @@ fun SearchResultsScreen(
 fun SearchResultsTopBar(
     user1Prefs: Map<String, Boolean>,
     user2Prefs: Map<String, Boolean>,
-    onBackClick: () -> Unit,
+    navController: NavController,
     onSettingsClick: () -> Unit
 ) {
     val user1Color = Color(0xFFEE6C6C)
     val user2Color = Color(0xFFFF77FF)
-    val isBackEnabled = remember { mutableStateOf(true) }
+
+    val coroutineScope = rememberCoroutineScope()
+    var isBackEnabled by remember { mutableStateOf(true) }
 
     Box(
         modifier = Modifier
@@ -204,19 +208,19 @@ fun SearchResultsTopBar(
             .background(dietprefsGrey)
             .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
-        IconButton(onClick = {
-            if (isBackEnabled.value) {
-                isBackEnabled.value = false
-                if (navController.previousBackStackEntry != null) {
-                    navController.popBackStack()
-                }
-                // Re-enable after delay
-                LaunchedEffect(Unit) {
-                    kotlinx.coroutines.delay(500) // Half second delay
-                    isBackEnabled.value = true
-                }
+        IconButton(
+            onClick = {
+                if (isBackEnabled) {
+                    isBackEnabled = false
+                    coroutineScope.launch {
+                        navController.popBackStack()
+                        delay(500)
+                        isBackEnabled = true
+                    }
             }
-        }, modifier = Modifier.align(Alignment.CenterStart)) {
+        },
+            modifier = Modifier.align(Alignment.CenterStart)
+        ) {
             Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = Color.White)
         }
 
