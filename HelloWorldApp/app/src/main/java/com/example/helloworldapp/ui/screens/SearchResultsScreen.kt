@@ -195,6 +195,7 @@ fun SearchResultsTopBar(
 ) {
     val user1Color = Color(0xFFEE6C6C)
     val user2Color = Color(0xFFFF77FF)
+    val isBackEnabled = remember { mutableStateOf(true) }
 
     Box(
         modifier = Modifier
@@ -203,7 +204,19 @@ fun SearchResultsTopBar(
             .background(dietprefsGrey)
             .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
-        IconButton(onClick = onBackClick, modifier = Modifier.align(Alignment.CenterStart)) {
+        IconButton(onClick = {
+            if (isBackEnabled.value) {
+                isBackEnabled.value = false
+                if (navController.previousBackStackEntry != null) {
+                    navController.popBackStack()
+                }
+                // Re-enable after delay
+                LaunchedEffect(Unit) {
+                    kotlinx.coroutines.delay(500) // Half second delay
+                    isBackEnabled.value = true
+                }
+            }
+        }, modifier = Modifier.align(Alignment.CenterStart)) {
             Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = Color.White)
         }
 
