@@ -28,11 +28,7 @@ fun AppNavigation(sharedViewModel: SharedViewModel) {
         }
         composable(Screen.SearchResults.route) {
             SearchResultsScreen(
-                onBackClick = {
-                    if (navController.previousBackStackEntry != null) {
-                        navController.popBackStack()
-                    }
-                },
+                navController = navController,
                 onSettingsClick = { /* handle */ },
                 sharedViewModel = sharedViewModel
             )
