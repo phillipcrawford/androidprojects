@@ -49,7 +49,7 @@ fun AppNavHost(
         }
         composable("SearchResultsScreen") {
             SearchResultsScreen(
-                onBackClick = { navController.popBackStack() },
+                navController = navController,
                 onSettingsClick = { /* TODO: Settings */ },
                 sharedViewModel = sharedViewModel
             )
