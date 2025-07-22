@@ -33,7 +33,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun SearchResultsScreen(
-    onBackClick: () -> Unit,
+    navController: NavController,
     onSettingsClick: () -> Unit,
     sharedViewModel: SharedViewModel
 ) {
