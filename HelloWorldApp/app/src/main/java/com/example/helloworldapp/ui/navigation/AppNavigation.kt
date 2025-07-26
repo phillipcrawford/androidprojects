@@ -1,38 +1,38 @@
-//package com.example.helloworldapp.ui.navigation
-//
-//import androidx.compose.runtime.Composable
-//import androidx.navigation.NavHostController
-//import androidx.navigation.compose.NavHost
-//import androidx.navigation.compose.composable
-//import androidx.navigation.compose.rememberNavController
-//import com.example.helloworldapp.ui.screens.PreferenceScreen
-//import com.example.helloworldapp.ui.screens.SearchResultsScreen
-//import com.example.helloworldapp.viewmodel.SharedViewModel
-//
-//@Composable
-//fun AppNavigation(navController: NavHostController, sharedViewModel: SharedViewModel) {
-//    //val navController = rememberNavController()
-//
-//    NavHost(
-//        navController = navController,
-//        startDestination = Screen.Preferences.route
-//    ) {
-//        composable(Screen.Preferences.route) {
-//            PreferenceScreen(
-//                onSearchClick = {
-//                    navController.navigate(Screen.SearchResults.route)
-//                },
-//                onSettingsClick = { /* Handle settings */ },
-//                onUserModeClick = { /* Handle user switch */ },
-//                sharedViewModel = sharedViewModel
-//            )
-//        }
-//        composable(Screen.SearchResults.route) {
-//            SearchResultsScreen(
-//                navController = navController,
-//                onSettingsClick = { /* handle */ },
-//                sharedViewModel = sharedViewModel
-//            )
-//        }
-//    }
-//}
+package com.example.helloworldapp.ui.navigation
+
+import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.helloworldapp.ui.screens.PreferenceScreen
+import com.example.helloworldapp.ui.screens.SearchResultsScreen
+import com.example.helloworldapp.viewmodel.SharedViewModel
+
+@Composable
+fun AppNavGraph(navController: NavHostController, sharedViewModel: SharedViewModel) {
+    //val navController = rememberNavController()
+
+    NavHost(
+        navController = navController,
+        startDestination = Screen.Preferences.route
+    ) {
+        composable(Screen.Preferences.route) {
+            PreferenceScreen(
+                onSearchClick = {
+                    navController.navigate(Screen.SearchResults.route)
+                },
+                onSettingsClick = { /* Handle settings */ },
+                onUserModeClick = { /* Handle user switch */ },
+                sharedViewModel = sharedViewModel
+            )
+        }
+        composable(Screen.SearchResults.route) {
+            SearchResultsScreen(
+                navController = navController,
+                onSettingsClick = { /* handle */ },
+                sharedViewModel = sharedViewModel
+            )
+        }
+    }
+}
