@@ -19,10 +19,8 @@ fun AppNavGraph(navController: NavHostController, sharedViewModel: SharedViewMod
     ) {
         composable(Screen.Preferences.route) {
             PreferenceScreen(
-                onSearchClick = {
-                    navController.navigate(Screen.SearchResults.route)
-                },
-                onSettingsClick = { /* Handle settings */ },
+                onSearchClick = { navController.navigate(Screen.SearchResults.route) },
+                onSettingsClick = { navController.navigate(Screen.Settings.route) },
                 onUserModeClick = { /* Handle user switch */ },
                 sharedViewModel = sharedViewModel
             )
@@ -30,9 +28,13 @@ fun AppNavGraph(navController: NavHostController, sharedViewModel: SharedViewMod
         composable(Screen.SearchResults.route) {
             SearchResultsScreen(
                 navController = navController,
-                onSettingsClick = { /* handle */ },
+                onSettingsClick = { navController.navigate(Screen.Settings.route) },
                 sharedViewModel = sharedViewModel
             )
+        }
+
+        composable(Screen.Settings.route) {
+            /* TODO: Implement SettingsScreen() */
         }
     }
 }
