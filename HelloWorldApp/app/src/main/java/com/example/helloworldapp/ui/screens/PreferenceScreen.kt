@@ -23,6 +23,8 @@ import com.example.helloworldapp.ui.theme.dietprefsGrey
 import com.example.helloworldapp.ui.theme.dietprefsTeal
 import com.example.helloworldapp.ui.theme.selectedGrey
 import com.example.helloworldapp.ui.theme.selectedTeal
+import com.example.helloworldapp.ui.theme.user1Red
+import com.example.helloworldapp.ui.theme.user2Magenta
 import com.example.helloworldapp.viewmodel.SharedViewModel
 
 @Composable
@@ -63,7 +65,7 @@ fun PreferenceScreen(
                         .padding(0.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
                 ) {
-                    Text("Search", color = Color(0xFFEE6C6C), fontSize = 32.sp)
+                    Text("Search", color = user1Red, fontSize = 32.sp)
                 }
                 Button(
                     onClick = {
@@ -224,9 +226,6 @@ fun PreferencesTopBar(
     onSettingsClick: () -> Unit,
     onUserModeClick: () -> Unit
 ) {
-    val user1Color = Color(0xFFEE6C6C)
-    val user2Color = Color(0xFFFF77FF)
-
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -252,7 +251,7 @@ fun PreferencesTopBar(
                     text = "Preferences",
                     fontSize = 40.sp,
                     fontWeight = FontWeight.Bold,
-                    color = user1Color,
+                    color = user1Red,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.weight(1f)
@@ -271,7 +270,7 @@ fun PreferencesTopBar(
                             Icon(
                                 imageVector = Icons.Default.Person,
                                 contentDescription = "User 1",
-                                tint = user1Color
+                                tint = user1Red
                             )
                         }
                         Spacer(modifier = Modifier.width(8.dp))
@@ -279,7 +278,7 @@ fun PreferencesTopBar(
                             text = user1Selected.joinToString(", "),
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
-                            color = user1Color,
+                            color = user1Red,
                             maxLines = if (user2Selected.isEmpty()) 4 else 2,
                             overflow = TextOverflow.Ellipsis
                         )
@@ -292,7 +291,7 @@ fun PreferencesTopBar(
                             Icon(
                                 imageVector = Icons.Default.Person,
                                 contentDescription = "User 2",
-                                tint = user2Color
+                                tint = user2Magenta
                             )
                         }
                         Spacer(modifier = Modifier.width(8.dp))
@@ -300,7 +299,7 @@ fun PreferencesTopBar(
                             text = user2Selected.joinToString(", "),
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
-                            color = user2Color,
+                            color = user2Magenta,
                             maxLines = if (user1Selected.isEmpty()) 4 else 2,
                             overflow = TextOverflow.Ellipsis
                         )

@@ -16,5 +16,6 @@ val aiLRed = Color(0xFFEE6C6C) //maybe it was onto something?
 val dietprefsTeal2 = Color(0xFF005B5B)
 val user1Red = Color(0xFFE06666)
 val user2Magenta = Color(0xFFE0B3FF)
+val user2Color = Color(0xFFFF77FF)
 val dietprefsTeal = Color(0xFF004D4D)
 val selectedTeal = Color(0xFF008080)
