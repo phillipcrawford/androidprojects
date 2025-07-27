@@ -29,6 +29,8 @@ import androidx.navigation.NavController
 import com.example.helloworldapp.data.AppDatabase
 import com.example.helloworldapp.model.Preference
 import com.example.helloworldapp.ui.theme.dietprefsGrey
+import com.example.helloworldapp.ui.theme.user1Red
+import com.example.helloworldapp.ui.theme.user2Magenta
 import com.example.helloworldapp.viewmodel.SharedViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
@@ -132,14 +134,14 @@ fun SearchResultsScreen(
                             Icon(
                                 imageVector = Icons.Filled.Person,
                                 contentDescription = "User 1 Items",
-                                tint = Color(0xFFEE6C6C), // Light Red for User 1
+                                tint = user1Red, // Light Red for User 1
                                 modifier = Modifier.size(16.dp)
                             )
                             Spacer(modifier = Modifier.width(4.dp))
                             Icon(
                                 imageVector = Icons.Filled.Person,
                                 contentDescription = "User 2 Items",
-                                tint = Color(0xFFFF77FF), // Magenta for User 2
+                                tint = user2Magenta, // Magenta for User 2
                                 modifier = Modifier.size(16.dp)
                             )
                         }
@@ -252,9 +254,6 @@ fun SearchResultsTopBar(
     navController: NavController,
     onSettingsClick: () -> Unit
 ) {
-    val user1Color = Color(0xFFEE6C6C)
-    val user2Color = Color(0xFFFF77FF)
-
     val coroutineScope = rememberCoroutineScope()
     var isBackEnabled by remember { mutableStateOf(true) }
 
@@ -290,26 +289,26 @@ fun SearchResultsTopBar(
         ) {
             if (user1Prefs.isNotEmpty()) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(Icons.Default.Person, contentDescription = "User 1", tint = user1Color, modifier = Modifier.size(20.dp))
+                    Icon(Icons.Default.Person, contentDescription = "User 1", tint = user1Red, modifier = Modifier.size(20.dp))
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         user1Prefs.joinToString(", ") { it.display },
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
-                        color = user1Color,
+                        color = user1Red,
                         maxLines = if (user2Prefs.isEmpty()) 4 else 2
                     )
                 }
             }
             if (user2Prefs.isNotEmpty()) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(Icons.Default.Person, contentDescription = "User 2", tint = user2Color, modifier = Modifier.size(20.dp))
+                    Icon(Icons.Default.Person, contentDescription = "User 2", tint = user2Magenta, modifier = Modifier.size(20.dp))
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         user2Prefs.joinToString(", ") { it.display },
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
-                        color = user2Color,
+                        color = user2Magenta,
                         maxLines = if (user1Prefs.isEmpty()) 4 else 2
                     )
                 }
