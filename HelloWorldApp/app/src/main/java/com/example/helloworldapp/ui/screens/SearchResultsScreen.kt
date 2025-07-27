@@ -21,6 +21,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -51,6 +53,14 @@ fun SearchResultsScreen(
     val listState = rememberLazyListState()
     val visibleRange by sharedViewModel.visibleRange.collectAsState()
     val totalResults by sharedViewModel.totalResultsCount.collectAsState()
+
+    // Determine user mode for results display
+    val isTwoUserMode = user1Prefs.isNotEmpty() && user2Prefs.isNotEmpty()
+    val isSingleUserModeWithUser1 = user1Prefs.isNotEmpty() && user2Prefs.isEmpty()
+    val isSingleUserModeWithUser2 = user1Prefs.isEmpty() && user2Prefs.isNotEmpty()
+    // A general single user mode flag (if either has prefs but not both)
+    val isSingleUserResultsMode = (user1Prefs.isNotEmpty() || user2Prefs.isNotEmpty()) && !isTwoUserMode
+
 
     LaunchedEffect(listState.firstVisibleItemIndex, displayVendors.size) {
         val start = listState.firstVisibleItemIndex + 1
@@ -83,7 +93,8 @@ fun SearchResultsScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(Color(0xFFEFEFEF))
-                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .defaultMinSize(minHeight = if (isTwoUserMode) 56.dp else Dp.Unspecified), // T,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(modifier = Modifier.weight(2f)) {
@@ -105,7 +116,41 @@ fun SearchResultsScreen(
                     }
                 }
                 Text("Dist", fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
-                Text("U1 | U2", fontWeight = FontWeight.Bold, modifier = Modifier.weight(1f))
+                // Conditional Menu Items Header
+                if (isTwoUserMode) {
+                    Column(
+                        modifier = Modifier.weight(1f),
+                        horizontalAlignment = Alignment.CenterHorizontally // Center the icons and text
+                    ) {
+                        Text(
+                            "Menu Items", // Or "U1 | U2" if you prefer that text
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center // Ensure text is centered
+                        )
+                        Spacer(modifier = Modifier.height(2.dp)) // Small space
+                        Row {
+                            Icon(
+                                imageVector = Icons.Filled.Person,
+                                contentDescription = "User 1 Items",
+                                tint = Color(0xFFEE6C6C), // Light Red for User 1
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Icon(
+                                imageVector = Icons.Filled.Person,
+                                contentDescription = "User 2 Items",
+                                tint = Color(0xFFFF77FF), // Magenta for User 2
+                                modifier = Modifier.size(16.dp)
+                            )
+                        }
+                    }
+                } else { // Single user mode or no users with preferences (though no users means no results typically)
+                    Text(
+                        "Menu Items",
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
             }
 
 //            if (totalResults > 0) {
@@ -146,7 +191,18 @@ fun SearchResultsScreen(
                     ) {
                         Text(vendor.vendorName, modifier = Modifier.weight(2f))
                         Text("${"%.1f".format(vendor.distanceMiles)} mi", modifier = Modifier.weight(1f))
-                        Text("${vendor.user1Count} | ${vendor.user2Count}", modifier = Modifier.weight(1f))
+                        // Conditional results display
+                        val menuItemsText = when {
+                            isTwoUserMode -> "${vendor.user1Count} | ${vendor.user2Count}"
+                            isSingleUserModeWithUser1 -> "${vendor.user1Count}"
+                            isSingleUserModeWithUser2 -> "${vendor.user2Count}"
+                            // Fallback if somehow no prefs but vendors are shown (e.g. initial state before computation)
+                            // or if only one user has prefs, show their count.
+                            user1Prefs.isNotEmpty() -> "${vendor.user1Count}"
+                            user2Prefs.isNotEmpty() -> "${vendor.user2Count}"
+                            else -> "N/A" // Should ideally not happen if filtering is correct
+                        }
+                        Text(menuItemsText, modifier = Modifier.weight(1f))
                     }
                 }
             }
