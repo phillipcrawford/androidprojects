@@ -1,4 +1,3 @@
-// PreferenceScreen.kt
 package com.example.helloworldapp.ui.screens
 
 import androidx.compose.foundation.background
@@ -19,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.helloworldapp.model.Preference
 import com.example.helloworldapp.ui.theme.dietprefsGrey
 import com.example.helloworldapp.ui.theme.dietprefsTeal
 import com.example.helloworldapp.ui.theme.selectedGrey
@@ -32,22 +32,12 @@ fun PreferenceScreen(
     onUserModeClick: () -> Unit,
     sharedViewModel: SharedViewModel
 ) {
-    val preferences = listOf(
-        "vegetarian", "pescetarian", "vegan", "keto", "organic", "gmo-free",
-        "locally sourced", "raw", "entree", "sweet", "Kosher", "Halal",
-        "beef", "chicken", "bacon/pork/ham", "seafood",
-        "low sugar", "high protein", "low carb", "no alliums",
-        "no pork products", "no red meat", "no msg", "no sesame",
-        "no milk", "no eggs", "no fish", "no shellfish",
-        "no peanuts", "no treenuts", "gluten-free", "no soy"
-    )
-
     val user1Prefs by sharedViewModel.user1Prefs.collectAsState()
     val user2Prefs by sharedViewModel.user2Prefs.collectAsState()
     val isUser2Active = remember { mutableStateOf(false) }
 
-    val user1Selected = user1Prefs.filterValues { it }.keys.toList()
-    val user2Selected = user2Prefs.filterValues { it }.keys.toList()
+    val user1Selected = user1Prefs.map { it.display }
+    val user2Selected = user2Prefs.map { it.display }
 
     Scaffold(
         topBar = {
@@ -76,9 +66,11 @@ fun PreferenceScreen(
                     Text("Search", color = Color(0xFFEE6C6C), fontSize = 32.sp)
                 }
                 Button(
-                    onClick = { sharedViewModel.clearPrefs(); isUser2Active.value = false },
-                    modifier = Modifier
-                        .padding(8.dp),
+                    onClick = {
+                        sharedViewModel.clearPrefs()
+                        isUser2Active.value = false
+                    },
+                    modifier = Modifier.padding(8.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFB35100))
                 ) {
                     Text("C", color = Color.White, fontSize = 20.sp)
@@ -97,7 +89,7 @@ fun PreferenceScreen(
                 verticalArrangement = Arrangement.spacedBy(4.dp),
                 modifier = Modifier.fillMaxSize()
             ) {
-                val rows = preferences.chunked(2).take(16)
+                val rows = Preference.orderedForUI.take(32).chunked(2).take(16)
 
                 rows.forEachIndexed { rowIndex, rowPrefs ->
                     val isTeal = rowIndex >= 8
@@ -108,13 +100,18 @@ fun PreferenceScreen(
                         horizontalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         rowPrefs.forEach { pref ->
-                            val isSelected = if (isUser2Active.value) user2Prefs[pref] == true else user1Prefs[pref] == true
+                            val isSelected = if (isUser2Active.value)
+                                user2Prefs.contains(pref)
+                            else
+                                user1Prefs.contains(pref)
+
                             val bgColor = when {
                                 isTeal && isSelected -> selectedTeal
                                 isTeal && !isSelected -> dietprefsTeal
                                 isSelected -> selectedGrey
                                 else -> dietprefsGrey
                             }
+
                             Box(
                                 modifier = Modifier
                                     .weight(1f)
@@ -127,11 +124,11 @@ fun PreferenceScreen(
                                             sharedViewModel.toggleUser1Pref(pref)
                                         }
                                     }
-                                    .padding(12.dp, 0.dp, 0.dp, 0.dp),
+                                    .padding(start = 12.dp),
                                 contentAlignment = Alignment.CenterStart
                             ) {
                                 Text(
-                                    text = pref,
+                                    text = pref.display,
                                     color = Color.White,
                                     fontSize = 16.sp
                                 )
@@ -143,14 +140,19 @@ fun PreferenceScreen(
                     }
                 }
 
+                // Last row with "low price" and user toggle
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
                         .weight(1f),
                     horizontalArrangement = Arrangement.spacedBy(4.dp)
                 ) {
-                    val lowPricePref = "low price"
-                    val isLowPriceSelected = if (isUser2Active.value) user2Prefs[lowPricePref] == true else user1Prefs[lowPricePref] == true
+                    val lowPricePref = Preference.LOW_PRICE
+                    val isLowPriceSelected = if (isUser2Active.value)
+                        user2Prefs.contains(lowPricePref)
+                    else
+                        user1Prefs.contains(lowPricePref)
+
                     Box(
                         modifier = Modifier
                             .weight(1f)
@@ -166,11 +168,11 @@ fun PreferenceScreen(
                                     sharedViewModel.toggleUser1Pref(lowPricePref)
                                 }
                             }
-                            .padding(12.dp, 0.dp, 0.dp, 0.dp),
+                            .padding(start = 12.dp),
                         contentAlignment = Alignment.CenterStart
                     ) {
                         Text(
-                            text = lowPricePref,
+                            text = lowPricePref.display,
                             color = Color.White,
                             fontSize = 16.sp
                         )

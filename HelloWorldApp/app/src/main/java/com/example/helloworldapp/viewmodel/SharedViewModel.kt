@@ -6,16 +6,18 @@ import androidx.lifecycle.viewModelScope
 import com.example.helloworldapp.data.AppDatabase
 import com.example.helloworldapp.data.ItemEntity
 import com.example.helloworldapp.data.VendorWithItems
+import com.example.helloworldapp.model.Preference
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class SharedViewModel : ViewModel() {
-    private val _user1Prefs = MutableStateFlow<Map<String, Boolean>>(emptyMap())
-    val user1Prefs: StateFlow<Map<String, Boolean>> = _user1Prefs
 
-    private val _user2Prefs = MutableStateFlow<Map<String, Boolean>>(emptyMap())
-    val user2Prefs: StateFlow<Map<String, Boolean>> = _user2Prefs
+    private val _user1Prefs = MutableStateFlow<Set<Preference>>(emptySet())
+    val user1Prefs: StateFlow<Set<Preference>> = _user1Prefs
+
+    private val _user2Prefs = MutableStateFlow<Set<Preference>>(emptySet())
+    val user2Prefs: StateFlow<Set<Preference>> = _user2Prefs
 
     private val _displayVendors = MutableStateFlow<List<DisplayVendor>>(emptyList())
     val displayVendors: StateFlow<List<DisplayVendor>> = _displayVendors
@@ -37,29 +39,29 @@ class SharedViewModel : ViewModel() {
         _visibleRange.value = start to end
     }
 
-    fun toggleUser1Pref(pref: String) {
-        _user1Prefs.value = _user1Prefs.value.toMutableMap().also {
-            it[pref] = !(it[pref] ?: false)
+    fun toggleUser1Pref(pref: Preference) {
+        _user1Prefs.value = _user1Prefs.value.toMutableSet().apply {
+            if (!add(pref)) remove(pref)
         }
     }
 
-    fun toggleUser2Pref(pref: String) {
-        _user2Prefs.value = _user2Prefs.value.toMutableMap().also {
-            it[pref] = !(it[pref] ?: false)
+    fun toggleUser2Pref(pref: Preference) {
+        _user2Prefs.value = _user2Prefs.value.toMutableSet().apply {
+            if (!add(pref)) remove(pref)
         }
     }
 
     fun clearPrefs() {
-        _user1Prefs.value = emptyMap()
-        _user2Prefs.value = emptyMap()
+        _user1Prefs.value = emptySet()
+        _user2Prefs.value = emptySet()
     }
 
     fun loadAndComputeResults(db: AppDatabase) {
         viewModelScope.launch {
             val allVendorsWithItems = db.vendorDao().getVendorsWithItems()
-            Log.d("FilterDebug", "Loaded vendors from DB: ${allVendorsWithItems.size}")
-            Log.d("FilterDebug", "User1 active prefs: ${user1Prefs.value.filterValues { it }}")
-            Log.d("FilterDebug", "User2 active prefs: ${user2Prefs.value.filterValues { it }}")
+//            Log.d("FilterDebug", "Loaded vendors from DB: ${allVendorsWithItems.size}")
+//            Log.d("FilterDebug", "User1 active prefs: ${user1Prefs.value.filterValues { it }}")
+//            Log.d("FilterDebug", "User2 active prefs: ${user2Prefs.value.filterValues { it }}")
 
             computeResults(allVendorsWithItems)
         }
@@ -125,45 +127,7 @@ class SharedViewModel : ViewModel() {
         }
     }
 
-    private fun matchesPrefs(prefs: Map<String, Boolean>, item: ItemEntity): Boolean {
-        for ((key, value) in prefs) {
-            if (value) {
-                when (key) {
-                    "vegetarian" -> if (!item.vegetarian) return false
-                    "pescetarian" -> if (!item.pescetarian) return false
-                    "vegan" -> if (!item.vegan) return false
-                    "keto" -> if (!item.keto) return false
-                    "organic" -> if (!item.organic) return false
-                    "gmoFree" -> if (!item.gmoFree) return false
-                    "locallySourced" -> if (!item.locallySourced) return false
-                    "raw" -> if (!item.raw) return false
-                    "entree" -> if (!item.entree) return false
-                    "sweet" -> if (!item.sweet) return false
-                    "kosher" -> if (!item.kosher) return false
-                    "halal" -> if (!item.halal) return false
-                    "beef" -> if (!item.beef) return false
-                    "chicken" -> if (!item.chicken) return false
-                    "pork" -> if (!item.pork) return false
-                    "seafood" -> if (!item.seafood) return false
-                    "lowSugar" -> if (!item.lowSugar) return false
-                    "highProtein" -> if (!item.highProtein) return false
-                    "lowCarb" -> if (!item.lowCarb) return false
-                    "noAlliums" -> if (!item.noAlliums) return false
-                    "noPorkProducts" -> if (!item.noPorkProducts) return false
-                    "noRedMeat" -> if (!item.noRedMeat) return false
-                    "noMsg" -> if (!item.noMsg) return false
-                    "noSesame" -> if (!item.noSesame) return false
-                    "noMilk" -> if (!item.noMilk) return false
-                    "noEggs" -> if (!item.noEggs) return false
-                    "noFish" -> if (!item.noFish) return false
-                    "noShellfish" -> if (!item.noShellfish) return false
-                    "noPeanuts" -> if (!item.noPeanuts) return false
-                    "noTreenuts" -> if (!item.noTreenuts) return false
-                    "glutenFree" -> if (!item.glutenFree) return false
-                    "noSoy" -> if (!item.noSoy) return false
-                }
-            }
-        }
-        return true
+    private fun matchesPrefs(prefs: Set<Preference>, item: ItemEntity): Boolean {
+        return prefs.all { it.matches(item) }
     }
 }

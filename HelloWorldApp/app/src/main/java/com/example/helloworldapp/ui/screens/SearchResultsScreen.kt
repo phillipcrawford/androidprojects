@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.helloworldapp.data.AppDatabase
+import com.example.helloworldapp.model.Preference
 import com.example.helloworldapp.ui.theme.dietprefsGrey
 import com.example.helloworldapp.viewmodel.SharedViewModel
 import kotlinx.coroutines.delay
@@ -190,8 +191,8 @@ fun SearchResultsScreen(
 
 @Composable
 fun SearchResultsTopBar(
-    user1Prefs: Map<String, Boolean>,
-    user2Prefs: Map<String, Boolean>,
+    user1Prefs: Set<Preference>,
+    user2Prefs: Set<Preference>,
     navController: NavController,
     onSettingsClick: () -> Unit
 ) {
@@ -236,7 +237,7 @@ fun SearchResultsTopBar(
                     Icon(Icons.Default.Person, contentDescription = "User 1", tint = user1Color, modifier = Modifier.size(20.dp))
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        user1Prefs.filterValues { it }.keys.joinToString(", "),
+                        user1Prefs.joinToString(", ") { it.display },
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
                         color = user1Color,
@@ -249,7 +250,7 @@ fun SearchResultsTopBar(
                     Icon(Icons.Default.Person, contentDescription = "User 2", tint = user2Color, modifier = Modifier.size(20.dp))
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        user2Prefs.filterValues { it }.keys.joinToString(", "),
+                        user2Prefs.joinToString(", ") { it.display },
                         fontSize = 16.sp,
                         fontWeight = FontWeight.Bold,
                         color = user2Color,

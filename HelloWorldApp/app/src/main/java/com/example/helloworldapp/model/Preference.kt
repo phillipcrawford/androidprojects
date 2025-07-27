@@ -47,6 +47,11 @@ enum class Preference(
     // Doesn't exist on ItemEntity; keep for UI, ignore in filtering.
     LOW_PRICE("low price", null);
 
+    /** Returns true if this preference matches the item, or ignores if matcher == null */
+    fun matches(item: ItemEntity): Boolean {
+        return matcher?.invoke(item) ?: true
+    }
+
     companion object {
         /** Order them *exactly* as you want to show in PreferenceScreen. */
         val orderedForUI: List<Preference> = listOf(
@@ -59,5 +64,10 @@ enum class Preference(
             NO_PEANUTS, NO_TREENUTS, GLUTEN_FREE, NO_SOY,
             LOW_PRICE // last row with the user toggle
         )
+
+        /** Helper to map display string (e.g. "low sugar") to its enum. */
+        fun fromDisplay(display: String): Preference? {
+            return values().firstOrNull { it.display.equals(display, ignoreCase = true) }
+        }
     }
 }
