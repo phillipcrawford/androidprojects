@@ -8,6 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 @Database(entities = [VendorEntity::class, ItemEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
@@ -74,23 +75,26 @@ suspend fun populateDatabase(dao: VendorDao) {
         val vendorId = dao.insertVendor(vendor)
 
         for (j in 1..5) {
+            val totalVotes = Random.nextInt(5, 51) // Random total votes between 5 and 50
+            val upvotes = Random.nextInt(0, totalVotes + 1) // Random upvotes between 0 and totalVotes
+
             val item = ItemEntity(
                 vendorId = vendorId.toInt(),
                 name = "Item $j",
                 vegetarian = (j % 3 == 0),
                 pescetarian = (j % 2 == 0),
-                vegan = true,
-                keto = false,
-                organic = true,
+                vegan = (j % 4 == 0), // Varied this a bit
+                keto = (j % 5 == 0),  // Varied this a bit
+                organic = (j % 2 != 0), // Varied this a bit
                 gmoFree = false,
                 locallySourced = false,
                 raw = false,
-                entree = false,
-                sweet = false,
+                entree = (j == 1 || j == 2), // Example: first two items are entrees
+                sweet = (j == 5),          // Example: last item is sweet
                 kosher = false,
                 halal = false,
                 beef = false,
-                chicken = false,
+                chicken = (j == 1), // Example
                 pork = false,
                 seafood = false,
                 lowSugar = false,
@@ -107,11 +111,11 @@ suspend fun populateDatabase(dao: VendorDao) {
                 noShellfish = false,
                 noPeanuts = false,
                 noTreenuts = false,
-                glutenFree = false,
+                glutenFree = (j % 3 != 0), // Example
                 noSoy = false,
-                price = 10.0,
-                upvotes = 0,
-                totalVotes = 0,
+                price = Random.nextDouble(5.0, 25.0), // Random price
+                upvotes = upvotes,     // Use generated upvotes
+                totalVotes = totalVotes, // Use generated totalVotes
                 pictures = ""
             )
             dao.insertItem(item)

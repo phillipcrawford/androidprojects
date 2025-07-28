@@ -1,6 +1,5 @@
 package com.example.helloworldapp.viewmodel
 
-import SortState
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
