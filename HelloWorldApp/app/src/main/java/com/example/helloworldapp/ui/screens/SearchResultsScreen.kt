@@ -150,7 +150,8 @@ fun SearchResultsScreen(
                     Text(
                         "Menu Items",
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.weight(1f)
+                        modifier = Modifier.weight(1f),
+                        textAlign = TextAlign.Center
                     )
                 }
             }
