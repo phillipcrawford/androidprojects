@@ -1,5 +1,6 @@
 package com.example.helloworldapp.viewmodel
 
+import SortState
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,6 +10,7 @@ import com.example.helloworldapp.data.VendorWithItems
 import com.example.helloworldapp.model.Preference
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class SharedViewModel : ViewModel() {
@@ -22,6 +24,8 @@ class SharedViewModel : ViewModel() {
     private val _displayVendors = MutableStateFlow<List<DisplayVendor>>(emptyList())
     val displayVendors: StateFlow<List<DisplayVendor>> = _displayVendors
 
+    //private val _sortState = MutableStateFlow(SortState()) // Default sort by Menu Items, Descending
+    //val sortState: StateFlow<SortState> = _sortState.asStateFlow()
     private val _totalResultsCount = MutableStateFlow(0)
     val totalResultsCount: StateFlow<Int> = _totalResultsCount
 
@@ -33,6 +37,8 @@ class SharedViewModel : ViewModel() {
 
     private var currentPage = 0
     private val pageSize = 10
+
+    //private val _sortedDisplayVendors = MutableStateFlow<List<DisplayVendor>>(emptyList())
 
 
     fun updateVisibleRange(start: Int, end: Int) {
