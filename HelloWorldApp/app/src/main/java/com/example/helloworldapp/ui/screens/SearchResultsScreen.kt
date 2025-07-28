@@ -47,7 +47,6 @@ fun SearchResultsScreen(
 
     val user1Prefs by sharedViewModel.user1Prefs.collectAsState()
     val user2Prefs by sharedViewModel.user2Prefs.collectAsState()
-    val displayVendors by sharedViewModel.displayVendors.collectAsState()
 
     var searchQuery by remember { mutableStateOf("") }
     val pagedVendors by sharedViewModel.pagedVendors.collectAsState()
@@ -64,10 +63,14 @@ fun SearchResultsScreen(
     val isSingleUserResultsMode = (user1Prefs.isNotEmpty() || user2Prefs.isNotEmpty()) && !isTwoUserMode
 
 
-    LaunchedEffect(listState.firstVisibleItemIndex, displayVendors.size) {
-        val start = listState.firstVisibleItemIndex + 1
-        val end = (start + listState.layoutInfo.visibleItemsInfo.size - 1).coerceAtMost(displayVendors.size)
-        sharedViewModel.updateVisibleRange(start, end)
+    LaunchedEffect(listState.firstVisibleItemIndex, pagedVendors.size) {
+        if (pagedVendors.isNotEmpty()) {
+            val start = listState.firstVisibleItemIndex + 1
+            val end = (start + listState.layoutInfo.visibleItemsInfo.size - 1).coerceAtMost(pagedVendors.size)
+            sharedViewModel.updateVisibleRange(start, end)
+        } else {
+            sharedViewModel.updateVisibleRange(0, 0) // Or handle empty state as appropriate
+        }
     }
 
     // Load results on first launch
