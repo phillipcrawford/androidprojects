@@ -5,6 +5,7 @@ data class DisplayVendor(
     val user1Count: Int,
     val user2Count: Int,
     val distanceMiles: Double = 1.2,
+    val querySpecificRatingString: String = "0 / 0",
     val querySpecificRating: Float = 0f,
     val combinedRelevantItemCount: Int = 0
 )
