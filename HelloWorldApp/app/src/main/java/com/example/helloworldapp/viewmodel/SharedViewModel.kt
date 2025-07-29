@@ -122,34 +122,37 @@ class SharedViewModel : ViewModel() {
                 isUser1Active && isUser2Active -> (user1MatchingItems + user2MatchingItems).distinct()
                 isUser1Active -> user1MatchingItems
                 isUser2Active -> user2MatchingItems
-                else -> items // If no prefs, consider all items for rating, or make it 0
+                else -> items // If no prefs, consider all items for rating.
             }
 
-            // Filter out vendors with no relevant items if specific preferences are set
             if ((isUser1Active || isUser2Active) && relevantItemsForQuery.isEmpty()) {
                 null // Skip this vendor if prefs are active but no items match
             } else {
-                // --- Calculate Query Specific Rating ---
-                val totalUpvotes = relevantItemsForQuery.sumOf { it.upvotes }
-                val totalVotes = relevantItemsForQuery.sumOf { it.totalVotes }
-                val querySpecificRating = if (totalVotes > 0) {
-                    (totalUpvotes.toFloat() / totalVotes.toFloat() * 50).roundToInt() / 10f // Scale to 0-5, one decimal
+                // --- Calculate Query Specific Rating (String and Value) ---
+                val sumApplicableUpvotes = relevantItemsForQuery.sumOf { it.upvotes }
+                val sumApplicableTotalVotes = relevantItemsForQuery.sumOf { it.totalVotes }
+
+                val querySpecificRatingString: String
+                val querySpecificRatingValue: Float
+
+                if (sumApplicableTotalVotes > 0) {
+                    querySpecificRatingString = "$sumApplicableUpvotes / $sumApplicableTotalVotes"
+                    querySpecificRatingValue = sumApplicableUpvotes.toFloat() / sumApplicableTotalVotes.toFloat()
                 } else {
-                    0f // Or some default like -1f to indicate no rating
+                    querySpecificRatingString = "0 / 0" // Or "N/A" or as you prefer
+                    querySpecificRatingValue = 0f       // Or -1f to indicate no rating possible
                 }
 
                 // --- Combined Relevant Item Count for Display ---
-                // This is the count of unique items that satisfy the combined query criteria
                 val combinedRelevantItemCount = relevantItemsForQuery.size
 
                 DisplayVendor(
                     vendorName = vendor.name,
-                    user1Count = user1MatchingItems.size, // Count for User 1 column
-                    user2Count = user2MatchingItems.size, // Count for User 2 column
-                    distanceMiles = vendor.lat / 1000.0, // Placeholder for actual distance calculation
-                    // Assuming lat is a stand-in for distance for now
-                    // Replace with actual distance if available/calculated
-                    querySpecificRating = querySpecificRating,
+                    user1Count = user1MatchingItems.size,
+                    user2Count = user2MatchingItems.size,
+                    distanceMiles = vendor.lat / 1000.0, // REMINDER: Replace with actual distance
+                    querySpecificRatingString = querySpecificRatingString, // Use new field
+                    querySpecificRatingValue = querySpecificRatingValue,   // Use new field
                     combinedRelevantItemCount = combinedRelevantItemCount
                 )
             }
