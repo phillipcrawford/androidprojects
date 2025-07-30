@@ -111,12 +111,15 @@ fun SearchResultsScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // Vendor Header (includes rating string and result count)
-                Column(modifier = Modifier.weight(2f)) { // Increased weight for vendor name + rating
+                Column(modifier = Modifier
+                    .weight(2f)
+                    .clickable { sharedViewModel.updateSortState(SortColumn.VENDOR_RATING) }
+                ) {
                     SortableHeader(
                         text = "Vendor",
                         column = SortColumn.VENDOR_RATING,
                         currentSortState = sortState,
-                        onClick = { sharedViewModel.updateSortState(SortColumn.VENDOR_RATING) }
+                        onClick = { /* sharedViewModel.updateSortState(SortColumn.VENDOR_RATING) */ }
                     )
                     if (totalResults > 0) {
                         Text(
@@ -411,17 +414,15 @@ fun SortableHeader(
     textAlign: TextAlign? = null // Allow specifying text alignment
 ) {
     Row(
-        modifier = modifier
-            .clickable(onClick = onClick)
-            .padding(vertical = 8.dp, horizontal = 4.dp), // Added some horizontal padding
+        modifier = modifier.padding(vertical = 4.dp), // Added some horizontal padding
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = if (textAlign == TextAlign.Center) Arrangement.Center else Arrangement.SpaceBetween
     ) {
         Text(
-            text,
+            text = text,
             fontWeight = FontWeight.Bold, // Header text is bold
             fontSize = 14.sp,             // Adjusted font size
-            textAlign = textAlign
+            textAlign = textAlign ?: TextAlign.Start // Allow specifying text alignment
         )
         Spacer(Modifier.width(4.dp)) // Space between text and icon
         if (currentSortState.column == column) {
