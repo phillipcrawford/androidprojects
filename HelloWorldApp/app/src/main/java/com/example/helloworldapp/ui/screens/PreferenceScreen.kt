@@ -14,6 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext // <<< ADD THIS IMPORT
+import com.example.helloworldapp.data.AppDatabase
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -34,6 +36,7 @@ fun PreferenceScreen(
     onUserModeClick: () -> Unit,
     sharedViewModel: SharedViewModel
 ) {
+    val context = LocalContext.current
     val user1Prefs by sharedViewModel.user1Prefs.collectAsState()
     val user2Prefs by sharedViewModel.user2Prefs.collectAsState()
     val isUser2Active = remember { mutableStateOf(false) }
@@ -59,7 +62,12 @@ fun PreferenceScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Button(
-                    onClick = onSearchClick,
+                    onClick = {
+                        // 1. Call loadAndComputeResults from SharedViewModel
+                        sharedViewModel.loadAndComputeResults(AppDatabase.getDatabase(context)) // <<< MODIFY THIS
+                        // 2. Then, execute the original navigation action
+                        onSearchClick() // <<< This was the original content of onClick },
+                    },
                     modifier = Modifier
                         .weight(1f)
                         .padding(0.dp),

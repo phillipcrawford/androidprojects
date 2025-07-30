@@ -1,3 +1,5 @@
+package com.example.helloworldapp.model
+
 enum class SortColumn {
     VENDOR_RATING, // "Vendor" - by rating (upvotes/total_votes)
     DISTANCE,      // "Dist" - by distance

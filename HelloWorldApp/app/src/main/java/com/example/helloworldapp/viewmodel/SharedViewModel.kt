@@ -1,34 +1,31 @@
 package com.example.helloworldapp.viewmodel
 
-import SortColumn
-import SortState
+import com.example.helloworldapp.model.SortColumn
+import com.example.helloworldapp.model.SortState
+import com.example.helloworldapp.model.SortDirection
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.helloworldapp.data.AppDatabase // Ensure this is imported
+import com.example.helloworldapp.data.AppDatabase
 import com.example.helloworldapp.data.ItemEntity
 import com.example.helloworldapp.data.VendorWithItems
 import com.example.helloworldapp.model.Preference
-//import com.example.helloworldapp.model.SortColumn // To be uncommented later
-//import com.example.helloworldapp.model.SortDirection // To be uncommented later
-//import com.example.helloworldapp.model.SortState // To be uncommented later
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import kotlin.math.roundToInt
+// import kotlin.math.roundToInt // Only if you were using the old rating scaling
 
 class SharedViewModel : ViewModel() {
 
+    // ... (user1Prefs, user2Prefs remain the same) ...
     private val _user1Prefs = MutableStateFlow<Set<Preference>>(emptySet())
     val user1Prefs: StateFlow<Set<Preference>> = _user1Prefs.asStateFlow()
 
     private val _user2Prefs = MutableStateFlow<Set<Preference>>(emptySet())
     val user2Prefs: StateFlow<Set<Preference>> = _user2Prefs.asStateFlow()
 
-    // Holds the fully processed and sorted list before pagination
-    private val _fullDisplayVendors = MutableStateFlow<List<DisplayVendor>>(emptyList())
 
-    // This is what the UI will observe for the paginated list
+    private val _fullDisplayVendors = MutableStateFlow<List<DisplayVendor>>(emptyList())
     private val _pagedVendors = MutableStateFlow<List<DisplayVendor>>(emptyList())
     val pagedVendors: StateFlow<List<DisplayVendor>> = _pagedVendors.asStateFlow()
 
@@ -39,15 +36,17 @@ class SharedViewModel : ViewModel() {
     val visibleRange: StateFlow<Pair<Int, Int>> = _visibleRange.asStateFlow()
 
     private var currentPage = 0
-    private val pageSize = 10 // You can adjust page size
+    private val pageSize = 10
 
-     private val _sortState = MutableStateFlow(SortState()) // Default sort
-     val sortState: StateFlow<SortState> = _sortState.asStateFlow()
+    // --- SORTING STATE --- (UNCOMMENTED)
+    private val _sortState = MutableStateFlow(SortState()) // Default sort from SortType.kt
+    val sortState: StateFlow<SortState> = _sortState.asStateFlow()
 
     fun updateVisibleRange(start: Int, end: Int) {
         _visibleRange.value = start to end
     }
 
+    // ... (toggleUser1Pref, toggleUser2Pref, clearPrefs remain the same) ...
     fun toggleUser1Pref(pref: Preference) {
         val currentPrefs = _user1Prefs.value.toMutableSet()
         if (pref in currentPrefs) {
@@ -56,6 +55,9 @@ class SharedViewModel : ViewModel() {
             currentPrefs.add(pref)
         }
         _user1Prefs.value = currentPrefs
+        // Re-calculate results when preferences change
+        // You'll need access to the db instance here, or trigger it from where db is available
+        // For now, assuming loadAndComputeResults will be called externally after pref change
     }
 
     fun toggleUser2Pref(pref: Preference) {
@@ -66,30 +68,32 @@ class SharedViewModel : ViewModel() {
             currentPrefs.add(pref)
         }
         _user2Prefs.value = currentPrefs
+        // Similar to toggleUser1Pref, results should re-compute
     }
 
     fun clearPrefs() {
         _user1Prefs.value = emptySet()
         _user2Prefs.value = emptySet()
-        // Optionally re-trigger computation if needed, or let UI decide
-        // For example, if you want search results to clear or update:
-        // loadAndComputeResults(yourDbInstance) // This needs a db instance
+        // Similar to toggleUser1Pref, results should re-compute
     }
 
+
+    // --- SORTING FUNCTION --- (UNCOMMENTED)
     fun updateSortState(column: SortColumn) {
         val currentSort = _sortState.value
         val newDirection = if (currentSort.column == column) {
+            // Toggle direction if same column is clicked
             if (currentSort.direction == SortDirection.ASCENDING) SortDirection.DESCENDING else SortDirection.ASCENDING
         } else {
-            // Default direction for new columns (e.g., DESCENDING for rating/items, ASCENDING for distance)
+            // Default direction for new columns
             when (column) {
-                SortColumn.VENDOR_RATING -> SortDirection.DESCENDING
-                SortColumn.MENU_ITEMS -> SortDirection.DESCENDING
-                SortColumn.DISTANCE -> SortDirection.ASCENDING
+                SortColumn.VENDOR_RATING -> SortDirection.DESCENDING // Highest rating first
+                SortColumn.MENU_ITEMS -> SortDirection.DESCENDING    // Most items first
+                SortColumn.DISTANCE -> SortDirection.ASCENDING       // Closest first
             }
         }
         _sortState.value = SortState(column, newDirection)
-        // Re-apply sort and pagination
+        // Re-apply sort and pagination to the existing full list
         applySortAndPagination(_fullDisplayVendors.value)
     }
 
@@ -112,22 +116,19 @@ class SharedViewModel : ViewModel() {
             val vendor = vendorWithItems.vendor
             val items = vendorWithItems.items
 
-            // --- Per-user item matching ---
             val user1MatchingItems = if (isUser1Active) items.filter { item -> matchesPrefs(u1Prefs, item) } else emptyList()
             val user2MatchingItems = if (isUser2Active) items.filter { item -> matchesPrefs(u2Prefs, item) } else emptyList()
 
-            // --- Combined relevant items for rating and count ---
             val relevantItemsForQuery = when {
                 isUser1Active && isUser2Active -> (user1MatchingItems + user2MatchingItems).distinct()
                 isUser1Active -> user1MatchingItems
                 isUser2Active -> user2MatchingItems
-                else -> items // If no prefs, consider all items for rating.
+                else -> items
             }
 
             if ((isUser1Active || isUser2Active) && relevantItemsForQuery.isEmpty()) {
-                null // Skip this vendor if prefs are active but no items match
+                null
             } else {
-                // --- Calculate Query Specific Rating (String and Value) ---
                 val sumApplicableUpvotes = relevantItemsForQuery.sumOf { it.upvotes }
                 val sumApplicableTotalVotes = relevantItemsForQuery.sumOf { it.totalVotes }
 
@@ -138,11 +139,10 @@ class SharedViewModel : ViewModel() {
                     querySpecificRatingString = "$sumApplicableUpvotes / $sumApplicableTotalVotes"
                     querySpecificRatingValue = sumApplicableUpvotes.toFloat() / sumApplicableTotalVotes.toFloat()
                 } else {
-                    querySpecificRatingString = "0 / 0" // Or "N/A" or as you prefer
-                    querySpecificRatingValue = 0f       // Or -1f to indicate no rating possible
+                    querySpecificRatingString = "0 / 0"
+                    querySpecificRatingValue = 0f
                 }
 
-                // --- Combined Relevant Item Count for Display ---
                 val combinedRelevantItemCount = relevantItemsForQuery.size
 
                 DisplayVendor(
@@ -150,76 +150,72 @@ class SharedViewModel : ViewModel() {
                     user1Count = user1MatchingItems.size,
                     user2Count = user2MatchingItems.size,
                     distanceMiles = vendor.lat / 1000.0, // REMINDER: Replace with actual distance
-                    querySpecificRatingString = querySpecificRatingString, // Use new field
-                    querySpecificRatingValue = querySpecificRatingValue,   // Use new field
+                    querySpecificRatingString = querySpecificRatingString,
+                    querySpecificRatingValue = querySpecificRatingValue,
                     combinedRelevantItemCount = combinedRelevantItemCount
                 )
             }
         }
 
-        _fullDisplayVendors.value = processedVendors
-        _totalResultsCount.value = processedVendors.size
-        // applySortAndPagination(processedVendors) // Will be called when sorting is active
-        resetAndLoadFirstPage(processedVendors) // Load first page without sorting for now
+        // _fullDisplayVendors.value = processedVendors // This will be set in applySortAndPagination
+        // _totalResultsCount.value = processedVendors.size // This will be set in applySortAndPagination
+
+        // MODIFIED: Call applySortAndPagination instead of resetAndLoadFirstPage directly
+        applySortAndPagination(processedVendors)
     }
 
 
     private fun applySortAndPagination(vendors: List<DisplayVendor>) {
-        // --- SORTING LOGIC --- (Uncomment and adapt when SortType.kt is ready)
-        /*
-        val sortedVendors = when (sortState.value.column) {
+        // --- SORTING LOGIC --- (UNCOMMENTED and using querySpecificRatingValue)
+        val sortedVendors = when (_sortState.value.column) {
             SortColumn.VENDOR_RATING -> {
-                if (sortState.value.direction == SortDirection.ASCENDING) {
-                    vendors.sortedBy { it.querySpecificRating }
+                if (_sortState.value.direction == SortDirection.ASCENDING) {
+                    vendors.sortedBy { it.querySpecificRatingValue } // Sort by the float value
                 } else {
-                    vendors.sortedByDescending { it.querySpecificRating }
+                    vendors.sortedByDescending { it.querySpecificRatingValue } // Sort by the float value
                 }
             }
             SortColumn.DISTANCE -> {
-                if (sortState.value.direction == SortDirection.ASCENDING) {
+                if (_sortState.value.direction == SortDirection.ASCENDING) {
                     vendors.sortedBy { it.distanceMiles }
                 } else {
                     vendors.sortedByDescending { it.distanceMiles }
                 }
             }
             SortColumn.MENU_ITEMS -> {
-                if (sortState.value.direction == SortDirection.ASCENDING) {
+                // Sorting by combinedRelevantItemCount
+                if (_sortState.value.direction == SortDirection.ASCENDING) {
                     vendors.sortedBy { it.combinedRelevantItemCount }
                 } else {
                     vendors.sortedByDescending { it.combinedRelevantItemCount }
                 }
             }
         }
-        _fullDisplayVendors.value = sortedVendors // Update the full list with sorted order
-        resetAndLoadFirstPage(sortedVendors)
-        */
-        // For now, without sorting:
-        resetAndLoadFirstPage(vendors)
+        _fullDisplayVendors.value = sortedVendors // Update the full list with the NOW SORTED order
+        resetAndLoadFirstPage(sortedVendors) // Then paginate from the sorted list
     }
 
 
     private fun resetAndLoadFirstPage(vendors: List<DisplayVendor>) {
         currentPage = 0
         _pagedVendors.value = vendors.take(pageSize)
-        _totalResultsCount.value = vendors.size // Ensure total count reflects the potentially filtered list
+        _totalResultsCount.value = vendors.size
     }
 
     fun loadNextPage() {
+        // Ensure that we use the _fullDisplayVendors (which is sorted) as the source for next pages
         if ((currentPage + 1) * pageSize < _fullDisplayVendors.value.size) {
             currentPage++
-            val currentPaged = _pagedVendors.value.toMutableList()
-            val nextPageItems = _fullDisplayVendors.value.drop(currentPage * pageSize).take(pageSize)
-            currentPaged.addAll(nextPageItems)
-            _pagedVendors.value = currentPaged
+            // It's usually better to rebuild the paged list rather than adding to a mutable list
+            // to ensure Compose recomposes correctly with a new list instance.
+            _pagedVendors.value = _fullDisplayVendors.value.take((currentPage + 1) * pageSize)
         }
     }
 
     private fun matchesPrefs(prefs: Set<Preference>, item: ItemEntity): Boolean {
-        if (prefs.isEmpty()) return true // If no preferences, item is considered a match (or handle as needed)
+        if (prefs.isEmpty()) return true
         return prefs.all { pref ->
-            // Special handling for LOW_PRICE if it were to be a filter
-            // if (pref == Preference.LOW_PRICE) return true // Or some price logic
-            pref.matcher?.invoke(item) ?: true // If matcher is null, it's not a filter criteria (like LOW_PRICE)
+            pref.matcher?.invoke(item) ?: true
         }
     }
 }
