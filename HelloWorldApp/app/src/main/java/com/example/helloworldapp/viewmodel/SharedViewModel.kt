@@ -1,5 +1,6 @@
 package com.example.helloworldapp.viewmodel
 
+import SortColumn
 import SortState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -75,8 +76,6 @@ class SharedViewModel : ViewModel() {
         // loadAndComputeResults(yourDbInstance) // This needs a db instance
     }
 
-    // --- SORTING FUNCTION --- (Uncomment when SortType.kt is ready)
-    /*
     fun updateSortState(column: SortColumn) {
         val currentSort = _sortState.value
         val newDirection = if (currentSort.column == column) {
@@ -93,7 +92,7 @@ class SharedViewModel : ViewModel() {
         // Re-apply sort and pagination
         applySortAndPagination(_fullDisplayVendors.value)
     }
-    */
+
 
     fun loadAndComputeResults(db: AppDatabase) {
         viewModelScope.launch {
