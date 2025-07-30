@@ -1,5 +1,6 @@
 package com.example.helloworldapp.viewmodel
 
+import SortState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.helloworldapp.data.AppDatabase // Ensure this is imported
@@ -39,9 +40,8 @@ class SharedViewModel : ViewModel() {
     private var currentPage = 0
     private val pageSize = 10 // You can adjust page size
 
-    // --- SORTING STATE --- (Uncomment when SortType.kt is ready)
-    // private val _sortState = MutableStateFlow(SortState()) // Default sort
-    // val sortState: StateFlow<SortState> = _sortState.asStateFlow()
+     private val _sortState = MutableStateFlow(SortState()) // Default sort
+     val sortState: StateFlow<SortState> = _sortState.asStateFlow()
 
     fun updateVisibleRange(start: Int, end: Int) {
         _visibleRange.value = start to end
