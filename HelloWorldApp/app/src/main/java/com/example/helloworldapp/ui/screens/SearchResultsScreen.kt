@@ -212,13 +212,26 @@ fun SearchResultsScreen(
                             verticalAlignment = Alignment.Top // Align to top for multi-line text
                         ) {
                             // Vendor Name and Rating
-                            Column(modifier = Modifier.weight(2f).padding(end = 8.dp)) {
-                                Text(vendor.vendorName, fontWeight = FontWeight.Bold, fontSize = 16.sp)
-                                Spacer(modifier = Modifier.height(2.dp))
+                            Box(
+                                modifier = Modifier
+                                    .weight(2f) // This Box takes up 2/4 of the available width
+                                    .padding(end = 8.dp)
+                                // .height(IntrinsicSize.Min) // Optional: If you need to ensure Box wraps content height
+                            ) {
+                                // Vendor Name - Aligned to TopStart (default for Box content, but explicit is fine)
+                                Text(
+                                    text = vendor.vendorName,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 16.sp,
+                                    modifier = Modifier.align(Alignment.TopStart)
+                                )
+
+                                // Rating String - Aligned to TopEnd (Top Right)
                                 Text(
                                     text = "Rating: ${vendor.querySpecificRatingString}",
                                     fontSize = 13.sp,
-                                    color = Color.Gray
+                                    color = Color.Gray,
+                                    modifier = Modifier.align(Alignment.TopEnd) // <<< ALIGN TO TOP END
                                 )
                             }
 

@@ -74,7 +74,7 @@ suspend fun populateDatabase(dao: VendorDao) {
         )
         val vendorId = dao.insertVendor(vendor)
 
-        for (j in 1..5) {
+        for (j in 1..7) {
             val totalVotes = Random.nextInt(5, 51) // Random total votes between 5 and 50
             val upvotes = Random.nextInt(0, totalVotes + 1) // Random upvotes between 0 and totalVotes
 
