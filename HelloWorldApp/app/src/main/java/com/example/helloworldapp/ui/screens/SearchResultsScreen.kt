@@ -124,7 +124,9 @@ fun SearchResultsScreen(
                             fontWeight = FontWeight.Normal,
                             fontSize = 11.sp, // Slightly smaller
                             color = Color.DarkGray,
-                            modifier = Modifier.padding(top = 2.dp) // Small padding from header
+                            modifier = Modifier
+                                .padding(top = 2.dp)
+                                .align(Alignment.End)
                         )
                     } else {
                         Text( // Placeholder if no results yet, or show "0 results"
@@ -132,7 +134,9 @@ fun SearchResultsScreen(
                             fontWeight = FontWeight.Normal,
                             fontSize = 11.sp,
                             color = Color.DarkGray,
-                            modifier = Modifier.padding(top = 2.dp)
+                            modifier = Modifier
+                                .padding(top = 2.dp)
+                                .align(Alignment.End)
                         )
                     }
                 }
