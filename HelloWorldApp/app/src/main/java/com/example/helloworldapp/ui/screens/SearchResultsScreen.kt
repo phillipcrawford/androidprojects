@@ -111,9 +111,10 @@ fun SearchResultsScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // Vendor Header (includes rating string and result count)
-                Column(modifier = Modifier
-                    .weight(2f)
-                    .clickable { sharedViewModel.updateSortState(SortColumn.VENDOR_RATING) }
+                Column(
+                    modifier = Modifier
+                        .weight(2f)
+                        .clickable { sharedViewModel.updateSortState(SortColumn.VENDOR_RATING) }
                 ) {
                     SortableHeader(
                         text = "Vendor",
@@ -143,15 +144,22 @@ fun SearchResultsScreen(
                         )
                     }
                 }
-
-                SortableHeader(
-                    text = "Dist",
-                    column = SortColumn.DISTANCE,
-                    currentSortState = sortState,
-                    onClick = { /*sharedViewModel.updateSortState(SortColumn.DISTANCE) */ },
-                    //modifier = Modifier.weight(1f),
-                    textAlign = TextAlign.Center
-                )
+                Box(
+                    modifier = Modifier
+                        .weight(1f)
+                        .clickable { sharedViewModel.updateSortState(SortColumn.DISTANCE) },
+                        //.fillMaxHeight(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    SortableHeader(
+                        text = "Dist",
+                        column = SortColumn.DISTANCE,
+                        currentSortState = sortState,
+                        onClick = { /*sharedViewModel.updateSortState(SortColumn.DISTANCE) */ },
+                        //modifier = Modifier.weight(1f),
+                        textAlign = TextAlign.Center
+                    )
+                }
 
                 // Menu Items Header (adapts to user mode)
                 Column(
