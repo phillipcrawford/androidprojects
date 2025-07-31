@@ -159,7 +159,7 @@ fun SearchResultsScreen(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     SortableHeader(
-                        text = if (isTwoUserMode) "Itemws" else "Menu Items", // Shorter text for two user mode if needed
+                        text = if (isTwoUserMode) "Items" else "Menu Items", // Shorter text for two user mode if needed
                         column = SortColumn.MENU_ITEMS,
                         currentSortState = sortState,
                         onClick = { sharedViewModel.updateSortState(SortColumn.MENU_ITEMS) },
