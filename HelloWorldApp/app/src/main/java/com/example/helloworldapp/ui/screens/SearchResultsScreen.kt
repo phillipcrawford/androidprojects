@@ -149,7 +149,7 @@ fun SearchResultsScreen(
                     column = SortColumn.DISTANCE,
                     currentSortState = sortState,
                     onClick = { sharedViewModel.updateSortState(SortColumn.DISTANCE) },
-                    modifier = Modifier.weight(1f),
+                    //modifier = Modifier.weight(1f),
                     textAlign = TextAlign.Center
                 )
 
