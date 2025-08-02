@@ -152,7 +152,7 @@ fun SearchResultsScreen(
                     contentAlignment = Alignment.Center
                 ) {
                     SortableHeader(
-                        text = "Dist",
+                        text = "Diest",
                         column = SortColumn.DISTANCE,
                         currentSortState = sortState,
                         onClick = { /*sharedViewModel.updateSortState(SortColumn.DISTANCE) */ },
