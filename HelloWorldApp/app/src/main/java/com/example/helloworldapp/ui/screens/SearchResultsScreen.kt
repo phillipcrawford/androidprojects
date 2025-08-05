@@ -117,7 +117,7 @@ fun SearchResultsScreen(
                         .clickable { sharedViewModel.updateSortState(SortColumn.VENDOR_RATING) }
                 ) {
                     SortableHeader(
-                        text = "Vendswowr",
+                        text = "Vendswwowr",
                         column = SortColumn.VENDOR_RATING,
                         currentSortState = sortState,
                         onClick = { /* sharedViewModel.updateSortState(SortColumn.VENDOR_RATING) */ }
