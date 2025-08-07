@@ -105,7 +105,7 @@ fun SearchResultsScreen(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color(0xFFEFEFEF)) // Light grey background for header
+                    .background(dietprefsGrey) // Light grey background for header
                     .padding(horizontal = 16.dp, vertical = 8.dp)
                     .defaultMinSize(minHeight = if (isTwoUserMode) 56.dp else Dp.Unspecified),
                 verticalAlignment = Alignment.CenterVertically
@@ -163,14 +163,18 @@ fun SearchResultsScreen(
 
                 // Menu Items Header (adapts to user mode)
                 Column(
-                    modifier = Modifier.weight(1f),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    modifier = Modifier
+                        .weight(1f)
+                        .clickable { sharedViewModel.updateSortState(SortColumn.MENU_ITEMS) },
+                        //.fillMaxHeight(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
                 ) {
                     SortableHeader(
-                        text = if (isTwoUserMode) "Items" else "Menu Items", // Shorter text for two user mode if needed
+                        text = "Menu Items", // Shorter text for two user mode if needed
                         column = SortColumn.MENU_ITEMS,
                         currentSortState = sortState,
-                        onClick = { sharedViewModel.updateSortState(SortColumn.MENU_ITEMS) },
+                        onClick = { /* sharedViewModel.updateSortState(SortColumn.MENU_ITEMS) */ },
                         textAlign = TextAlign.Center
                     )
                     if (isTwoUserMode) {
@@ -180,7 +184,7 @@ fun SearchResultsScreen(
                                 imageVector = Icons.Filled.Person,
                                 contentDescription = "User 1 Items",
                                 tint = user1Red,
-                                modifier = Modifier.size(14.dp) // Slightly smaller icons
+                                modifier = Modifier.size(14.dp)
                             )
                             Spacer(modifier = Modifier.width(4.dp))
                             Icon(
