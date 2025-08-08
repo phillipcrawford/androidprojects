@@ -137,7 +137,7 @@ fun SearchResultsScreen(
                             text = if (searchQuery.isNotBlank() || user1Prefs.isNotEmpty() || user2Prefs.isNotEmpty()) "0 results" else "Loading...",
                             fontWeight = FontWeight.Normal,
                             fontSize = 11.sp,
-                            color = Color.DarkGray,
+                            color = Color.White,
                             modifier = Modifier
                                 .padding(top = 2.dp)
                                 .align(Alignment.End)
