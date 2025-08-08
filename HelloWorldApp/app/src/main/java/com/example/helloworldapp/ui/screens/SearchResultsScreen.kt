@@ -434,6 +434,7 @@ fun SortableHeader(
             text = text,
             fontWeight = FontWeight.Bold, // Header text is bold
             fontSize = 14.sp,             // Adjusted font size
+            color = Color.White,
             textAlign = textAlign ?: TextAlign.Start // Allow specifying text alignment
         )
         Spacer(Modifier.width(4.dp)) // Space between text and icon
