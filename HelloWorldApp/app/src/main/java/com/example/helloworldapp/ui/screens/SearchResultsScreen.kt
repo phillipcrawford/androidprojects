@@ -127,7 +127,7 @@ fun SearchResultsScreen(
                             text = "${visibleRange.first}–${visibleRange.second} of $totalResults",
                             fontWeight = FontWeight.Normal,
                             fontSize = 11.sp, // Slightly smaller
-                            color = Color.DarkGray,
+                            color = Color.White,
                             modifier = Modifier
                                 .padding(top = 2.dp)
                                 .align(Alignment.End)
