@@ -117,21 +117,37 @@ class SharedViewModel : ViewModel() {
             _isLoading.value = true
             try {
                 val allVendorsWithItems = withContext(Dispatchers.IO) {
-                    Log.d("ViewModelDebug", "loadAndComputeResults: Fetching vendors from DB...")
-                    db.vendorDao().getVendorsWithItems()
+                    Log.d(TAG, "loadAndComputeResults: Fetching vendors from DB...")
+                    val data = db.vendorDao().getVendorsWithItems()
+                    Log.d(TAG, "loadAndComputeResults: Fetched ${data.size} vendors from DB.")
+                    data
                 }
-                Log.d("ViewModelDebug", "loadAndComputeResults: Fetched ${allVendorsWithItems.size} vendors.")
 
-                // Call your core processing function
                 computeAndProcessResults(allVendorsWithItems)
 
-                Log.d("ViewModelDebug", "loadAndComputeResults: PROCESSING COMPLETED SUCCESSFULLY (within try block)")
+                // This log might be premature if computeAndProcessResults itself is asynchronous
+                // in a way not captured here, but given its structure, it should complete before this.
+                Log.i(TAG, "loadAndComputeResults: Successfully launched and passed data to computeAndProcessResults.")
+
+
             } catch (e: Exception) {
-                Log.e("ViewModelDebug", "loadAndComputeResults: ERROR during data loading or processing", e)
-                // Optionally, update UI to show an error state via another StateFlow
+                Log.e(TAG, "loadAndComputeResults: CRITICAL ERROR during data loading or initial processing", e)
             } finally {
-                _isLoading.value = false // Ensure loading state is reset
-                Log.d("ViewModelDebug", "loadAndComputeResults: FINISHED (isLoading set to false in finally block)")
+                // This 'finally' might execute before computeAndProcessResults fully finishes if
+                // computeAndProcessResults itself spawns further async work without proper joining.
+                // However, your current structure seems sequential after fetching.
+                // The _isLoading should ideally be set to false at the very end of all processing.
+                // Let's keep it here for now and refine if computeAndProcessResults is more complex.
+                // For now, the assumption is computeAndProcessResults is blocking within this launch.
+                // **Consider moving _isLoading.value = false to the end of computeAndProcessResults if it's the true end.**
+                // For now, let's assume this finally block is the effective end of the user-perceived loading operation.
+                // We'll see from logs if this is reached prematurely.
+                // A better pattern if computeAndProcessResults is complex and might throw:
+                // _isLoading.value = false would be inside computeAndProcessResults's own finally block,
+                // and computeAndProcessResults would be called directly in the try of this function.
+                // For now, let's proceed with this logging. The critical part is if this line is reached.
+                Log.i(TAG, "loadAndComputeResults: FINALLY block reached. Setting isLoading to false.")
+                _isLoading.value = false
             }
         }
     }
