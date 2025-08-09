@@ -80,6 +80,7 @@ class SharedViewModel : ViewModel() {
     }
 
     fun clearPrefs() {
+        Log.d(TAG, "clearPrefs: Clearing all preferences.")
         _user1Prefs.value = emptySet()
         _user2Prefs.value = emptySet()
         // Similar to toggleUser1Pref, results should re-compute
@@ -88,6 +89,7 @@ class SharedViewModel : ViewModel() {
 
     // --- SORTING FUNCTION --- (UNCOMMENTED)
     fun updateSortState(column: SortColumn) {
+        Log.d(TAG, "updateSortState: Requested column: $column. Current sort: ${_sortState.value}")
         val currentSort = _sortState.value
         val newDirection = if (currentSort.column == column) {
             // Toggle direction if same column is clicked
@@ -101,6 +103,7 @@ class SharedViewModel : ViewModel() {
             }
         }
         _sortState.value = SortState(column, newDirection)
+        Log.d(TAG, "updateSortState: New sort state: ${_sortState.value}")
         // Re-apply sort and pagination to the existing full list
         applySortAndPagination(_fullDisplayVendors.value)
     }
@@ -108,8 +111,10 @@ class SharedViewModel : ViewModel() {
 
     fun loadAndComputeResults(db: AppDatabase) { // This seems to be your entry point
         viewModelScope.launch {
-            Log.d("ViewModelDebug", "loadAndComputeResults: STARTING. User1Prefs: ${user1Prefs.value.joinToString { it.name }}, User2Prefs: ${user2Prefs.value.joinToString { it.name }}")
-            _isLoading.value = true // Set loading state
+            //Log.d("ViewModelDebug", "loadAndComputeResults: STARTING. User1Prefs: ${user1Prefs.value.joinToString { it.name }}, User2Prefs: ${user2Prefs.value.joinToString { it.name }}")
+            //_isLoading.value = true // Set loading state
+            Log.i(TAG, "loadAndComputeResults: STARTING. User1Prefs: ${user1Prefs.value.joinToString { it.name }}, User2Prefs: ${user2Prefs.value.joinToString { it.name }}")
+            _isLoading.value = true
             try {
                 val allVendorsWithItems = withContext(Dispatchers.IO) {
                     Log.d("ViewModelDebug", "loadAndComputeResults: Fetching vendors from DB...")
