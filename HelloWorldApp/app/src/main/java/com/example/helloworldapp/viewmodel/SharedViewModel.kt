@@ -1,5 +1,7 @@
 package com.example.helloworldapp.viewmodel
 
+import android.util.Log
+import androidx.compose.foundation.layout.size
 import com.example.helloworldapp.model.SortColumn
 import com.example.helloworldapp.model.SortState
 import com.example.helloworldapp.model.SortDirection
@@ -9,15 +11,18 @@ import com.example.helloworldapp.data.AppDatabase
 import com.example.helloworldapp.data.ItemEntity
 import com.example.helloworldapp.data.VendorWithItems
 import com.example.helloworldapp.model.Preference
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 // import kotlin.math.roundToInt // Only if you were using the old rating scaling
 
 class SharedViewModel : ViewModel() {
 
-    // ... (user1Prefs, user2Prefs remain the same) ...
+    private val TAG = "ViewModelDebug"
     private val _user1Prefs = MutableStateFlow<Set<Preference>>(emptySet())
     val user1Prefs: StateFlow<Set<Preference>> = _user1Prefs.asStateFlow()
 
@@ -42,12 +47,16 @@ class SharedViewModel : ViewModel() {
     private val _sortState = MutableStateFlow(SortState()) // Default sort from SortType.kt
     val sortState: StateFlow<SortState> = _sortState.asStateFlow()
 
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+
     fun updateVisibleRange(start: Int, end: Int) {
         _visibleRange.value = start to end
     }
 
     // ... (toggleUser1Pref, toggleUser2Pref, clearPrefs remain the same) ...
     fun toggleUser1Pref(pref: Preference) {
+        Log.d(TAG, "toggleUser1Pref: Toggling '${pref.name}'. Current: ${_user1Prefs.value.map { it.name }}")
         val currentPrefs = _user1Prefs.value.toMutableSet()
         if (pref in currentPrefs) {
             currentPrefs.remove(pref)
@@ -55,12 +64,11 @@ class SharedViewModel : ViewModel() {
             currentPrefs.add(pref)
         }
         _user1Prefs.value = currentPrefs
-        // Re-calculate results when preferences change
-        // You'll need access to the db instance here, or trigger it from where db is available
-        // For now, assuming loadAndComputeResults will be called externally after pref change
+        Log.d(TAG, "toggleUser1Pref: New User1 Prefs: ${_user1Prefs.value.map { it.name }}")
     }
 
     fun toggleUser2Pref(pref: Preference) {
+        Log.d(TAG, "toggleUser2Pref: Toggling '${pref.name}'. Current: ${_user2Prefs.value.map { it.name }}")
         val currentPrefs = _user2Prefs.value.toMutableSet()
         if (pref in currentPrefs) {
             currentPrefs.remove(pref)
@@ -68,7 +76,7 @@ class SharedViewModel : ViewModel() {
             currentPrefs.add(pref)
         }
         _user2Prefs.value = currentPrefs
-        // Similar to toggleUser1Pref, results should re-compute
+        Log.d(TAG, "toggleUser2Pref: New User2 Prefs: ${_user2Prefs.value.map { it.name }}")
     }
 
     fun clearPrefs() {
@@ -98,10 +106,28 @@ class SharedViewModel : ViewModel() {
     }
 
 
-    fun loadAndComputeResults(db: AppDatabase) {
+    fun loadAndComputeResults(db: AppDatabase) { // This seems to be your entry point
         viewModelScope.launch {
-            val allVendorsWithItems = db.vendorDao().getVendorsWithItems()
-            computeAndProcessResults(allVendorsWithItems)
+            Log.d("ViewModelDebug", "loadAndComputeResults: STARTING. User1Prefs: ${user1Prefs.value.joinToString { it.name }}, User2Prefs: ${user2Prefs.value.joinToString { it.name }}")
+            _isLoading.value = true // Set loading state
+            try {
+                val allVendorsWithItems = withContext(Dispatchers.IO) {
+                    Log.d("ViewModelDebug", "loadAndComputeResults: Fetching vendors from DB...")
+                    db.vendorDao().getVendorsWithItems()
+                }
+                Log.d("ViewModelDebug", "loadAndComputeResults: Fetched ${allVendorsWithItems.size} vendors.")
+
+                // Call your core processing function
+                computeAndProcessResults(allVendorsWithItems)
+
+                Log.d("ViewModelDebug", "loadAndComputeResults: PROCESSING COMPLETED SUCCESSFULLY (within try block)")
+            } catch (e: Exception) {
+                Log.e("ViewModelDebug", "loadAndComputeResults: ERROR during data loading or processing", e)
+                // Optionally, update UI to show an error state via another StateFlow
+            } finally {
+                _isLoading.value = false // Ensure loading state is reset
+                Log.d("ViewModelDebug", "loadAndComputeResults: FINISHED (isLoading set to false in finally block)")
+            }
         }
     }
 
