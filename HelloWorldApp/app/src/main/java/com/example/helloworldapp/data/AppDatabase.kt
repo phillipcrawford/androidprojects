@@ -91,15 +91,15 @@ suspend fun populateDatabase(dao: VendorDao) {
                 raw = false,
                 entree = (j == 1 || j == 2), // Example: first two items are entrees
                 sweet = (j == 5),          // Example: last item is sweet
-                kosher = false,
+                kosher = true,
                 halal = false,
                 beef = false,
                 chicken = (j == 1), // Example
                 pork = false,
                 seafood = false,
                 lowSugar = false,
-                highProtein = false,
-                lowCarb = false,
+                highProtein = true,
+                lowCarb = (j % 2 == 0),
                 noAlliums = false,
                 noPorkProducts = false,
                 noRedMeat = false,
